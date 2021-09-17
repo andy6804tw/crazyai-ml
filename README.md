@@ -31,7 +31,7 @@
 - 免費額度使用 GPU、TPU 資源
 - 輕鬆共用與分享檔案
 
-因此讀者必須先熟悉 Colab 的操作模式，想了解該如何操作的朋友們可以先來看這一步[影片](https://youtu.be/C9mvGMtrPXo?t=266)教學。
+因此讀者必須先熟悉 Colab 的操作模式，想了解該如何操作的朋友們可以先來看這部[影片](https://youtu.be/C9mvGMtrPXo?t=266)教學。
 
 ## 電子書
 製作中...
@@ -46,4 +46,4 @@
 
 歡迎大家訂閱我的 [YouTube](https://www.youtube.com/channel/UCSNPCGvMYEV-yIXAVt3FA5A) 頻道。
 
-本系列教學簡報 PDF & Code 都可以從我的 [GitHub](https://github.com/andy6804tw/2021-13th-ironman) 取得！
+本系列教學內容都可以從我的 [GitHub](https://github.com/andy6804tw/2021-13th-ironman) 取得！
