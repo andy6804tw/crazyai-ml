@@ -85,7 +85,7 @@ Attributes:
 
 Methods:
 - fit: 放入X、y進行模型擬合。
-- predict: 預測並迴傳預測類別。
+- predict: 預測並回傳預測類別。
 - score: R2 score 模型評估。
 
 ```py
