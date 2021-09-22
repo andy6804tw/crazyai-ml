@@ -14,6 +14,7 @@
 | [[Day 7] 非監督式學習-降維](https://ithelp.ithome.com.tw/articles/10267685) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/7.非監督式學習-降維/7.非監督式學習-降維.ipynb) |
 | [[Day 8] 線性迴歸 (Linear Regression)](https://ithelp.ithome.com.tw/articles/10268453) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/8.線性迴歸/8.線性迴歸.ipynb) |
 | [[Day 9] 邏輯迴歸 (Logistic regression)](https://ithelp.ithome.com.tw/articles/10269006) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/9.邏輯迴歸/9.邏輯迴歸.ipynb) |
+| [[Day 10] 近朱者赤，近墨者黑 - KNN](https://ithelp.ithome.com.tw/articles/10269826) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/10.KNN/10.1.KNN(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/10.KNN/10.2.KNN(Regression).ipynb) |
 
 
 ## 前言
