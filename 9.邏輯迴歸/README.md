@@ -1,4 +1,4 @@
-# 邏輯迴歸 (Logistic regression)
+# 邏輯迴歸 (Logistic Regression)
 ## 今日學習目標
 - 認識邏輯迴歸
     - 線性分類器
@@ -10,7 +10,7 @@
 
 
 ## 認識邏輯迴歸
-邏輯迴歸 (Logistic regression) 是由線性迴歸變化而來的，它是一種分類的模型。其目標是要找出一條直線能夠將所有數據清楚地分開並做分類，我們又可以稱迴歸的線性分類器。邏輯迴歸其實是在說明一個機率的意義，透過一個 function 去訓練得到的一組參數，不同的 w,b 就會得到不同的 function。於是我們可以說 f<sub>w,b</sub>(x) 即為 posteriror probability。
+邏輯迴歸 (Logistic Regression) 是由線性迴歸變化而來的，它是一種分類的模型。其目標是要找出一條直線能夠將所有數據清楚地分開並做分類，我們又可以稱迴歸的線性分類器。邏輯迴歸其實是在說明一個機率的意義，透過一個 function 去訓練得到的一組參數，不同的 w,b 就會得到不同的 function。於是我們可以說 f<sub>w,b</sub>(x) 即為 posteriror probability。
 
 ![](./image/img9-1.png)
 
