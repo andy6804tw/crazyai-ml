@@ -16,6 +16,7 @@
 | [[Day 9] 邏輯迴歸 (Logistic Regression)](https://ithelp.ithome.com.tw/articles/10269006) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/9.邏輯迴歸/9.邏輯迴歸.ipynb) |
 | [[Day 10] 近朱者赤，近墨者黑 - KNN](https://ithelp.ithome.com.tw/articles/10269826) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/10.KNN/10.1.KNN(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/10.KNN/10.2.KNN(Regression).ipynb) |
 | [[Day 11] 核模型 - 支持向量機 (SVM)](https://ithelp.ithome.com.tw/articles/10270447) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/11.SVM/11.1.SVM(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/11.SVM/11.2.SVR(Regression).ipynb) |
+| [[Day 12] 決策樹 (Decision tree)](https://ithelp.ithome.com.tw/articles/10271143) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/12.決策樹/12.1.決策樹(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/12.決策樹/12.2.決策樹(Regression).ipynb) |
 
 
 ## 前言
