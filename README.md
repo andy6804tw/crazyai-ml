@@ -17,7 +17,7 @@
 | [[Day 10] 近朱者赤，近墨者黑 - KNN](https://ithelp.ithome.com.tw/articles/10269826) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/10.KNN/10.1.KNN(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/10.KNN/10.2.KNN(Regression).ipynb) |
 | [[Day 11] 核模型 - 支持向量機 (SVM)](https://ithelp.ithome.com.tw/articles/10270447) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/11.SVM/11.1.SVM(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/11.SVM/11.2.SVR(Regression).ipynb) |
 | [[Day 12] 決策樹 (Decision tree)](https://ithelp.ithome.com.tw/articles/10271143) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/12.決策樹/12.1.決策樹(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/12.決策樹/12.2.決策樹(Regression).ipynb) |
-| [[Day 13] 整體學習 (Ensamble Learning)](https://ithelp.ithome.com.tw/articles/10271882) | - |
+| [[Day 13] 整體學習 (Ensemble Learning)](https://ithelp.ithome.com.tw/articles/10271882) | - |
 ## 前言
 哈囉大家好我是10程式中的10！我是[上一屆](https://ithelp.ithome.com.tw/users/20107247/ironman/3719)鐵人賽影片教學組`全民瘋AI系列`的作者，當時講解了人工智慧的基礎以及常見的機器學習演算法與手把手教學。由於大家反應很熱烈，讓我看到了大家對於AI的學習熱忱。也因為上一屆獲得了影片教學組優選，收到了許多書商的出版邀請，由於我沒有時間與動力將這些大量知識寫成文章因此都婉拒了。因此我想藉由這一次鐵人賽將上一屆的影片內容整理成電子書版本，提供大家影片教學與文字版的筆記內容(唷呼書商快看過來～)當然內容會以之前影片教學為基底，並加入一些新的元素讓文章內容變得更紮實。在全新的`全民瘋AI系列2.0`中我會介紹實用的機器學習演算法並含有程式手把手實作，以及近年來熱門的機器學習套件與模型調參技巧。除此之外我還會提到大家最感興趣的 AI 模型落地與整合。希望在這次的鐵人賽能夠將AI的資源整理得更詳細並分享給各位。
 

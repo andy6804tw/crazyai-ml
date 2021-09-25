@@ -1,4 +1,4 @@
-# 整體學習 (Ensamble Learning)
+# 整體學習 (Ensemble Learning)
 
 ## 今日學習目標
 - 了解整體學習
