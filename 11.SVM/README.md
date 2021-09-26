@@ -154,7 +154,7 @@ accuracy = rbfModel.score(train_reduced, y_train)
 ![](./image/img11-5.png)
 
 ## 支持向量迴歸（Support Vector Regression, SVR） 模型
-在 Sklearn 中 SVM 提供迴歸的模型稱作 SVR。此外 SVR 迴歸器也提供了三種不同的核函數，分別有一個線性以及兩個非線性的模型可以呼叫。在 SVR 迴歸的實驗，我們拿一組非線性的資料作為例子。並查看在不同的和技巧下模型所擬合的成效為何？
+在 Sklearn 中 SVM 提供迴歸的模型稱作 SVR。此外 SVR 迴歸器也提供了三種不同的核函數，分別有一個線性以及兩個非線性的模型可以呼叫。在 SVR 迴歸的實驗，我們拿一組非線性的資料作為例子。並查看在不同的核技巧下模型所擬合的成效為何？
 
 三種不同SVR迴歸器:
 1. kernel='linear'  (線性)
