@@ -213,6 +213,8 @@ clf.predict(X_test)
 pip install pipelineprofiler
 ```
 
+透過 `PipelineProfiler` 套件可以很快速地檢視模型訓練結果，以及每一個 Ensemble 模型的超參數以及資料前處理方式和特徵處理方法。
+
 ```py
 import PipelineProfiler
 
