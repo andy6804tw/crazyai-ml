@@ -169,14 +169,14 @@ automlclassifierV2.fit(X_train, y_train)
 
 ```py
 # 預測成功的比例
-print('訓練集: ',automlclassifierV2.score(X_train,y_train))
-print('測試集: ',automlclassifierV2.score(X_test,y_test))
+print('automlclassifierV2 訓練集: ',automlclassifierV2.score(X_train,y_train))
+print('automlclassifierV2 測試集: ',automlclassifierV2.score(X_test,y_test))
 ```
 
 執行結果：
 ```
-訓練集:  0.9904761904761905
-測試集:  0.9333333333333333
+automlclassifierV2 訓練集:  0.9904761904761905
+automlclassifierV2 測試集:  0.9333333333333333
 ```
 
 使用一樣的搜尋時間與訓練限制，最終訓練出來的模型在訓練集與測試集都表現不錯。兩者的準確率更接近了。這樣的結果的確比系列教學所介紹的任一個單一模型還來得好。
