@@ -156,7 +156,7 @@ from optuna.samplers import CmaEsSampler, RandomSampler
 study_1 = optuna.create_study(sampler=RandomSampler(seed=42))
 
 # Study with a CMA ES sampler
-study_1 = optuna.create_study(sampler=CmaEsSampler(seed=42))
+study_2 = optuna.create_study(sampler=CmaEsSampler(seed=42))
 ```
 
 ## Optuna 視覺化分析
