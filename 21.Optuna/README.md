@@ -153,10 +153,10 @@ TPESampler 為預設的超參數採樣器。它試圖透過提高最後一次試
 from optuna.samplers import CmaEsSampler, RandomSampler
 
 # Study with a random sampler
-study = optuna.create_study(sampler=RandomSampler(seed=42))
+study_1 = optuna.create_study(sampler=RandomSampler(seed=42))
 
 # Study with a CMA ES sampler
-study = optuna.create_study(sampler=CmaEsSampler(seed=42))
+study_1 = optuna.create_study(sampler=CmaEsSampler(seed=42))
 ```
 
 ## Optuna 視覺化分析
