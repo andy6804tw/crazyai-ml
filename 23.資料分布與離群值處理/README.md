@@ -227,5 +227,4 @@ Shape Of The After Ouliers:  (499,)
 
 ![](./image/img23-13.png)
 
-
-完整 Code 可以從我的 [GitHub](https://github.com/1010code/python-outliers-clean) 中取得！
+> 本系列教學內容及範例程式都可以從我的 [GitHub](https://github.com/andy6804tw/2021-13th-ironman) 取得！
