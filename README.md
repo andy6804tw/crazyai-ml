@@ -9,7 +9,7 @@
 | [[Day 2] 快來探索AI的世界](https://ithelp.ithome.com.tw/articles/10263822) | -  |
 | [[Day 3] 你真了解資料嗎？試試看視覺化分析吧！](https://ithelp.ithome.com.tw/articles/10264416) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/3.你真了解資料嗎？試試看視覺化分析吧！/3.你真了解資料嗎？試試看視覺化分析吧！.ipynb)  |
 | [[Day 4] 咱們一起做資料清理和前處理](https://ithelp.ithome.com.tw/articles/10265253) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/4.咱們一起做資料清理和前處理/4.咱們一起做資料清理和前處理.ipynb)  |
-| [[Day 5] 機器學習大補帖](https://ithelp.ithome.com.tw/articles/10265253) | - |
+| [[Day 5] 機器學習大補帖](https://ithelp.ithome.com.tw/articles/10265942) | - |
 | [[Day 6] 非監督式學習 K-means 分群](https://ithelp.ithome.com.tw/articles/10266672) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/6.非監督式學習k-means分群/6.非監督式學習k-means分群.ipynb) |
 | [[Day 7] 非監督式學習-降維](https://ithelp.ithome.com.tw/articles/10267685) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/7.非監督式學習-降維/7.非監督式學習-降維.ipynb) |
 | [[Day 8] 線性迴歸 (Linear Regression)](https://ithelp.ithome.com.tw/articles/10268453) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/8.線性迴歸/8.線性迴歸.ipynb) |
