@@ -22,7 +22,7 @@ Auto-sklearn 採用元學習 (Meta Learning) 選擇模型和超參數優化的�
 ## Auto-sklearn 架構
 Auto-sklearn 可以被拿來處理迴歸和分類的問題。下圖為第一版論文中所繪製的架構圖。我們可以將 Auto-sklearn 切成三個部分，其中第一個是引入元學習機制來模仿專家在處理機器學習的先驗知識。並採用元特徵讓我們更有效率的去決定在新的資料集中該挑選哪一種機器學習模型。接著挑好模型後並透過貝葉斯優化來挑選合適的模型超參數，以及嘗試一些資料前處理與特徵工程。最後挑選幾個不錯的模型並透過鞥體學席的技巧進行模型堆疊，將表現不錯的模型輸出結果做一個加權和或是投票。
 
-- Meta Ｌearning
+- Meta Learning
 - Bayesian Optimization
 - Build Ensemble 
 
