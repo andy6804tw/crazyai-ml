@@ -227,7 +227,7 @@ PipelineProfiler.plot_pipeline_matrix(profiler_data)
 ## Reference
 - [1] Feurer, Matthias et al. “[Efficient and Robust Automated Machine Learning](https://proceedings.neurips.cc/paper/2015/file/11d0e6287202fced83f79975ec59a3a6-Paper.pdf),” Advances in neural information processing systems 2015.
 - [2] Feurer, Matthias et al. “[Supplementary Material for Efficient and Robust Automated Machine Learning](https://ml.informatik.uni-freiburg.de/wp-content/uploads/papers/15-NIPS-auto-sklearn-supplementary.pdf),” Advances in neural information processing systems 2015.
-- [3] Feurer, Matthias et al. “[Efficient and Robust Automated Machine Learning](https://arxiv.org/abs/2007.04074),” arXiv, 2020.
+- [3] Feurer, Matthias et al. “[Auto-Sklearn 2.0: Hands-free AutoML via Meta-Learning](https://arxiv.org/abs/2007.04074),” arXiv, 2020.
 - [4] Ono, Jorge et al. “[PipelineProfiler: A Visual Analytics Tool for the Exploration of AutoML Pipelines](https://arxiv.org/abs/2005.00160),” arXiv, 2020.
 - [Auto Machine Learning筆記- Bayesian Optimization](http://codewithzhangyi.com/2018/07/31/Auto%20Hyperparameter%20Tuning%20-%20Bayesian%20Optimization/)
 - [A Quickstart Guide to Auto-Sklearn (AutoML) for Machine Learning Practitioners](https://neptune.ai/blog/a-quickstart-guide-to-auto-sklearn-automl-for-machine-learning-practitioners)
