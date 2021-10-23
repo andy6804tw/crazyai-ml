@@ -104,7 +104,7 @@ Bayesian Optimization (貝葉斯優化) 目標是要在最少的試驗下尋找�
 
 ![](./image/img19-4.png)
 
-[Auto-sklearn](https://automl.github.io/auto-sklearn/master/) 就是一個透過貝葉斯優化來尋找最佳操參數的一個工具。同時它也能搜索在 Sklearn 中所有可能的算法，並為你推薦一個合適的模型與資料前處理方式。明天我們就來一探究竟該套件背後的神秘原理以及程式實作吧！
+[Auto-sklearn](https://automl.github.io/auto-sklearn/master/) 就是一個透過貝葉斯優化來尋找最佳超參數的一個工具。同時它也能搜索在 Sklearn 中所有可能的算法，並為你推薦一個合適的模型與資料前處理方式。明天我們就來一探究竟該套件背後的神秘原理以及程式實作吧！
 
 ## Reference
 - [automl.org](https://www.automl.org/automl/)
