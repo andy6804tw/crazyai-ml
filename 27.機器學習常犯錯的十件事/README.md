@@ -9,7 +9,7 @@
   - 資料收集與處理不當
   - 訓練集與測試集的類別分佈不一致
   - 沒有資料視覺化的習慣
-  - 使用 LabelEcoder 為特徵編碼
+  - 使用 LabelEncoder 為特徵編碼
   - 資料處理不當導致資料洩漏
 
 
@@ -110,7 +110,7 @@ dtype: float64
 ## 3. 沒有資料視覺化的習慣
 資料視覺化的好處多多，在本系列文章 [[Day 3] 你真了解資料嗎？試試看視覺化分析吧！](https://ithelp.ithome.com.tw/articles/10264416) 與 [[Day 22] Python 視覺化解釋數據 - Plotly Express](https://ithelp.ithome.com.tw/articles/10277258) 講解了許多 Python 資料視覺化的技巧。資料視覺化可以幫助我們分析與統計資料的型態，往往有好的資料清洗與前處理對模型預測結果會有大幅的提升。有興趣的讀者可以參考[安斯庫姆四重 (Anscombe’s quartet)](https://zh.wikipedia.org/wiki/%E5%AE%89%E6%96%AF%E5%BA%93%E5%A7%86%E5%9B%9B%E9%87%8D%E5%A5%8F)。他主要是是透過四個小資料集並透過視覺化與統計來觀察，並說明在分析數據前先繪製圖表的重要性，以及離群值對統計的影響之大。
 
-## 4. 使用 LabelEcoder 為特徵編碼
+## 4. 使用 LabelEncoder 為特徵編碼
 通常我們要為類別的特徵進行編碼，直覺會想到 Sklearn 的 [LabelEncoder](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html)。但是如果一個資料集中有多個特徵是屬於類別型的資料，豈不是很麻煩?必須要一個一個呼叫 LabelEncoder 分別為這些特徵進行轉換。如果你看到這邊有同感的，在這裡要告訴你事實並非如此！我們看看 在官方文件下 LabelEncoder 的描述：
 
 > This transformer should be used to encode target values, i.e. y, and not the input X.
