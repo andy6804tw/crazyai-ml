@@ -81,7 +81,7 @@ with gzip.GzipFile('./model/xgboost-iris.pgz', 'w') as f:
 ## 載入 XGboost 模型
 試著載入兩種不同格式的模型，並預測一筆資料。注意模型預測輸入必須為 numpy 型態，且須為二維陣列格式。
 
-### 1. 載入 pickle 格式模型
+### 1. 載入 gzip 格式模型
 
 ```py
 import pickle
@@ -94,7 +94,7 @@ with gzip.open('./model/xgboost-iris.pgz', 'r') as f:
     print(pred)
 ```
 
-### 2. 載入 gzip 格式模型
+### 2. 載入 pickle 格式模型
 
 ```py
 #讀取Model
