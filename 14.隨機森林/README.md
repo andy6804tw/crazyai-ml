@@ -75,8 +75,8 @@ predicted = randomForestModel.predict(X_train)
 
 ```py
 # 預測成功的比例
-print('訓練集: ',knnModel.score(X_train,y_train))
-print('測試集: ',knnModel.score(X_test,y_test))
+print('訓練集: ',randomForestModel.score(X_train,y_train))
+print('測試集: ',randomForestModel.score(X_test,y_test))
 ```
 
 輸出結果：
