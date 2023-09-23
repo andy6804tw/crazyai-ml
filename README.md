@@ -66,9 +66,6 @@
 
 因此讀者必須先熟悉 Colab 的操作模式，想了解該如何操作的朋友們可以先來看這部[影片](https://youtu.be/C9mvGMtrPXo?t=266)教學。
 
-## 電子書
-製作中...
-
 ## 回報錯誤與建議
 本系列文章若有問題或是內容建議都可以來 GitHub 中的 [issue](https://github.com/andy6804tw/2021-13th-ironman/issues) 提出。歡迎大家一同貢獻為這系列文章有更好的閱讀品質。
 
