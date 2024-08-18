@@ -10,6 +10,8 @@
     - MaxAbsScaler（絕對值最大標準化）
     - RobustScaler
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tATr84j1jqA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## 前言
 很多演算法對數據範圍非常的敏感。因此為了要讓模型訓練的更強大，通常的做法是對特徵進行調節，使得數據更適合這些演算法。一般來說，我們在做機器學習時往往會做特徵的正規化。
 

@@ -1,0 +1,72 @@
+site_name: 全民瘋AI系列 [經典機器學習]
+site_author: 10程式中
+# site_url: 
+extra_css:
+  - 'stylesheets/extra.css'
+extra_javascript:
+  - javascripts/extra.js
+theme:
+  name: material
+  language: 'zh-TW'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  palette:
+    primary: 'brown'
+    accent: 'deep orange'
+repo_url: https://github.com/andy6804tw/2020-12th-ironman
+use_directory_urls: false
+edit_uri: ""
+# Copyright
+copyright: 'Copyright © 2021 - 2024 10程式中'
+nav:
+  - '第一部分 AI基礎概念':
+    - '[Day 1] 目標介紹': '1.全民瘋AI系列2.0目標介紹/README.md'
+    - '[Day 2] 快來探索AI的世界': '2.快來探索AI的世界/README.md'
+    - '[Day 3] 3.你真了解資料嗎?試試看視覺化分析吧!': '3.你真了解資料嗎試試看視覺化分析吧/README.md'
+    - '[Day 4] 咱們一起做資料清理和前處理': '4.咱們一起做資料清理和前處理/README.md'
+    - '[Day 5] 機器學習大補帖': '5.機器學習大補帖/README.md'
+  - '第二部分 機器學習入門':
+    - '[Day 6] 非監督式學習-k-means分群': '6.非監督式學習k-means分群/README.md'
+    - '[Day 7] 非監督式學習-降維': '7.非監督式學習-降維/README.md'
+    - '[Day 8] 線性迴歸': '8.線性迴歸/README.md'
+    - '[Day 9] 邏輯迴歸': '9.邏輯迴歸/README.md'
+    - '[Day 10] KNN': '10.KNN/README.md'
+    - '[Day 11] SVM': '11.SVM/README.md'
+    - '[Day 12] 決策樹': '12.決策樹/README.md'
+    - '[Day 13] 整體學習': '13.整體學習/README.md'
+    - '[Day 14] 隨機森林': '14.隨機森林/README.md'
+    - '[Day 15] XGBoost': '15.XGBoost/README.md'
+    - '[Day 16] Stacking': '16.Stacking/README.md'
+    - '[Day 17] LightGBM': '17.LightGBM/README.md'
+    - '[Day 18] CatBoost': '18.CatBoost/README.md'
+  - '第三部分 進階概念與應用':
+    - '[Day 19] AutoML': '19.AutoML/README.md'
+    - '[Day 20] Auto-Sklearn': '20.Auto-Sklearn/README.md'
+    - '[Day 21] Optuna': '21.Optuna/README.md'
+    - '[Day 22] Plotly-Express': '22.Plotly-Express/README.md'
+    - '[Day 23] 資料分布與群體值處理': '23.資料分布與離群值處理/README.md'
+    - '[Day 24] 不能忽視的過擬合與欠擬合': '24.不能忽視的過擬合與欠擬合/README.md'
+    - '[Day 25] 交叉驗證 Cross-Validation 簡介': '25.交叉驗證 Cross-Validation 簡介/README.md'
+    - '[Day 26] 交叉驗證 K-Fold Cross-Validation': '26.交叉驗證 K-Fold Cross-Validation/README.md'
+    - '[Day 27] 機器學習常犯錯的十件事': '27.機器學習常犯錯的十件事/README.md'
+    - '[Day 28] 儲存訓練好的模型': '28.儲存訓練好的模型/README.md'
+    - '[Day 29] 使用Python-Flask架設API吧': '29.使用Python-Flask架設API吧/README.md'
+    - '[Day 30] 使用 Heroku 部署機器學習 API': '30.使用 Heroku 部署機器學習 API/README.md'
+
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: false
+plugins:
+  - search
+  - mkpdfs:
+      design: design/report.css
+      author: Tsai Yi Lin
+      company: "10程式中"
+      toc_title: Table of contents
+      output_path: pdf/全民瘋AI系列_經典機器學習_v2.1.pdf

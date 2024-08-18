@@ -1,11 +1,13 @@
 # 全民瘋AI系列2.0
 > 第13屆iT邦幫忙鐵人賽
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C9mvGMtrPXo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## 前言
 哈囉大家好我是10程式中的10！我是[上一屆](https://ithelp.ithome.com.tw/users/20107247/ironman/3719)鐵人賽影片教學組`全民瘋AI系列`的作者，當時講解了人工智慧的基礎以及常見的機器學習演算法與手把手教學。由於大家反應很熱烈，讓我看到了大家對於AI的學習熱忱。也因為上一屆獲得了影片教學組優選，收到了許多書商的出版邀請，由於我沒有時間與動力將這些大量知識寫成文章因此都婉拒了。因此我想藉由這一次鐵人賽將上一屆的影片內容整理成電子書版本，提供大家影片教學與文字版的筆記內容(唷呼書商快看過來～)當然內容會以之前影片教學為基底，並加入一些新的元素讓文章內容變得更紮實。在全新的`全民瘋AI系列2.0`中我會介紹實用的機器學習演算法並含有程式手把手實作，以及近年來熱門的機器學習套件與模型調參技巧。除此之外我還會提到大家最感興趣的 AI 模型落地與整合。希望在這次的鐵人賽能夠將AI的資源整理得更詳細並分享給各位。
 
 
-![](./image/img1-1.jpg)
+![](./1.全民瘋AI系列2.0目標介紹/image/img1-1.jpg)
 
 ## 此系列教學適合誰?
 如果您是之前的舊讀者，歡迎回來為自己充電～新的系列文章保證讓你收穫滿滿！若您是新來的讀者歡迎加入人工智慧的世界，此系列文章正適合初學者閱讀。另外建議可以搭配我[上一屆](https://ithelp.ithome.com.tw/users/20107247/ironman/3719)鐵人賽的影片教學進行學習。
@@ -21,7 +23,7 @@
 - 免費額度使用 GPU、TPU 資源
 - 輕鬆共用與分享檔案
 
-因此讀者必須先熟悉 Colab 的操作模式，想了解該如何操作的朋友們可以先來看這一步[影片](https://youtu.be/C9mvGMtrPXo?t=266)教學。
+因此讀者必須先熟悉 Colab 的操作模式，想了解該如何操作的朋友們可以先來看這一步[影片](https://youtu.be/C9mvGMtrPXo?t=266)教學。或是可以閱讀其他相關[文章](https://datasciocean.tech/python-tutorial/google-colaboratory/)。
 
 
 ## 回報錯誤與建議

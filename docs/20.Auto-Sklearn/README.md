@@ -73,7 +73,7 @@ pip install auto-sklearn
 ![](./image/img20-7.png)
 
 
-## 1) 載入資料集
+## 載入資料集
 本次範例沿用鳶尾花朵資料集，並使用 Auto-sklearn 來搜尋最佳的分類器模型。此外大家可以試著觀察 Auto-sklearn 找到的最佳模型在訓練集與測試集上的表現，並與前幾天所介紹的那些機器學習演算法來做比較。
 
 ```py
@@ -91,7 +91,7 @@ df_data
 
 ![](./image/img20-8.png)
 
-## 2) 切割訓練集與測試集
+## 切割訓練集與測試集
 我們按照花朵種類的數量對資料集以 7:3 的比例切割出訓練集與測試集。其中參數 `stratify=y` 設定是確保訓練集與測試集對於三種花朵類別的比例在這兩個切出來的資料集中比例要一樣，以免訓練出來的模型有很大的偏差。
 
 ```py
@@ -174,6 +174,7 @@ print('automlclassifierV2 測試集: ',automlclassifierV2.score(X_test,y_test))
 ```
 
 執行結果：
+
 ```
 automlclassifierV2 訓練集:  0.9904761904761905
 automlclassifierV2 測試集:  0.9333333333333333
@@ -225,10 +226,10 @@ PipelineProfiler.plot_pipeline_matrix(profiler_data)
 ![](https://i.imgur.com/mCiuTpJ.gif)
 
 ## Reference
-- [1] Feurer, Matthias et al. “[Efficient and Robust Automated Machine Learning](https://proceedings.neurips.cc/paper/2015/file/11d0e6287202fced83f79975ec59a3a6-Paper.pdf),” Advances in neural information processing systems 2015.
-- [2] Feurer, Matthias et al. “[Supplementary Material for Efficient and Robust Automated Machine Learning](https://ml.informatik.uni-freiburg.de/wp-content/uploads/papers/15-NIPS-auto-sklearn-supplementary.pdf),” Advances in neural information processing systems 2015.
-- [3] Feurer, Matthias et al. “[Auto-Sklearn 2.0: Hands-free AutoML via Meta-Learning](https://arxiv.org/abs/2007.04074),” arXiv, 2020.
-- [4] Ono, Jorge et al. “[PipelineProfiler: A Visual Analytics Tool for the Exploration of AutoML Pipelines](https://arxiv.org/abs/2005.00160),” arXiv, 2020.
+- [1] Feurer, Matthias et al. [Efficient and Robust Automated Machine Learning](https://proceedings.neurips.cc/paper/2015/file/11d0e6287202fced83f79975ec59a3a6-Paper.pdf), Advances in neural information processing systems 2015.
+- [2] Feurer, Matthias et al. [Supplementary Material for Efficient and Robust Automated Machine Learning](https://ml.informatik.uni-freiburg.de/wp-content/uploads/papers/15-NIPS-auto-sklearn-supplementary.pdf), Advances in neural information processing systems 2015.
+- [3] Feurer, Matthias et al. [Auto-Sklearn 2.0: Hands-free AutoML via Meta-Learning](https://arxiv.org/abs/2007.04074), arXiv, 2020.
+- [4] Ono, Jorge et al. [PipelineProfiler: A Visual Analytics Tool for the Exploration of AutoML Pipelines](https://arxiv.org/abs/2005.00160), arXiv, 2020.
 - [Auto Machine Learning筆記- Bayesian Optimization](http://codewithzhangyi.com/2018/07/31/Auto%20Hyperparameter%20Tuning%20-%20Bayesian%20Optimization/)
 - [A Quickstart Guide to Auto-Sklearn (AutoML) for Machine Learning Practitioners](https://neptune.ai/blog/a-quickstart-guide-to-auto-sklearn-automl-for-machine-learning-practitioners)
 - [Auto-Sklearn: Scikit-Learn on Steroids](https://towardsdatascience.com/auto-sklearn-scikit-learn-on-steroids-42abd4680e94)

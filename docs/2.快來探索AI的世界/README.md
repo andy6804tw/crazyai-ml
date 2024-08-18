@@ -1,10 +1,10 @@
-
-
 # 快來探索AI的世界
-## Day 2 學習目標
+## 今日學習目標
 - 人工智慧的演進
 - 人工智慧的分級
 - 機器是如何學習的
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zt7ZoPVrZHQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## 人工智慧的演進
