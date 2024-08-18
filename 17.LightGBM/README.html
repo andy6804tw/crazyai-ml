@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="ie=edge" http-equiv="x-ua-compatible"/>
+<meta content="10程式中" name="author"/>
+<meta content="複製" name="lang:clipboard.copy"/>
+<meta content="已複製" name="lang:clipboard.copied"/>
+<meta content="ja" name="lang:search.language"/>
+<meta content="True" name="lang:search.pipeline.stopwords"/>
+<meta content="True" name="lang:search.pipeline.trimmer"/>
+<meta content="沒有符合的項目" name="lang:search.result.none"/>
+<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
+<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
+<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
+<link href="../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
+<title>[Day 17] LightGBM - 全民瘋AI系列</title>
+<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
+<meta content="#795548" name="theme-color"/>
+<script src="../assets/javascripts/modernizr.74668098.js"></script>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
+<svg class="md-svg">
+<defs>
+<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
+</defs>
+</svg>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+<a class="md-skip" href="#lightgbm" tabindex="1">
+        跳轉到
+      </a>
+<header class="md-header" data-md-component="header">
+<nav class="md-header-nav md-grid">
+<div class="md-flex">
+<div class="md-flex__cell md-flex__cell--shrink">
+<a class="md-header-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch">
+<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
+              全民瘋AI系列
+            </span>
+<span class="md-header-nav__topic">
+              
+                [Day 17] LightGBM
+              
+            </span>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
+<label class="md-icon md-search__icon" for="__search"></label>
+<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+        
+      </button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="result">
+<div class="md-search-result__meta">
+            打字進行搜尋
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<div class="md-header-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container">
+<main class="md-main">
+<div class="md-main__inner md-grid" data-md-component="container">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title md-nav__title--site" for="__drawer">
+<a class="md-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+    全民瘋AI系列
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
+<label class="md-nav__link" for="nav-1">
+      第一部分 AI基礎概念
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-1">
+        第一部分 AI基礎概念
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/README.html" title="[Day 1] 目標介紹">
+      [Day 1] 目標介紹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2.快來探索AI的世界/README.html" title="[Day 2] 快來探索AI的世界">
+      [Day 2] 快來探索AI的世界
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../3.你真了解資料嗎?試試看視覺化分析吧!/README.html" title="[Day 3] 你真了解資料嗎？試試看視覺化分析吧！">
+      [Day 3] 你真了解資料嗎？試試看視覺化分析吧！
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/README.html" title="[Day 4] 咱們一起做資料清理和前處理">
+      [Day 4] 咱們一起做資料清理和前處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../5.機器學習大補帖/README.html" title="[Day 5] 機器學習大補帖">
+      [Day 5] 機器學習大補帖
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2">
+      第二部分 機器學習入門
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+        第二部分 機器學習入門
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../6.非監督式學習k-means分群/README.html" title="[Day 6] 非監督式學習-k-means分群">
+      [Day 6] 非監督式學習-k-means分群
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../7.非監督式學習-降維/README.html" title="[Day 7] 非監督式學習-降維">
+      [Day 7] 非監督式學習-降維
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../8.線性迴歸/README.html" title="[Day 8] 線性迴歸">
+      [Day 8] 線性迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../9.邏輯迴歸/README.html" title="[Day 9] 邏輯迴歸">
+      [Day 9] 邏輯迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10.KNN/README.html" title="[Day 10] KNN">
+      [Day 10] KNN
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11.SVM/README.html" title="[Day 11] SVM">
+      [Day 11] SVM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12.決策樹/README.html" title="[Day 12] 決策樹">
+      [Day 12] 決策樹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../13.整體學習/README.html" title="[Day 13] 整體學習">
+      [Day 13] 整體學習
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../14.隨機森林/README.html" title="[Day 14] 隨機森林">
+      [Day 14] 隨機森林
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../15.XGBoost/README.html" title="[Day 15] XGBoost">
+      [Day 15] XGBoost
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../16.Stacking/README.html" title="[Day 16] Stacking">
+      [Day 16] Stacking
+    </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        [Day 17] LightGBM
+      </label>
+<a class="md-nav__link md-nav__link--active" href="README.html" title="[Day 17] LightGBM">
+      [Day 17] LightGBM
+    </a>
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1" title="今日學習目標">
+    今日學習目標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="前言">
+    前言
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lightgbm-xgboost" title="LightGBM 與 XGBoost 比較">
+    LightGBM 與 XGBoost 比較
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lightgbm_1" title="LightGBM 優點">
+    LightGBM 優點
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#unbalance" title="處理 unbalance 資料">
+    處理 unbalance 資料
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference" title="Reference">
+    Reference
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../18.CatBoost/README.html" title="[Day 18] CatBoost">
+      [Day 18] CatBoost
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
+      第三部分 進階概念與應用
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-3">
+        第三部分 進階概念與應用
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../19.AutoML/README.html" title="[Day 19] AutoML">
+      [Day 19] AutoML
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../20.Auto-Sklearn/README.html" title="[Day 20] Auto-Sklearn">
+      [Day 20] Auto-Sklearn
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../21.Optuna/README.html" title="[Day 21] Optuna">
+      [Day 21] Optuna
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../22.Plotly-Express/README.html" title="[Day 22] Plotly-Express">
+      [Day 22] Plotly-Express
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../23.資料分布與離群值處理/README.html" title="[Day 23] 資料分布與群體值處理">
+      [Day 23] 資料分布與群體值處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../24.不能忽視的過擬合與欠擬合/README.html" title="[Day 24] 不能忽視的過擬合與欠擬合">
+      [Day 24] 不能忽視的過擬合與欠擬合
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/README.html" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
+      [Day 25] 交叉驗證 Cross-Validation 簡介
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/README.html" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
+      [Day 26] 交叉驗證 K-Fold Cross-Validation
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../27.機器學習常犯錯的十件事/README.html" title="[Day 27] 機器學習常犯錯的十件事">
+      [Day 27] 機器學習常犯錯的十件事
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../28.儲存訓練好的模型/README.html" title="[Day 28] 儲存訓練好的模型">
+      [Day 28] 儲存訓練好的模型
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../29.使用Python-Flask架設API吧/README.html" title="[Day 29] 使用Python-Flask架設API吧">
+      [Day 29] 使用Python-Flask架設API吧
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/README.html" title="[Day 30] 使用 Heroku 部署機器學習 API">
+      [Day 30] 使用 Heroku 部署機器學習 API
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1" title="今日學習目標">
+    今日學習目標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="前言">
+    前言
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lightgbm-xgboost" title="LightGBM 與 XGBoost 比較">
+    LightGBM 與 XGBoost 比較
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lightgbm_1" title="LightGBM 優點">
+    LightGBM 優點
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#unbalance" title="處理 unbalance 資料">
+    處理 unbalance 資料
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference" title="Reference">
+    Reference
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
+<h1 id="lightgbm">LightGBM</h1>
+<h2 id="_1">今日學習目標</h2>
+<ul>
+<li>LightGBM 與 XGBoost 比較</li>
+<li>了解 LightGBM 優點</li>
+<li>實作 LightGBM 處理資料不平衡資料<ul>
+<li>信用卡盜刷偵測 (二元分類)</li>
+</ul>
+</li>
+</ul>
+<h2 id="_2">前言</h2>
+<p>LightGBM 是屬於 GBDT 家族中成員之一，相較於先前介紹的 XGBoost 兩者可以拿來做比較。簡單來說從 LightGBM 名字上觀察，我們可以看出它是輕量化 (Light) 的梯度提升機 (GBM) 的實例。其相對 XGBoost 來說它具有訓練速度快、記憶體佔用低的特點，因此近幾年 LightGBM 在 Kaggle 上也算是熱門模型一。</p>
+<p><img alt="" src="https://i.imgur.com/ecN4zor.png"/></p>
+<h2 id="lightgbm-xgboost">LightGBM 與 XGBoost 比較</h2>
+<p>這兩種演算法都使用貪婪的方法來最小化損失函數的梯度來構建所有的弱學習器。其 tree-based 演算法所面臨的挑戰是如何挑選最佳的葉節點的切割方式，然而 LightGBM 和 XGBoost 分別使用不同的優化技術與方法來識別最佳的分割點。</p>
+<h2 id="lightgbm_1">LightGBM 優點</h2>
+<p>LightGBM 由微軟團隊於 2017 年所發表的論文 <a href="https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf">LightGBM: A Highly Efficient Gradient Boosting Decision Tree</a> 被提出。其主要想法是利用決策樹為基底的弱學習器，不斷地迭代訓練並取得最佳的模型。同時該演算法進行了優化使得訓練速度變快，並且有效降被消耗的資源。LightGBM 也是個開源專案大家可以在 <a href="https://github.com/microsoft/LightGBM">GitHub</a> 上可以取得相關資訊。</p>
+<p>在官方的文件中也條列了幾個 LightGBM 的優點：
+- 更快的訓練速度和更高的效率
+- 低記憶體使用率
+- 更好的準確度
+- 支援 GPU 平行運算
+- 能夠處理大規模數據</p>
+<p>LightGBM 使用 leaf-wise tree 演算法，因此在迭代過程中能更快地收斂。但是 leaf-wise tree 方法較容易過擬合。詳細的內容可以參考文章最後提供的相關資源。</p>
+<h2 id="unbalance">處理 unbalance 資料</h2>
+<p>在使用 LightGBM 做分類器時該如何處理樣本類別分佈不平衡的問題？一個簡單的方法是設定 <code>is_unbalance=True</code>，或是 <code>scale_pos_weight</code> 注意這兩個參數只能擇一使用。以下我們就使用一個不平衡的資料集，信用卡盜刷預測來做示範。首先我們可以載入 Google 所提供的信用卡盜刷資料集，詳細資訊可以參考<a href="https://www.tensorflow.org/tutorials/structured_data/imbalanced_data">這裡</a>。</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">raw_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'https://storage.googleapis.com/download.tensorflow.org/data/creditcard.csv'</span><span class="p">)</span>
+<span class="n">X</span><span class="o">=</span><span class="n">raw_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Class'</span><span class="p">])</span>
+<span class="n">y</span><span class="o">=</span><span class="n">raw_df</span><span class="p">[</span><span class="s1">'Class'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'X:'</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Y:'</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+<p>載入成功後我們可以看到該資料集共有 284807 筆資料，每一筆資料有 30 個特徵。</p>
+<div class="codehilite"><pre><span></span>X: (284807, 30)
+Y: (284807,)
+</pre></div>
+<p>為了方便檢視實驗結果，我們依照 y 的比例進行訓練集與測試集的切割。這裡值得一提的是，<code>stratify</code> 為分層隨機抽樣。特別是在原始數據中樣本標籤分佈不均衡時非常有用，一些分類問題可能會在目標類的分佈中表現出很大的不平衡時例如：負樣本可能比正樣本多幾倍。在這種情況下，建議使用分層抽樣。</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'X_train:'</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'X_test:'</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+<p>輸出結果：</p>
+<div class="codehilite"><pre><span></span>X_train: (199364, 30)
+X_test: (85443, 30)
+</pre></div>
+<p>訓練集與測試集經由 7:3 的比例下去隨機切割資料。我們可以透過 Pandas 做更近一步的分析，可以發現切割出來的訓練集與測試集在盜刷(1)與非盜刷(0)的資料比例是差不多的。</p>
+<p><img alt="" src="image/img17-1.png"/></p>
+<p>接下來重頭戲出場。我們採用 LightGBM 分類器，若還沒安裝的讀者可以參考以下指令進行安裝。</p>
+<div class="codehilite"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lightgbm
+</pre></div>
+<p>安裝結束後即可載入 lightgbm 套件並選用 LGBMClassifier 分類器。另外我們可以在建立分類器同時設定模型超參數，這裡我們來示範使用 <code>is_unbalance=True</code> 訓練模型。除此之外模型的超參數有很多，可以由<a href="https://lightgbm.readthedocs.io/en/latest/Parameters.html">官方</a>文件中查閱。以下幫各位整理常用的方法：</p>
+<p>Parameters:
+- num_iterations: 總共迭代的次數，即決策樹的個數。預設值為100。
+- learning_rate: 學習速率，預設0.1。
+- boosting: 選擇 boosting 種類。共四種 gbdt、rf、dart、goss，預設為 gbdt。
+- max_depth: 樹的最大深度，預設值為-1即表示無限制。
+- min_data_in_leaf: 一個子葉中最少數據，可用於處理過擬合。預設20筆。
+- max_bin: 將特徵值放入桶中的最大bins數。預設為255。</p>
+<p>Attributes:
+- feature_importances_: 查詢模型特徵的重要程度。</p>
+<p>Methods:
+- fit: 放入X、y進行模型擬合。
+- predict: 預測並回傳預測類別。
+- score: 預測成功的比例。
+- predict_proba: 預測每個類別的機率值。</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">LGBMClassifier</span><span class="p">(</span><span class="n">is_unbalance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+<p>訓練結束後即可使用剛切割好的測試集進行模型評估。我們可以發現準確率高達 94%。</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="n">pred</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Accuracy:"</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">))</span>
+</pre></div>
+<p>輸出結果：</p>
+<div class="codehilite"><pre><span></span>Accuracy: 0.9401706400758401
+</pre></div>
+<p>如果要判斷分類器的好壞，僅使用準確率來評估是一個不好的習慣。我們應該善用混淆矩陣做更近一步的分析，並查看正樣本與負樣本在預測上的表現。首先我們先來寫一個計算混淆矩陣的函式，並用 seaborn 繪製出熱力圖矩陣。</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="k">def</span> <span class="nf">plot_confusion_matrix</span><span class="p">(</span><span class="n">actual_val</span><span class="p">,</span> <span class="n">pred_val</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">confusion_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">actual_val</span><span class="p">,</span> <span class="n">pred_val</span><span class="p">,</span>
+                                   <span class="n">rownames</span><span class="o">=</span><span class="p">[</span><span class="s1">'Actual'</span><span class="p">],</span>
+                                   <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s1">'Predicted'</span><span class="p">])</span>
+
+    <span class="n">plot</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">',.0f'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+<p>在評估模型之前我們先來查看測試集輸出 y 的分佈各是多少。透過 numpy 的 unique 方法可以計算 <code>y_test</code> 中每個類別的數量。從輸出結果可以得知，85443 筆測試集中共有 85295 筆是標籤 0(未盜刷)、148 筆是標籤 1(盜刷)。知道這些真實數據的數量後，接下來我們就可以透過混淆矩陣來查看模型是否有將這些盜刷的資料被正確預測出來。</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+</pre></div>
+<p>輸出結果：</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="mi">85295</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="mi">148</span><span class="p">}</span>
+</pre></div>
+<p><code>plot_confusion_matrix</code> 函式建立完成後即可呼叫。此函式有三個輸入，分別為 y_test 實際輸出答案、 pred 模型預測結果、title 圖表標題(預設None)。相對應的變數輸入後即可得到計算好的混淆矩陣。</p>
+<div class="codehilite"><pre><span></span><span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+</pre></div>
+<p>下圖為實際 <code>is_unbalance=True</code> 的訓練結果。我們可以發現在測試集中有 148 筆盜刷資料，其中有 124 筆盜刷被成功辨識出來。另外我們可以發現真實答案是沒盜刷的資料居然有 5088 筆被誤判成盜刷。</p>
+<p><img alt="" src="image/img17-2.png"/></p>
+<p>我們再來試試將 <code>is_unbalance</code> 設為 <code>False</code> 並觀察混淆矩陣。可以發現雖然誤判的數量減少了，但是真實答案中有 148 筆盜刷資料僅有 88 筆被成功辨識出來。我們可以猜想模型在大多數狀況都會預測資料未被盜刷的機率較大。</p>
+<p><img alt="" src="image/img17-3.png"/></p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://codingnote.cc/zh-tw/p/22596/">終於有人把XGBoost 和 LightGBM 講明白了，項目中最主流的集成演算法！</a></li>
+<li><a href="https://www.twblogs.net/a/5baa44f32b717750855c8ac6">Lightgbm基本原理介紹</a></li>
+</ul>
+<blockquote>
+<p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
+</blockquote>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../16.Stacking/README.html" rel="prev" title="[Day 16] Stacking">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  上一頁
+                </span>
+                [Day 16] Stacking
+              </span>
+</div>
+</a>
+<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../18.CatBoost/README.html" rel="next" title="[Day 18] CatBoost">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  下一頁
+                </span>
+                [Day 18] CatBoost
+              </span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2021 - 2024 10程式中
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src="../assets/javascripts/application.245445c6.js"></script>
+<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+<script src="../assets/javascripts/lunr/tinyseg.js"></script>
+<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+<script src="../javascripts/extra.js"></script>
+</body>
+</html>

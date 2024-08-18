@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="ie=edge" http-equiv="x-ua-compatible"/>
+<meta content="10程式中" name="author"/>
+<meta content="複製" name="lang:clipboard.copy"/>
+<meta content="已複製" name="lang:clipboard.copied"/>
+<meta content="ja" name="lang:search.language"/>
+<meta content="True" name="lang:search.pipeline.stopwords"/>
+<meta content="True" name="lang:search.pipeline.trimmer"/>
+<meta content="沒有符合的項目" name="lang:search.result.none"/>
+<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
+<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
+<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
+<link href="../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
+<title>[Day 27] 機器學習常犯錯的十件事 - 全民瘋AI系列</title>
+<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
+<meta content="#795548" name="theme-color"/>
+<script src="../assets/javascripts/modernizr.74668098.js"></script>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
+<svg class="md-svg">
+<defs>
+<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
+</defs>
+</svg>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+<a class="md-skip" href="#_1" tabindex="1">
+        跳轉到
+      </a>
+<header class="md-header" data-md-component="header">
+<nav class="md-header-nav md-grid">
+<div class="md-flex">
+<div class="md-flex__cell md-flex__cell--shrink">
+<a class="md-header-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch">
+<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
+              全民瘋AI系列
+            </span>
+<span class="md-header-nav__topic">
+              
+                [Day 27] 機器學習常犯錯的十件事
+              
+            </span>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
+<label class="md-icon md-search__icon" for="__search"></label>
+<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+        
+      </button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="result">
+<div class="md-search-result__meta">
+            打字進行搜尋
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<div class="md-header-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container">
+<main class="md-main">
+<div class="md-main__inner md-grid" data-md-component="container">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title md-nav__title--site" for="__drawer">
+<a class="md-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+    全民瘋AI系列
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
+<label class="md-nav__link" for="nav-1">
+      第一部分 AI基礎概念
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-1">
+        第一部分 AI基礎概念
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/README.html" title="[Day 1] 目標介紹">
+      [Day 1] 目標介紹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2.快來探索AI的世界/README.html" title="[Day 2] 快來探索AI的世界">
+      [Day 2] 快來探索AI的世界
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../3.你真了解資料嗎?試試看視覺化分析吧!/README.html" title="[Day 3] 你真了解資料嗎？試試看視覺化分析吧！">
+      [Day 3] 你真了解資料嗎？試試看視覺化分析吧！
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/README.html" title="[Day 4] 咱們一起做資料清理和前處理">
+      [Day 4] 咱們一起做資料清理和前處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../5.機器學習大補帖/README.html" title="[Day 5] 機器學習大補帖">
+      [Day 5] 機器學習大補帖
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2">
+      第二部分 機器學習入門
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+        第二部分 機器學習入門
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../6.非監督式學習k-means分群/README.html" title="[Day 6] 非監督式學習-k-means分群">
+      [Day 6] 非監督式學習-k-means分群
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../7.非監督式學習-降維/README.html" title="[Day 7] 非監督式學習-降維">
+      [Day 7] 非監督式學習-降維
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../8.線性迴歸/README.html" title="[Day 8] 線性迴歸">
+      [Day 8] 線性迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../9.邏輯迴歸/README.html" title="[Day 9] 邏輯迴歸">
+      [Day 9] 邏輯迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10.KNN/README.html" title="[Day 10] KNN">
+      [Day 10] KNN
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11.SVM/README.html" title="[Day 11] SVM">
+      [Day 11] SVM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12.決策樹/README.html" title="[Day 12] 決策樹">
+      [Day 12] 決策樹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../13.整體學習/README.html" title="[Day 13] 整體學習">
+      [Day 13] 整體學習
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../14.隨機森林/README.html" title="[Day 14] 隨機森林">
+      [Day 14] 隨機森林
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../15.XGBoost/README.html" title="[Day 15] XGBoost">
+      [Day 15] XGBoost
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../16.Stacking/README.html" title="[Day 16] Stacking">
+      [Day 16] Stacking
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../17.LightGBM/README.html" title="[Day 17] LightGBM">
+      [Day 17] LightGBM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../18.CatBoost/README.html" title="[Day 18] CatBoost">
+      [Day 18] CatBoost
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
+      第三部分 進階概念與應用
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-3">
+        第三部分 進階概念與應用
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../19.AutoML/README.html" title="[Day 19] AutoML">
+      [Day 19] AutoML
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../20.Auto-Sklearn/README.html" title="[Day 20] Auto-Sklearn">
+      [Day 20] Auto-Sklearn
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../21.Optuna/README.html" title="[Day 21] Optuna">
+      [Day 21] Optuna
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../22.Plotly-Express/README.html" title="[Day 22] Plotly-Express">
+      [Day 22] Plotly-Express
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../23.資料分布與離群值處理/README.html" title="[Day 23] 資料分布與群體值處理">
+      [Day 23] 資料分布與群體值處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../24.不能忽視的過擬合與欠擬合/README.html" title="[Day 24] 不能忽視的過擬合與欠擬合">
+      [Day 24] 不能忽視的過擬合與欠擬合
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/README.html" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
+      [Day 25] 交叉驗證 Cross-Validation 簡介
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/README.html" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
+      [Day 26] 交叉驗證 K-Fold Cross-Validation
+    </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        [Day 27] 機器學習常犯錯的十件事
+      </label>
+<a class="md-nav__link md-nav__link--active" href="README.html" title="[Day 27] 機器學習常犯錯的十件事">
+      [Day 27] 機器學習常犯錯的十件事
+    </a>
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="今日學習目標">
+    今日學習目標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3" title="前言">
+    前言
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1" title="1. 資料收集與處理不當">
+    1. 資料收集與處理不當
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2" title="2. 訓練集與測試集的類別分佈不一致">
+    2. 訓練集與測試集的類別分佈不一致
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3" title="3. 沒有資料視覺化的習慣">
+    3. 沒有資料視覺化的習慣
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-labelencoder" title="4. 使用 LabelEncoder 為特徵編碼">
+    4. 使用 LabelEncoder 為特徵編碼
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5" title="5. 資料處理不當導致資料洩漏">
+    5. 資料處理不當導致資料洩漏
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6" title="6. 僅使用測試集評估模型好壞">
+    6. 僅使用測試集評估模型好壞
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7" title="7. 在沒有交叉驗證的情況下判斷模型性能">
+    7. 在沒有交叉驗證的情況下判斷模型性能
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8" title="8. 分類問題僅使用準確率作為衡量模型的指標">
+    8. 分類問題僅使用準確率作為衡量模型的指標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#9-r2" title="9. 迴歸問題僅使用 R2 分數評估模型好壞">
+    9. 迴歸問題僅使用 R2 分數評估模型好壞
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10-ai" title="10. 任何事情別急著想用 AI 解決">
+    10. 任何事情別急著想用 AI 解決
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../28.儲存訓練好的模型/README.html" title="[Day 28] 儲存訓練好的模型">
+      [Day 28] 儲存訓練好的模型
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../29.使用Python-Flask架設API吧/README.html" title="[Day 29] 使用Python-Flask架設API吧">
+      [Day 29] 使用Python-Flask架設API吧
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/README.html" title="[Day 30] 使用 Heroku 部署機器學習 API">
+      [Day 30] 使用 Heroku 部署機器學習 API
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="今日學習目標">
+    今日學習目標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3" title="前言">
+    前言
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1" title="1. 資料收集與處理不當">
+    1. 資料收集與處理不當
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2" title="2. 訓練集與測試集的類別分佈不一致">
+    2. 訓練集與測試集的類別分佈不一致
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3" title="3. 沒有資料視覺化的習慣">
+    3. 沒有資料視覺化的習慣
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-labelencoder" title="4. 使用 LabelEncoder 為特徵編碼">
+    4. 使用 LabelEncoder 為特徵編碼
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5" title="5. 資料處理不當導致資料洩漏">
+    5. 資料處理不當導致資料洩漏
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6" title="6. 僅使用測試集評估模型好壞">
+    6. 僅使用測試集評估模型好壞
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7" title="7. 在沒有交叉驗證的情況下判斷模型性能">
+    7. 在沒有交叉驗證的情況下判斷模型性能
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8" title="8. 分類問題僅使用準確率作為衡量模型的指標">
+    8. 分類問題僅使用準確率作為衡量模型的指標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#9-r2" title="9. 迴歸問題僅使用 R2 分數評估模型好壞">
+    9. 迴歸問題僅使用 R2 分數評估模型好壞
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10-ai" title="10. 任何事情別急著想用 AI 解決">
+    10. 任何事情別急著想用 AI 解決
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
+<h1 id="_1">機器學習常犯錯的十件事</h1>
+<h2 id="_2">今日學習目標</h2>
+<ul>
+<li>探討機器學習常犯的十個錯誤</li>
+</ul>
+<h2 id="_3">前言</h2>
+<p>人工智慧近年來成為任何產業熱門的話題之一，各公司積極地導入機器學習技術協助產業 AI 化。例如：智慧醫療、智慧交通、智慧製造......等。正是因為 AI 技術的創新與普及，訓練機器學習模型再也不是理工背景的人才能做的事。此外隨著 Python 開發社群茁壯，許多開源的 AI 套件如雨後春筍般的出現大大降低了機器學習建模的門檻。在今天的內容中我想藉由鐵人賽來跟大家分享機器學習常犯錯的十件事，並且從資料面與模型面的角度來探討機器學習應該注意的幾件事。尤其是在初學階段，因缺乏經驗往往會犯一些無可避免的錯誤。所以這篇文章將點出十個機器學習中常犯的隱形錯誤。</p>
+<ul>
+<li>資料面</li>
+<li>資料收集與處理不當</li>
+<li>訓練集與測試集的類別分佈不一致</li>
+<li>沒有資料視覺化的習慣</li>
+<li>使用 LabelEncoder 為特徵編碼</li>
+<li>
+<p>資料處理不當導致資料洩漏</p>
+</li>
+<li>
+<p>模型面</p>
+</li>
+<li>僅使用測試集評估模型好壞</li>
+<li>在沒有交叉驗證的情況下判斷模型性能</li>
+<li>分類問題僅使用準確率作為衡量模型的指標</li>
+<li>迴歸問題僅使用 R2 分數評估模型好壞</li>
+<li>任何事情別急著想用 AI 解決</li>
+</ul>
+<h2 id="1">1. 資料收集與處理不當</h2>
+<p>機器學習首要的步驟是定義問題，當確定目標與方向後即可開始搜集資料。相信大家都知道現實生活中的資料得來不易，即使從資料庫取得了這些資料後我們還需要花大量的時間進行資料清洗。所謂的資料清洗是資料庫當中可能會有缺失值，例如：NA、Inf、NaN、NULL。</p>
+<ul>
+<li>NA：表示缺失值，是 Not Available 的縮寫。</li>
+<li>Inf：表示無窮大，是 Infinite 的縮寫。</li>
+<li>NaN：表示非數值，是 Not a Number 的縮寫。</li>
+<li>NULL：表示空值，即沒有內容。</li>
+</ul>
+<p>當資料都完成了前處理後，即可開始建立模型與評估模型。但是當訓練出來的模型表現不好有很多的因素。大家最常做的是替換模型演算法，或是嘗試不同的模型超參數取得一個最佳的結果。但是在進行這些做之前，建議大家先把關注的點回到資料處理面。模型訓練不好的其中一個因素是資料的標籤收集不當。Landing.ai 執行長吳恩達也曾經說過當一個小資料集存在著錯誤標籤時，模型很難給出一個正確的輸出。因為資料間夾帶了雜訊往往會使的模型存在著一些偏差，導致訓練結果不穩定。因此筆者建議模型訓練不好的時候，可以回頭觀察資料是否存在一些錯誤。而不是一昧的調整模型演算法與超參數。</p>
+<h2 id="2">2. 訓練集與測試集的類別分佈不一致</h2>
+<p>在分類的資料中，初學者常見的錯誤是忘記使用分層抽樣 (stratify) 來對訓練集和測試集進行切割。當測試集的分佈盡可能與訓練相同情況下，模型才更有可能得到更準確的預測。然而在分類的問題中，我們必須更關注每個類別的資料分佈比例。以下舉個例子：假設我們有三個標籤的類別，而這三個類別的分佈比例分別為 4:3:3。同理我們在進行資料切割的時候必須確保訓練集與測試集需要有相同的資料分佈比例。</p>
+<p>大家應該都使用過 Sklearn 的 <code>train_test_split</code> 進行資料切割。在此方法中 Sklearn 提供了一個 <code>stratify</code> 參數達到分層隨機抽樣的目的。特別是在原始數據中樣本標籤分佈不均衡時非常有用，一些分類問題可能會在目標類的分佈中表現出很大的不平衡：例如，負樣本與正樣本比例懸殊(信用卡盜刷預測、離職員工預測)。以下用紅酒分類預測來進行示範，首先我們不使用 <code>stratify</code> 隨機切割資料並查看資料切割前後的三種類別比例。</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 查看全部資料三種類別比例</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<div class="codehilite"><pre><span></span># 全部資料三種類別比例
+1    0.398876
+0    0.331461
+2    0.269663
+dtype: float64
+</pre></div>
+<div class="codehilite"><pre><span></span><span class="c1"># 實驗一: 不使用 stratify 進行切割資料</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+
+<span class="c1"># 查看訓練集三種類別比例</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 查看測試集三種類別比例</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<div class="codehilite"><pre><span></span># 訓練集三種類別比例
+1    0.390977
+0    0.330827
+2    0.278195
+dtype: float64
+
+# 測試集三種類別比例
+1    0.511111
+0    0.266667
+2    0.222222
+dtype: float64
+</pre></div>
+<p>從上面切出來的訓練集與測試集可以發現三個類別的資料分佈比例都不同。因此我們可以使用 <code>stratify</code> 參數再切割一次。</p>
+<div class="codehilite"><pre><span></span><span class="c1"># 實驗二: 使用 stratify 進行切割資料</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># 查看訓練集三種類別比例</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 查看測試集三種類別比例</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<div class="codehilite"><pre><span></span># 訓練集三種類別比例
+1    0.400000
+0    0.333333
+2    0.266667
+dtype: float64
+
+# 測試集三種類別比例
+1    0.398496
+0    0.330827
+2    0.270677
+dtype: float64
+</pre></div>
+<p>我們可以發現將 <code>stratify</code> 設置為目標 (y) 在訓練和測試集中產生相同的分佈。因為改變的類別的比例是一個嚴重的問題，可能會使模型更偏向於特定的類別。因此訓練資料的分佈必須要與實際情況越接近越好。</p>
+<h2 id="3">3. 沒有資料視覺化的習慣</h2>
+<p>資料視覺化的好處多多，在本系列文章 <a href="https://ithelp.ithome.com.tw/articles/10264416">[Day 3] 你真了解資料嗎？試試看視覺化分析吧！</a> 與 <a href="https://ithelp.ithome.com.tw/articles/10277258">[Day 22] Python 視覺化解釋數據 - Plotly Express</a> 講解了許多 Python 資料視覺化的技巧。資料視覺化可以幫助我們分析與統計資料的型態，往往有好的資料清洗與前處理對模型預測結果會有大幅的提升。有興趣的讀者可以參考<a href="https://zh.wikipedia.org/wiki/%E5%AE%89%E6%96%AF%E5%BA%93%E5%A7%86%E5%9B%9B%E9%87%8D%E5%A5%8F">安斯庫姆四重 (Anscombe’s quartet)</a>。他主要是是透過四個小資料集並透過視覺化與統計來觀察，並說明在分析數據前先繪製圖表的重要性，以及離群值對統計的影響之大。</p>
+<h2 id="4-labelencoder">4. 使用 LabelEncoder 為特徵編碼</h2>
+<p>通常我們要為類別的特徵進行編碼，直覺會想到 Sklearn 的 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html">LabelEncoder</a>。但是如果一個資料集中有多個特徵是屬於類別型的資料，豈不是很麻煩?必須要一個一個呼叫 LabelEncoder 分別為這些特徵進行轉換。如果你看到這邊有同感的，在這裡要告訴你事實並非如此！我們看看 在官方文件下 LabelEncoder 的描述：</p>
+<blockquote>
+<p>This transformer should be used to encode target values, i.e. y, and not the input X.</p>
+</blockquote>
+<p>簡單來說 LabelEncoder 只是被用來編碼輸出項 y 而已的！你還在用它來編碼你的每個 x 嗎？（暈</p>
+<p>那麼我們該用什麼方法來編碼有順序的類別特徵呢？如果你仔細閱讀有關編碼分類特徵的 Sklearn 用戶指南，你會看到它清楚地說明：</p>
+<blockquote>
+<p>To convert categorical features to integer codes, we can use the OrdinalEncoder. This estimator transforms each categorical feature to one new feature of integers (0 to n_categories - 1)</p>
+</blockquote>
+<p>看到這邊大家應該知道閱讀官方文件的重要性吧！官方文件中建議 x 項的輸入特徵可以採用 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html">OrdinalEncoder</a> 一次為所有特徵依序做 Label Encoding。OrdinalEncoder 編碼器的使用方式如下：</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OrdinalEncoder</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="n">OrdinalEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'Male'</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Female'</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Female'</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">categories_</span><span class="p">)</span>
+<span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">'Female'</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Male'</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+<div class="codehilite"><pre><span></span>[array(['Female', 'Male'], dtype=object), array([1, 2, 3], dtype=object)]
+array([[0., 2.],
+       [1., 0.]])
+</pre></div>
+<p>以上的範例是 X 有三筆資料，每筆資料都有兩個特徵。我們可以發現第一個特徵是性別 Male 與 Female，因此 OrdinalEncoder 會依造字母開頭做排序 Female 編碼為 0 而 Male 編碼為 1。另外第二個特徵為數字 1、2、3，同理依序為他們編碼成 0、1、2。只需閱讀官方文檔和用戶指南，你就可以了解很多關於 Sklearn 的知識！是不是很棒～</p>
+<h2 id="5">5. 資料處理不當導致資料洩漏</h2>
+<p>資料洩漏 (data leakage) 是個隱形殺手，它會在不知不覺中影響模型預測結果。其發生的時機在於你在訓練過程中，不應該將測試的資料的資訊洩漏到訓練過程中。它會造成模型給出一個非常樂觀的結果，即使在交叉驗證中也是如此，但在對實際新數據進行測試時表現會非常地糟糕。</p>
+<p>資料洩漏最常發生於資料前處理的階段，尤其是當你的訓練集和測試集尚未切割的時候。Sklearn 提供了許多資料前處理的方法，例如: 缺失值補值(imputers)、正規化 (normalizers)、標準化(standardization)以及對數(log) 轉換...等。這些轉換器都會依賴於你輸入資料的分佈，並依照此分佈做相對應的擬合。</p>
+<p>舉例來說，我們在做標準化時(StandardScaler)透過從每筆資料中減去平均值並將其除以標準偏差來獲得縮放後的數據。我們使用 <code>fit()</code> 方法在所有資料集 X 上做轉換，並使得轉換器學習每個特徵的整個分佈的平均值和標準差。這些資料轉換後如果再將這些數據拆分為訓練集和測試集，則訓練集會受到污染。因為 StandardScaler 從實際分佈中洩露了測試集重要訊息，一般來說我們不能將測試集的分佈情況與訓練集混在一起。雖然我們希望訓練集的分佈與實際測試集的分佈要越接近越好，因為使得模型表現結果穩定。</p>
+<p>雖然我們把測試集與訓練集混在一起並做轉換，這一步驟對我們來說可能沒什麼。但是對於 Sklearn 強大的演算法，可能會透過這個遺漏測試集的分佈的訊息把模型擬合的很好。屆時模型訓練完成後，測試集不夠新穎，無法在實際看不見的數據上測試模型的性能。</p>
+<p>最簡單的解決辦法，就是不要使用 <code>fit()</code> 一次轉換所有的資料。在做任何資料轉換之前要先確保訓練集與測試集已經完整地被切開。即使切開後也不要再拿測試集呼叫 <code>fit()</code> 或 <code>fit_transform()</code>，這一樣會導致相同問題發生。因為訓練集和測試集必須進行相同的轉換，依照官方的範例我們必須先使用 <code>fit_transform()</code> 在訓練集上進行擬合與轉換。這確保了轉換器僅從訓練集學習，從中找出參數例如平均值與變異數並同時對其進行變換。接著使用 <code>transform()</code> 方法在測試資料上進行轉換，根據從訓練數據中學到的訊息進行轉換。</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">44</span><span class="p">)</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+<p>更強大的解決方案是使用 Sklearn 內建的 pipeline，它能夠保護模型免於資料洩漏的問題。此方法能夠確保訓練資料僅參與轉換擬合與模型訓練，而測試資料僅用於計算並驗證模型。</p>
+<hr/>
+<h2 id="6">6. 僅使用測試集評估模型好壞</h2>
+<p>如果你的測試資料 R2 score 得到了 0.85 就代表很好了嗎？不盡然！儘管有高的測試分數通常意味著模型表現佳，但在解釋測試結果時仍有一些重要的注意事項。首先最重要的，無論分數值如何測試集的分數一定要與訓練集相比較才能確保模型訓練好與壞。當你的模型訓練集分數高於測試集的分數，並且兩者都足夠高以滿足專案的目標期望時這代表你訓練了一個好模型。然而這並不意味著訓練和測試分數之間的差異越大越好。舉個例子，若訓練集的 R2 score 為 0.85 測試集為 0.8 即代表模型既不過度擬合(overfit)也不欠擬合(underfit)。但是如果訓練集 0.9 測試集 0.8 的時候，你的模型就是過擬合。其原因是該模型沒有在訓練期間進行泛化，而是記住了一些訓練數據，從而導致測試分數低得多。</p>
+<p>在大多數任務中你將會看到許多人使用 tree-based 模型或是整體學習模型 (ensemble models)。例如在隨機森林演算法當中如果它們的樹深度太深，往往會獲得非常高的訓練分數，從而導致過度擬合。另外也有測試集的分數比訓練集高的情況，若發生此情況時通常都會感覺是不是做錯了什麼。這種情況的主要原因是資料洩漏，也就是上一節我們討論的情況。或是你的測試資料筆數太少，沒辦法足以驗證模型好壞。</p>
+<p>另外有時候我們也會得到在訓練集有很好的表現但測試集無敵差的情況。當訓練和測試分數差異很大時，問題往往與測試集有關而不是過度擬合。這時候你可能要檢查資料預處理的方式是否一致 (像是取 log 或 scale)，或是只是忘記對測試集做轉換處理。</p>
+<p>這裡做一個小結，總之在訓練好模型時請仔細檢查訓練和測試分數之間的差距。並且可以透過此評估方式檢視模型是否過擬合，同時也能進行模型條參或是選擇最佳的資料預處理方式。並為最終的模型做最佳的準備。</p>
+<h2 id="7">7. 在沒有交叉驗證的情況下判斷模型性能</h2>
+<p>我想大家應該都熟練掌握了 overfitting 這個議題。這是機器學習中一個迫切問題，並已經設計了無數個方法來解決它。最基本的方法是將一部分數據作為測試集來模擬和測量模型在看不見的數據上的性能。但是我們可以調整模型的超參數，直到模型在該特定測試集上達到最高分數，這又意味著某種含義的過度擬合。因此我們可以會將完整數據的另一部分作為<code>驗證集</code>再次解決這個問題。模型將在訓練數據上進行訓練，並在驗證集上微調其參數，並在測試集上進行最終評估。</p>
+<p><img alt="" src="image/img27-1.png"/></p>
+<p>但是將我們寶貴的數據分成三組意味著模型可以學習的數據量更少。此外模型的整體預測性能將取決於那對特定的訓練集和驗證集。因此在進行機器學習時最常使用 K-Fold cross-validation 解決上述問題。詳細內容可以參考我的前兩天文章<a href="https://ithelp.ithome.com.tw/articles/10278851">[Day 25] 交叉驗證 Cross-Validation 簡介</a>以及<a href="https://ithelp.ithome.com.tw/articles/10279240">[Day 26] 交叉驗證 K-Fold Cross-Validation</a>。根據我們設定的 K 值，可以完整的將數據被分成 K 組 folds，對於每個 folds 每次模型訓練會把 K-1 組作為訓練集，而剩下的被歸類為驗證集。當模型交叉驗證結束後，訓練集所有資料會被完整的訓練。</p>
+<p><img alt="" src="image/img27-2.png"/></p>
+<h2 id="8">8. 分類問題僅使用準確率作為衡量模型的指標</h2>
+<p>在預設的情況下所有 Sklearn 分類器在呼叫 <code>score()</code> 函數時都使用準確度作為評分方法。由於準確率的計算方式簡單與容易理解，因此經常會看到初學者廣泛使用它來判斷其模型的性能。不幸的是這種一般準確率的評估方式只對類別平衡的二元分類問題有用。</p>
+<p>然而在其他的狀況下它是一個誤導性的指標，即使是表現最差的模型也可能背後隱藏著高準確度的分數。舉例來說有個偵測垃圾郵件的模型它的準確率 90%，但是實際上它根本無法偵測到垃圾郵件。這是為什麼？由於垃圾郵件並不常見，分類器可以檢測所有非垃圾郵件，即使分類器完全無法達到其目的這也可以提高其準確性。因為這個分類器僅可以分類這些正常郵件，稀少的垃圾郵件根本變認不出來。</p>
+<p>對於多元類分類的問題更是應該注意你的模型評估指標。如果達到 80% 的準確率，是否意味著模型在預測類別1、類別2、類別3甚至所有類時一樣準確呢？一般的準確率永遠無法回答此類問題，但幸運的是其他分類指標提供了更多的訊息指標。它就是<a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html">混淆矩陣</a>(confusion matrix)。</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+<div class="codehilite"><pre><span></span>array([[2, 0, 0],
+       [0, 0, 1],
+       [1, 0, 2]])
+</pre></div>
+<p>組成混淆矩陣的四個元素分別有 TP、TN、FP、FN。基本上混淆矩陣會拿這四個指標做參考，同時算出來的分數也更能去評估你的模型訓練的結果。此外我們可以利用混淆矩陣來計算 Precision、Recall、Accuracy 等分數。</p>
+<ul>
+<li>TP(True Positive): 正確預測成功的正樣本，例如真實答案(Ground True)是貓，成功的把一張貓的照片預測成貓，即為TP</li>
+<li>TN(True Negative): 正確預測成功的負樣本，成功的把一張狗的照片標示成不是貓，即為TN</li>
+<li>FP(False Positive): 錯誤預測成正樣本，實際上為負樣本，例如：錯誤的把一張狗的照片預測成貓</li>
+<li>FN(False Negative): 錯誤預測成負樣本，實際上為正樣本，例如：錯誤的把一張貓的照片預測成不是貓</li>
+</ul>
+<h2 id="9-r2">9. 迴歸問題僅使用 R2 分數評估模型好壞</h2>
+<p>在預測連續性數值輸出的迴歸模型中，大家往往會直接呼叫模型提供的評估方法直接計算 <code>score</code>。然而這個分數在迴歸模型中是計算 R2 分數，又稱判定係數 (coefficient of determination)。所謂的判定係數是輸入特徵 (x) 去解釋輸出 (y) 的變異程度有多少，其計算公式是：迴歸模型的變異量 (SSR)/總變異量 (TSS) 。用以下變異數分析表（ANOVA table）來說 TSS 就是計算總變異，把每個實際的 y 減去平均數的平方加總起來。而 SSR 就是把所有的模型預測 y 減去平均數的平方加總起來。如果 R2 分數很高越接近 1，表示模型的解釋能力很高。</p>
+<p><img alt="" src="image/img27-3.png"/></p>
+<p>在學術研究上最直覺的觀念是 R2 分數愈接近 1 越好，也有些人透過一些手段來製造 R2 分數很高的假象，詳細內容可以參考這篇<a href="http://amebse.nchu.edu.tw/new_page_535.htm">文章</a>。其實只透過 R2 個評估指標就來決定一個模型的好壞是不太好的習慣。更進一步可以使用 MSE、MAE 等殘差的評估值標來看每筆資料實際值與預測值的誤差。或是使用相對誤差來觀察預測模型的可信度。此外筆者還建議可以試著把每筆資料的真實 y 與模型預測的 ŷ 繪製出來，若呈現一條明顯的由左下到右上斜直線，則表示模型所預測的結果與真實答案很相近。</p>
+<p><img alt="" src="image/img27-4.png"/></p>
+<h2 id="10-ai">10. 任何事情別急著想用 AI 解決</h2>
+<p>近幾年 AI 的發展想必大家有目共睹，從影像識別到物件辨識的技術有著重大的進展。此外 2016 年 Google Deepmind 團隊的 AlphaGo 首度打敗人類，這也在人機對弈上開啟了一項重要的里程碑。甚至在自然語言方面，歸功於新的模型架構與硬體資源的進步，使得自然語言有重大的突破。看到這麼多 AI 的美好讓大家再次對深度學習點燃希望！只不過 AI 並非萬能，切記！所有的問題並不是將資料收集好，並將資料丟給電腦學習就會得到你想要的結果。大家也許會陷入「為 AI 而 AI」 的迷思，很多的任務其實透過具有規則的專家系統或是傳統演算法就可以達到很不錯的結果。再者我們都對 AI 的技術感到特別歡喜與期待，但是 AI 的黑盒子人類往往不知道模型下一步會產生什麼不可預期的結果。其實 AI 有很多的限制與挑戰，除了建立機器學習模型以外，我們更需要關注的是模型在想什麼。可解釋人工智慧必然是我們要探討的一段課題。AI 與機器人的出現並不是要取代人類，我認為 AI 比較適合扮演輔助人類的重要角色。</p>
+<blockquote>
+<p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
+</blockquote>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../26.交叉驗證 K-Fold Cross-Validation/README.html" rel="prev" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  上一頁
+                </span>
+                [Day 26] 交叉驗證 K-Fold Cross-Validation
+              </span>
+</div>
+</a>
+<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../28.儲存訓練好的模型/README.html" rel="next" title="[Day 28] 儲存訓練好的模型">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  下一頁
+                </span>
+                [Day 28] 儲存訓練好的模型
+              </span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2021 - 2024 10程式中
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src="../assets/javascripts/application.245445c6.js"></script>
+<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+<script src="../assets/javascripts/lunr/tinyseg.js"></script>
+<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+<script src="../javascripts/extra.js"></script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="ie=edge" http-equiv="x-ua-compatible"/>
+<meta content="10程式中" name="author"/>
+<meta content="複製" name="lang:clipboard.copy"/>
+<meta content="已複製" name="lang:clipboard.copied"/>
+<meta content="ja" name="lang:search.language"/>
+<meta content="True" name="lang:search.pipeline.stopwords"/>
+<meta content="True" name="lang:search.pipeline.trimmer"/>
+<meta content="沒有符合的項目" name="lang:search.result.none"/>
+<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
+<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
+<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
+<link href="../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
+<title>[Day 28] 儲存訓練好的模型 - 全民瘋AI系列</title>
+<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
+<meta content="#795548" name="theme-color"/>
+<script src="../assets/javascripts/modernizr.74668098.js"></script>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
+<svg class="md-svg">
+<defs>
+<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
+</defs>
+</svg>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+<a class="md-skip" href="#_1" tabindex="1">
+        跳轉到
+      </a>
+<header class="md-header" data-md-component="header">
+<nav class="md-header-nav md-grid">
+<div class="md-flex">
+<div class="md-flex__cell md-flex__cell--shrink">
+<a class="md-header-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch">
+<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
+              全民瘋AI系列
+            </span>
+<span class="md-header-nav__topic">
+              
+                [Day 28] 儲存訓練好的模型
+              
+            </span>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
+<label class="md-icon md-search__icon" for="__search"></label>
+<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+        
+      </button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="result">
+<div class="md-search-result__meta">
+            打字進行搜尋
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<div class="md-header-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container">
+<main class="md-main">
+<div class="md-main__inner md-grid" data-md-component="container">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title md-nav__title--site" for="__drawer">
+<a class="md-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+    全民瘋AI系列
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
+<label class="md-nav__link" for="nav-1">
+      第一部分 AI基礎概念
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-1">
+        第一部分 AI基礎概念
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/README.html" title="[Day 1] 目標介紹">
+      [Day 1] 目標介紹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2.快來探索AI的世界/README.html" title="[Day 2] 快來探索AI的世界">
+      [Day 2] 快來探索AI的世界
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../3.你真了解資料嗎?試試看視覺化分析吧!/README.html" title="[Day 3] 你真了解資料嗎？試試看視覺化分析吧！">
+      [Day 3] 你真了解資料嗎？試試看視覺化分析吧！
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/README.html" title="[Day 4] 咱們一起做資料清理和前處理">
+      [Day 4] 咱們一起做資料清理和前處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../5.機器學習大補帖/README.html" title="[Day 5] 機器學習大補帖">
+      [Day 5] 機器學習大補帖
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2">
+      第二部分 機器學習入門
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+        第二部分 機器學習入門
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../6.非監督式學習k-means分群/README.html" title="[Day 6] 非監督式學習-k-means分群">
+      [Day 6] 非監督式學習-k-means分群
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../7.非監督式學習-降維/README.html" title="[Day 7] 非監督式學習-降維">
+      [Day 7] 非監督式學習-降維
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../8.線性迴歸/README.html" title="[Day 8] 線性迴歸">
+      [Day 8] 線性迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../9.邏輯迴歸/README.html" title="[Day 9] 邏輯迴歸">
+      [Day 9] 邏輯迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10.KNN/README.html" title="[Day 10] KNN">
+      [Day 10] KNN
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11.SVM/README.html" title="[Day 11] SVM">
+      [Day 11] SVM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12.決策樹/README.html" title="[Day 12] 決策樹">
+      [Day 12] 決策樹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../13.整體學習/README.html" title="[Day 13] 整體學習">
+      [Day 13] 整體學習
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../14.隨機森林/README.html" title="[Day 14] 隨機森林">
+      [Day 14] 隨機森林
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../15.XGBoost/README.html" title="[Day 15] XGBoost">
+      [Day 15] XGBoost
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../16.Stacking/README.html" title="[Day 16] Stacking">
+      [Day 16] Stacking
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../17.LightGBM/README.html" title="[Day 17] LightGBM">
+      [Day 17] LightGBM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../18.CatBoost/README.html" title="[Day 18] CatBoost">
+      [Day 18] CatBoost
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
+      第三部分 進階概念與應用
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-3">
+        第三部分 進階概念與應用
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../19.AutoML/README.html" title="[Day 19] AutoML">
+      [Day 19] AutoML
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../20.Auto-Sklearn/README.html" title="[Day 20] Auto-Sklearn">
+      [Day 20] Auto-Sklearn
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../21.Optuna/README.html" title="[Day 21] Optuna">
+      [Day 21] Optuna
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../22.Plotly-Express/README.html" title="[Day 22] Plotly-Express">
+      [Day 22] Plotly-Express
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../23.資料分布與離群值處理/README.html" title="[Day 23] 資料分布與群體值處理">
+      [Day 23] 資料分布與群體值處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../24.不能忽視的過擬合與欠擬合/README.html" title="[Day 24] 不能忽視的過擬合與欠擬合">
+      [Day 24] 不能忽視的過擬合與欠擬合
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/README.html" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
+      [Day 25] 交叉驗證 Cross-Validation 簡介
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/README.html" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
+      [Day 26] 交叉驗證 K-Fold Cross-Validation
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../27.機器學習常犯錯的十件事/README.html" title="[Day 27] 機器學習常犯錯的十件事">
+      [Day 27] 機器學習常犯錯的十件事
+    </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        [Day 28] 儲存訓練好的模型
+      </label>
+<a class="md-nav__link md-nav__link--active" href="README.html" title="[Day 28] 儲存訓練好的模型">
+      [Day 28] 儲存訓練好的模型
+    </a>
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="今日學習目標">
+    今日學習目標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3" title="前言">
+    前言
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4" title="模型儲存方法">
+    模型儲存方法
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1" title="1) 載入資料集">
+    1) 載入資料集
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2" title="2) 切割訓練集與測試集">
+    2) 切割訓練集與測試集
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#-xgboost" title="訓練模型 - XGBoost">
+    訓練模型 - XGBoost
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#xgboost" title="儲存 XGboost 模型">
+    儲存 XGboost 模型
+  </a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-pickle" title="1. 使用 pickle 儲存模型">
+    1. 使用 pickle 儲存模型
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-pickle-gzip" title="2. 使用 pickle 儲存模型並利用 gzip 壓縮">
+    2. 使用 pickle 儲存模型並利用 gzip 壓縮
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#xgboost_1" title="載入 XGboost 模型">
+    載入 XGboost 模型
+  </a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-gzip" title="1. 載入 gzip 格式模型">
+    1. 載入 gzip 格式模型
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-pickle" title="2. 載入 pickle 格式模型">
+    2. 載入 pickle 格式模型
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference" title="Reference">
+    Reference
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../29.使用Python-Flask架設API吧/README.html" title="[Day 29] 使用Python-Flask架設API吧">
+      [Day 29] 使用Python-Flask架設API吧
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/README.html" title="[Day 30] 使用 Heroku 部署機器學習 API">
+      [Day 30] 使用 Heroku 部署機器學習 API
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="今日學習目標">
+    今日學習目標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3" title="前言">
+    前言
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4" title="模型儲存方法">
+    模型儲存方法
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1" title="1) 載入資料集">
+    1) 載入資料集
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2" title="2) 切割訓練集與測試集">
+    2) 切割訓練集與測試集
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#-xgboost" title="訓練模型 - XGBoost">
+    訓練模型 - XGBoost
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#xgboost" title="儲存 XGboost 模型">
+    儲存 XGboost 模型
+  </a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-pickle" title="1. 使用 pickle 儲存模型">
+    1. 使用 pickle 儲存模型
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-pickle-gzip" title="2. 使用 pickle 儲存模型並利用 gzip 壓縮">
+    2. 使用 pickle 儲存模型並利用 gzip 壓縮
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#xgboost_1" title="載入 XGboost 模型">
+    載入 XGboost 模型
+  </a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-gzip" title="1. 載入 gzip 格式模型">
+    1. 載入 gzip 格式模型
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-pickle" title="2. 載入 pickle 格式模型">
+    2. 載入 pickle 格式模型
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reference" title="Reference">
+    Reference
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
+<h1 id="_1">儲存訓練好的模型</h1>
+<h2 id="_2">今日學習目標</h2>
+<ul>
+<li>使用 pickle + gzip 儲存模型<ul>
+<li>將訓練好的模型打包並儲存</li>
+</ul>
+</li>
+<li>載入儲存的模型<ul>
+<li>讀取打包好的模型並預測</li>
+</ul>
+</li>
+</ul>
+<h2 id="_3">前言</h2>
+<p>今天的教學內容要教各位如何將訓練好的模型儲存，並提供下一次載入模型和預測。在本系列的教學中介紹了許多 Sklearn 的模型演算法。當模型訓練好了，可以將訓練結果儲存起來，並建立一個 API 接口提供模型預測。</p>
+<p><img alt="" src="image/img28-1.png"/></p>
+<h2 id="_4">模型儲存方法</h2>
+<p>常見的儲存模型的套件有 <a href="https://docs.python.org/3/library/pickle.html">pickle</a> 與 <a href="https://joblib.readthedocs.io/en/latest/">joblib</a>。其中在 <a href="https://ithelp.ithome.com.tw/articles/10276333">[Day 20] 機器學習金手指 - Auto-sklearn</a> 最後有使用 joblib 來儲存模型，操作方法也非常簡單。然而在今天的教學中則使用另一種方法 pickle 來儲存模型。由於 pickle 儲存模型後容量可能會有好幾百 MB 因此建議可以透過 gzip 來壓縮模型並儲存。另外在 Python 官方文件中有警告絕對不要利用 pickle 來 unpickle 來路不明的檔案。因為透過 pickle 打包模型會有安全性疑慮，包括 <code>arbitrary code execution</code> 的問題，詳細內容可以參考這篇<a href="http://www.benfrederickson.com/dont-pickle-your-data/">文章</a>。如果要追求執行速度與安全性，建議可以採用 JSON 格式來存取模型的參數與設定。</p>
+<h2 id="1">1) 載入資料集</h2>
+<p>今日的範例還是拿鳶尾花朵資料集進行示範。首先我們先載入資料集並進行資料的切割。</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">df_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">iris</span><span class="p">[</span><span class="s1">'data'</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s1">'target'</span><span class="p">]],</span>
+                     <span class="n">columns</span><span class="o">=</span> <span class="p">[</span><span class="s1">'SepalLengthCm'</span><span class="p">,</span><span class="s1">'SepalWidthCm'</span><span class="p">,</span><span class="s1">'PetalLengthCm'</span><span class="p">,</span><span class="s1">'PetalWidthCm'</span><span class="p">,</span><span class="s1">'Species'</span><span class="p">])</span>
+<span class="n">df_data</span>
+</pre></div>
+<h2 id="2">2) 切割訓練集與測試集</h2>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">'Species'</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="c1"># 移除Species並取得剩下欄位資料</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">'Species'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'train shape:'</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'test shape:'</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+<h2 id="-xgboost">訓練模型 - XGBoost</h2>
+<p>XGBoost 模型是目前最熱門的演算法模型之一，詳細的內容可以參考 <a href="https://ithelp.ithome.com.tw/articles/10273094">[Day 15] 機器學習常勝軍 - XGBoost</a>。裡面會有介紹詳細的模型說明與手把手實作。當然大家也可以試著用其他 Sklearn 的模型訓練看看，一樣可以透過 <code>pickle</code> 來儲存訓練好的模型。</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+
+<span class="c1"># 建立 XGBClassifier 模型</span>
+<span class="n">xgboostModel</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="c1"># 使用訓練資料訓練模型</span>
+<span class="n">xgboostModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># 使用訓練資料預測分類</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">xgboostModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+<h2 id="xgboost">儲存 XGboost 模型</h2>
+<p>大家可以觀察 <code>.pickle</code> 與 <code>.gzip</code> 兩種不同副檔名儲存結果檔案大小有何差別?</p>
+<h3 id="1-pickle">1. 使用 pickle 儲存模型</h3>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'./model/xgboost-iris.pickle'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">xgboostModel</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+<h3 id="2-pickle-gzip">2. 使用 pickle 儲存模型並利用 gzip 壓縮</h3>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">GzipFile</span><span class="p">(</span><span class="s1">'./model/xgboost-iris.pgz'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">xgboostModel</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+<p><img alt="" src="image/img28-2.png"/></p>
+<h2 id="xgboost_1">載入 XGboost 模型</h2>
+<p>試著載入兩種不同格式的模型，並預測一筆資料。注意模型預測輸入必須為 numpy 型態，且須為二維陣列格式。</p>
+<h3 id="1-gzip">1. 載入 gzip 格式模型</h3>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+
+<span class="c1">#讀取Model</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'./model/xgboost-iris.pgz'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">xgboostModel</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">pred</span><span class="o">=</span><span class="n">xgboostModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">3.7</span><span class="p">,</span> <span class="mf">1.</span> <span class="p">]]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+</pre></div>
+<h3 id="2-pickle">2. 載入 pickle 格式模型</h3>
+<div class="codehilite"><pre><span></span><span class="c1">#讀取Model</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'./model/xgboost-iris.pickle'</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">xgboostModel</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">pred</span><span class="o">=</span><span class="n">xgboostModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">3.7</span><span class="p">,</span> <span class="mf">1.</span> <span class="p">]]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+</pre></div>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://medium.com/analytics-vidhya/save-and-load-your-scikit-learn-models-in-a-minute-21c91a961e9b">How to save and load your Scikit-learn models in a minute</a></li>
+<li><a href="http://www.benfrederickson.com/dont-pickle-your-data/">Don't Pickle Your Data</a></li>
+</ul>
+<blockquote>
+<p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
+</blockquote>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../27.機器學習常犯錯的十件事/README.html" rel="prev" title="[Day 27] 機器學習常犯錯的十件事">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  上一頁
+                </span>
+                [Day 27] 機器學習常犯錯的十件事
+              </span>
+</div>
+</a>
+<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../29.使用Python-Flask架設API吧/README.html" rel="next" title="[Day 29] 使用Python-Flask架設API吧">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  下一頁
+                </span>
+                [Day 29] 使用Python-Flask架設API吧
+              </span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2021 - 2024 10程式中
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src="../assets/javascripts/application.245445c6.js"></script>
+<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+<script src="../assets/javascripts/lunr/tinyseg.js"></script>
+<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+<script src="../javascripts/extra.js"></script>
+</body>
+</html>

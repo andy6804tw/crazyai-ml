@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="ie=edge" http-equiv="x-ua-compatible"/>
+<meta content="10程式中" name="author"/>
+<meta content="複製" name="lang:clipboard.copy"/>
+<meta content="已複製" name="lang:clipboard.copied"/>
+<meta content="ja" name="lang:search.language"/>
+<meta content="True" name="lang:search.pipeline.stopwords"/>
+<meta content="True" name="lang:search.pipeline.trimmer"/>
+<meta content="沒有符合的項目" name="lang:search.result.none"/>
+<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
+<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
+<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
+<link href="../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
+<title>[Day 24] 不能忽視的過擬合與欠擬合 - 全民瘋AI系列</title>
+<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
+<meta content="#795548" name="theme-color"/>
+<script src="../assets/javascripts/modernizr.74668098.js"></script>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
+<svg class="md-svg">
+<defs>
+<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
+</defs>
+</svg>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+<a class="md-skip" href="#_1" tabindex="1">
+        跳轉到
+      </a>
+<header class="md-header" data-md-component="header">
+<nav class="md-header-nav md-grid">
+<div class="md-flex">
+<div class="md-flex__cell md-flex__cell--shrink">
+<a class="md-header-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch">
+<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
+              全民瘋AI系列
+            </span>
+<span class="md-header-nav__topic">
+              
+                [Day 24] 不能忽視的過擬合與欠擬合
+              
+            </span>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
+<label class="md-icon md-search__icon" for="__search"></label>
+<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+        
+      </button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="result">
+<div class="md-search-result__meta">
+            打字進行搜尋
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<div class="md-header-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container">
+<main class="md-main">
+<div class="md-main__inner md-grid" data-md-component="container">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title md-nav__title--site" for="__drawer">
+<a class="md-nav__button md-logo" href=".." title="全民瘋AI系列">
+<i class="md-icon"></i>
+</a>
+    全民瘋AI系列
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2020-12th-ironman" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
+<label class="md-nav__link" for="nav-1">
+      第一部分 AI基礎概念
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-1">
+        第一部分 AI基礎概念
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/README.html" title="[Day 1] 目標介紹">
+      [Day 1] 目標介紹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2.快來探索AI的世界/README.html" title="[Day 2] 快來探索AI的世界">
+      [Day 2] 快來探索AI的世界
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../3.你真了解資料嗎?試試看視覺化分析吧!/README.html" title="[Day 3] 你真了解資料嗎？試試看視覺化分析吧！">
+      [Day 3] 你真了解資料嗎？試試看視覺化分析吧！
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/README.html" title="[Day 4] 咱們一起做資料清理和前處理">
+      [Day 4] 咱們一起做資料清理和前處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../5.機器學習大補帖/README.html" title="[Day 5] 機器學習大補帖">
+      [Day 5] 機器學習大補帖
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2">
+      第二部分 機器學習入門
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+        第二部分 機器學習入門
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../6.非監督式學習k-means分群/README.html" title="[Day 6] 非監督式學習-k-means分群">
+      [Day 6] 非監督式學習-k-means分群
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../7.非監督式學習-降維/README.html" title="[Day 7] 非監督式學習-降維">
+      [Day 7] 非監督式學習-降維
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../8.線性迴歸/README.html" title="[Day 8] 線性迴歸">
+      [Day 8] 線性迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../9.邏輯迴歸/README.html" title="[Day 9] 邏輯迴歸">
+      [Day 9] 邏輯迴歸
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10.KNN/README.html" title="[Day 10] KNN">
+      [Day 10] KNN
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11.SVM/README.html" title="[Day 11] SVM">
+      [Day 11] SVM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12.決策樹/README.html" title="[Day 12] 決策樹">
+      [Day 12] 決策樹
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../13.整體學習/README.html" title="[Day 13] 整體學習">
+      [Day 13] 整體學習
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../14.隨機森林/README.html" title="[Day 14] 隨機森林">
+      [Day 14] 隨機森林
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../15.XGBoost/README.html" title="[Day 15] XGBoost">
+      [Day 15] XGBoost
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../16.Stacking/README.html" title="[Day 16] Stacking">
+      [Day 16] Stacking
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../17.LightGBM/README.html" title="[Day 17] LightGBM">
+      [Day 17] LightGBM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../18.CatBoost/README.html" title="[Day 18] CatBoost">
+      [Day 18] CatBoost
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
+      第三部分 進階概念與應用
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-3">
+        第三部分 進階概念與應用
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../19.AutoML/README.html" title="[Day 19] AutoML">
+      [Day 19] AutoML
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../20.Auto-Sklearn/README.html" title="[Day 20] Auto-Sklearn">
+      [Day 20] Auto-Sklearn
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../21.Optuna/README.html" title="[Day 21] Optuna">
+      [Day 21] Optuna
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../22.Plotly-Express/README.html" title="[Day 22] Plotly-Express">
+      [Day 22] Plotly-Express
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../23.資料分布與離群值處理/README.html" title="[Day 23] 資料分布與群體值處理">
+      [Day 23] 資料分布與群體值處理
+    </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<a class="md-nav__link md-nav__link--active" href="README.html" title="[Day 24] 不能忽視的過擬合與欠擬合">
+      [Day 24] 不能忽視的過擬合與欠擬合
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/README.html" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
+      [Day 25] 交叉驗證 Cross-Validation 簡介
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/README.html" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
+      [Day 26] 交叉驗證 K-Fold Cross-Validation
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../27.機器學習常犯錯的十件事/README.html" title="[Day 27] 機器學習常犯錯的十件事">
+      [Day 27] 機器學習常犯錯的十件事
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../28.儲存訓練好的模型/README.html" title="[Day 28] 儲存訓練好的模型">
+      [Day 28] 儲存訓練好的模型
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../29.使用Python-Flask架設API吧/README.html" title="[Day 29] 使用Python-Flask架設API吧">
+      [Day 29] 使用Python-Flask架設API吧
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/README.html" title="[Day 30] 使用 Heroku 部署機器學習 API">
+      [Day 30] 使用 Heroku 部署機器學習 API
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
+<h2 id="_1">今日學習目標</h2>
+<ul>
+<li>如何選擇最佳的模型？</li>
+<li>深入理解度擬合與欠擬合<ul>
+<li>Bias-Variance Tradeoff</li>
+</ul>
+</li>
+<li>如何避免過擬合與欠擬合？</li>
+</ul>
+<h1 id="_2">前言</h1>
+<p>在機器學習中大家可能最常見的問題是，當訓練好了模型並在測試資料也獲得不錯的成績。於是很開心的落地並部署到真實場域中，殊不知預測出來的結果遠遠不如預期。我想這個痛點大家應該都經歷過，尤其是機器學習的新手。這種情況就是所謂的過度擬合，它是一個在機器學習領域中非常棘手的的問題。當你的模型過度的擬合訓練集，這意味著你的模型過於複雜的去記住所有現有的數據點，進而導致模型的泛化能力不佳，這不是我們期望的。所謂的模型泛化能力是指，當我利用訓練集訓練一個模型後再拿另一組模型沒看過的資料進行預測，最終的預測結果如果在沒看過的資料中依然保持不錯的表現我們就可以說此模型泛化能力強。今天我們將來詳細探討何謂過度擬合，以及該如何去解決它使得模型處於一個適當的狀態。</p>
+<h2 id="_3">如何選擇最佳的模型？</h2>
+<p>通常我們希望預測出來的結果要與實際的數值越接近越好，也就是在模型訓練的過程中我們要想辦法最小化誤差使得模型的誤差越小越好。那麼我們該如何評估訓練出來的模型好壞呢？以下圖為例，假設我們要訓練一個二元分類器。最簡單的方法是找出一條線夠將這兩個類別完整地分開，然而這一條切割的線要長得怎樣才是好的模型呢？從下圖我們可以發現紅色虛線的模型完整的擬合於訓練資料，而紅色實線的模型相對的比較沒有那麼嚴厲，在兩個類別間適當的找出一條平滑的曲線來區隔兩類的資料。</p>
+<p><img alt="" src="image/img01.png"/></p>
+<p>接著我們拿測試資料進行模型預測，可以發現由於紅色虛線的模型已經完整記住了訓練集的趨勢，因此在新的沒看過的資料表現就沒有那麼好了。尤其是在兩類別分隔線附近的資料最能看出端倪。於是我們可以很確定紅色虛線的模型已經過度擬合訓練資料了。另外紅色實現的模型雖然在訓練集中有幾筆會預測錯誤，但是它再測試集資料中一樣保持穩定的預測能力。</p>
+<p><img alt="" src="image/img02.png"/></p>
+<p>從上述的例子我們可以得知，在訓練模型時並非訓練集的誤差越小越好。我們必須同時拿測試集驗證模型的預測能力，目標是訓練集與測試集的平均誤差要越近越好。</p>
+<p>一個適當的機器學習工作流程包括：
+- 切割訓練集與測試集
+- 資料視覺化與前處理
+- 尋找適合的模型
+- 調整模型超參數
+- 使用適當的指標評估模型
+- 交叉驗證模型</p>
+<h2 id="overfitting-vs-underfitting">Overfitting vs. Underfitting</h2>
+<p>過度擬合的反義就是欠擬合，從字面上可以得知模型預測能力是不好的。當模型太簡單時會發生欠擬合，或是加入太多的 L1/L2 正則化限制模型預測能力，使模型在從數據集中學習時變得不靈活。一個過於簡單的模型在預測中往往具有較小的方差(variance)而導致偏差(bias)就會變大。相反的過於複雜的模型會有較的變異進而導致方差大，同時偏差會變小。偏差和方差都是機器學習中的預測誤差的方式。在一般情況下我們可以減少偏差所引起的誤差，但可能會導致增加方差引起的誤差，反之亦然。</p>
+<p><img alt="" src="image/img03.png"/></p>
+<p>這裡我們就要來思考機器學習模型中的 error 從何而來？模型中的 error 是判斷一個模型的好壞依據，但其實我們可以將 error 拆分成兩大部分。分別有 Bias 與 Variance 兩個部分。以實際例子來說，假設輸出 y 是輸入 x 真正的答案，而 ŷ 則是透過模型 f(x) 訓練出來的預測值，我們希望預測的結果要與真實答案越接近越好，當 <code>ŷ≠y</code> 時就會產生 error (誤差)。</p>
+<h2 id="bias-variance-tradeoff">Bias-Variance Tradeoff</h2>
+<p>方差與偏差之間存在著一些關係，我們必須從中找到一個適當的平衡點。因此我們希望透過權衡 bias error 跟 variance error 來使得總誤差達到最小。我們常會以打靶例子解釋方差與偏差之間的關聯性。假設我們發射十次，我們説一個人的打靶技術很精準。其中的<code>精</code>就表示這十個把面上的點彼此間距離都相當近，也就是我的方差非常低(low variance)。另外所謂的<code>準</code>就表示這十個點都離準心很近，也就是我們的偏差非常低(low bias)。</p>
+<p><img alt="" src="image/img06.png"/></p>
+<ul>
+<li>Underfitting: 過於簡單的模型使得預測結果彈性不高，訓練集與測試集表現都不好。low variance (high bias)。</li>
+<li>Overfitting: 過於複雜的模型使得訓練集完整的被擬合，因此訓練集表現極好，但測試集表現不佳。high variance (low bias)。</li>
+</ul>
+<h3 id="error-from-bias">Error from Bias</h3>
+<p>偏差(bias)就是模型的預測與真實值之間的差異。一般我們訓練模型是期望預測的值要與實際的答案要越接近越好。然而當一個簡單的線性模型可能無法完整地擬合到一個複雜非線性的資料集。因此如下圖所示，當一個模型訓練結果偏差過大我們可以得知該模型過於簡單。無論搜集再多的資料，線性的模型永遠無法擬合非線性的曲線。因為比較簡單的模型，他受到不同的資料的影響是比較小的。</p>
+<p><img alt="" src="image/img04.png"/></p>
+<ul>
+<li>簡單的模型有大的 bias，小的 variance。</li>
+<li>Error 來自於 bias 很大，稱為欠擬合。</li>
+</ul>
+<h3 id="error-from-variance">Error from Variance</h3>
+<p>方差(variance)是指你的模型對於資料集的敏感程度。一個過於複雜的模型會導致輸出的變異性非常大。模型死背所有訓練集中的數據點會導致一個問題發生。當你的訓練資料有需多的隨機誤差或是離群值時，我們又把這些異常值全部擬合進模型裡面，導致學出來的模型過於複雜同時降低泛化能力，對於未知的資料預測的能力就會很差，同時造就了很高的 variance error。因此這樣的結果我們稱為過度擬合。</p>
+<p><img alt="" src="image/img05.png"/></p>
+<ul>
+<li>較複雜的模型有小的 bias，大的 variance。</li>
+<li>Error 來自於 variance 很大，稱為過度擬合。</li>
+</ul>
+<h2 id="_4">如何避免欠擬合？</h2>
+<p>通常 bias 大而導致模型過於簡單，而無法擬合訓練資料。我們可以試著增加輸入的特徵，並做一些特徵工程讓模型觀察多點線索。或是調整模型的演算法，使模型更複雜。例如使用項次更高的多項式模型，或是 tree-based 模型中適當的增加樹的深度......等。這裏更值得一提的是，當模型欠擬合時搜集再多的訓練資料是沒有用的。因為簡單的模型比較不會受資料的影響，所以 variance 相對的會比較低而 bias 大，也就是輸出的變化性不大。從這裡我們可以得知簡單的模型受到不同的輸入資料受到的影響是比較小的。因為模型選得不好，再怎麼訓練他的 bias 還是一樣大。</p>
+<ul>
+<li>增加輸入特徵或特徵工程</li>
+<li>提高模型複雜度</li>
+</ul>
+<h2 id="_5">如何避免過度擬合？</h2>
+<p>當模型過於複雜過度擬合發生的機率相對提高，我們可以從訓練集與測試集觀察，很容易地檢測模型是否過度擬合。但是我們應該如何避免模型太過於複雜，而導致過度擬合發生呢？通常我們會診斷這些錯誤的來源，這些錯誤來自於兩種，分別為有 bias 與 variance。如果我們能夠診斷出這些錯誤的來源，我們就能挑出適當的方法來改善模型。以下幾點或許能夠幫助你進行建模：</p>
+<ul>
+<li>搜集更多訓練資料<ul>
+<li>增加訊練集的資料量是有效控制 variance 的方法，並且不會增加 bias。</li>
+</ul>
+</li>
+<li>模型添加 Regularization<ul>
+<li>在損失函數中增加一些限制式，降低模型複雜。</li>
+</ul>
+</li>
+<li>交叉驗證<ul>
+<li>從訓練集中切出驗證集，並挑出好的模型。而不是從測試集中求最小 error。</li>
+</ul>
+</li>
+<li>Early Stopping<ul>
+<li>設定當模型連續幾帶都無法改善 error，就立即終止訓練。</li>
+</ul>
+</li>
+<li>Ensembling<ul>
+<li>透過訓練多個模型，並取得每個模型預測並平均作為最終輸出。</li>
+</ul>
+</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://elitedatascience.com/overfitting-in-machine-learning">Overfitting in Machine Learning: What It Is and How to Prevent It</a></li>
+<li><a href="https://elitedatascience.com/bias-variance-tradeoff">WTF is the Bias-Variance Tradeoff? (Infographic)</a></li>
+<li><a href="https://jason-chen-1992.weebly.com/home/-bias-variance-tradeoff">【機器學習】偏差與方差之權衡 Bias-Variance Tradeoff</a></li>
+</ul>
+<blockquote>
+<p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
+</blockquote>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../23.資料分布與離群值處理/README.html" rel="prev" title="[Day 23] 資料分布與群體值處理">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  上一頁
+                </span>
+                [Day 23] 資料分布與群體值處理
+              </span>
+</div>
+</a>
+<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../25.交叉驗證 Cross-Validation 簡介/README.html" rel="next" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  下一頁
+                </span>
+                [Day 25] 交叉驗證 Cross-Validation 簡介
+              </span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2021 - 2024 10程式中
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src="../assets/javascripts/application.245445c6.js"></script>
+<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+<script src="../assets/javascripts/lunr/tinyseg.js"></script>
+<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+<script src="../javascripts/extra.js"></script>
+</body>
+</html>
