@@ -521,22 +521,30 @@
 <span class="c1"># 輸出特徵</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 </pre></div>
-<p>Sklearn 提供了許多 API 方法可以呼叫：
-- data: 取得輸入特徵
-- target: 取得輸出特徵
-- feature_names: 取得輸入特徵的名稱
-- target_names: 取得輸出的類別標籤(分類資料集)
-- DESCR: 資料集詳細描述</p>
-<p>如果想試試其他的資料集可以參考：
-- 迴歸問題
-    - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston">load_boston</a> 波士頓房價預測
-    - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html#sklearn.datasets.load_diabetes">load_diabetes</a> 糖尿病預測
-    - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_linnerud.html#sklearn.datasets.load_linnerud">load_linnerud</a> 體能評估預測
-- 分類問題
-    - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris">load_iris</a> 鳶尾花種類預測
-    - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits">load_digits</a> 手寫數字辨識
-    - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">load_wine</a> 葡萄酒種類預測
-    - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html#sklearn.datasets.load_breast_cancer">load_breast_cancer</a> 乳癌預測</p>
+<p>Sklearn 提供了許多 API 方法可以呼叫：</p>
+<ul>
+<li>data: 取得輸入特徵</li>
+<li>target: 取得輸出特徵</li>
+<li>feature_names: 取得輸入特徵的名稱</li>
+<li>target_names: 取得輸出的類別標籤(分類資料集)</li>
+<li>DESCR: 資料集詳細描述</li>
+</ul>
+<p>如果想試試其他的資料集可以參考：</p>
+<ul>
+<li>迴歸問題<ul>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston">load_boston</a> 波士頓房價預測</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html#sklearn.datasets.load_diabetes">load_diabetes</a> 糖尿病預測</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_linnerud.html#sklearn.datasets.load_linnerud">load_linnerud</a> 體能評估預測</li>
+</ul>
+</li>
+<li>分類問題<ul>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris">load_iris</a> 鳶尾花種類預測</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits">load_digits</a> 手寫數字辨識</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">load_wine</a> 葡萄酒種類預測</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html#sklearn.datasets.load_breast_cancer">load_breast_cancer</a> 乳癌預測</li>
+</ul>
+</li>
+</ul>
 <p><a href="https://zhuanlan.zhihu.com/p/95412564">參考</a></p>
 <h2 id="_5">載入資料集</h2>
 <p>首先我們載入鳶尾花朵資料集。為了方便分析我們將 numpy 格式的資料轉換成 DataFrame 的格式進行資料探索。因為透過 Pandas 的 DataFrame 格式我們更能用表格的形式觀察資料。</p>
