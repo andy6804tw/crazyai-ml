@@ -7,6 +7,8 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/J0VOaMUibuk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+範例程式：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]()
+
 ## 探索式分析 (EDA) 
 探索式資料分析 (Exploratory Data Analysis, EDA)，主要概念是利用數據統計的方式視覺化資料。透過資料的探索式分析可以查看資料集當中每個特徵彼此的重要程度以及其資料分布狀況，有良好的數據分析習慣能夠幫助你更了解資料集的特性。另外做 EDA 的好處是可以從各種面向先了解資料的狀況，以利後續的模型分析。
 

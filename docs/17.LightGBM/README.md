@@ -6,6 +6,10 @@
 - 實作 LightGBM 處理資料不平衡資料
     - 信用卡盜刷偵測 (二元分類)
 
+
+
+範例程式：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]()
+
 ## 前言
 LightGBM 是屬於 GBDT 家族中成員之一，相較於先前介紹的 XGBoost 兩者可以拿來做比較。簡單來說從 LightGBM 名字上觀察，我們可以看出它是輕量化 (Light) 的梯度提升機 (GBM) 的實例。其相對 XGBoost 來說它具有訓練速度快、記憶體佔用低的特點，因此近幾年 LightGBM 在 Kaggle 上也算是熱門模型一。
 
