@@ -56,6 +56,7 @@ y = iris.target
 
 
 Sklearn 提供了許多 API 方法可以呼叫：
+
 - data: 取得輸入特徵
 - target: 取得輸出特徵
 - feature_names: 取得輸入特徵的名稱
@@ -63,6 +64,7 @@ Sklearn 提供了許多 API 方法可以呼叫：
 - DESCR: 資料集詳細描述
 
 如果想試試其他的資料集可以參考：
+
 - 迴歸問題
     - [load_boston](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston) 波士頓房價預測
     - [load_diabetes](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html#sklearn.datasets.load_diabetes) 糖尿病預測
