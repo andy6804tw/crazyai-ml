@@ -8,6 +8,7 @@
     - 自動處理類別型的特徵
     - 可解釋化模型
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 範例程式：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]()
 

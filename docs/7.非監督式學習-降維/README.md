@@ -6,6 +6,7 @@
 - 常見兩種降維方法
     - PCA & t-SNE
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fwPnjnjywqg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 範例程式：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/7.非監督式學習-降維/7.非監督式學習-降維.ipynb)
 
@@ -60,6 +61,8 @@ PCA和t-SNE是兩個不同降維的方法，PCA的優點在於簡單若新的點
 - t-SNE允許非線性的轉換
 
 ## [程式實作]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OU03MZuLIts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## PCA
 

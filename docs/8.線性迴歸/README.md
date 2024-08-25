@@ -7,6 +7,7 @@
 - 線性迴歸程式手把手
     - 簡單線性迴歸、多元迴歸、非線性迴歸
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L0X1ppgWwAk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 範例程式：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/8.線性迴歸/8.線性迴歸.ipynb)
 

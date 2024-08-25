@@ -9,6 +9,7 @@
     - 採用鳶尾花朵資料集訓練，並比較兩種不同版本的 Auto-sklearn。
     - 使用 pipelineprofiler 視覺化 AutoML 模型。
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 範例程式：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]()
 

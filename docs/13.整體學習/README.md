@@ -5,6 +5,8 @@
     - 何謂整體學習？
 - 三種不同的整體學習
     - Bagging、Boosting、Stacking
+    
+<iframe width="560" height="315" src="https://www.youtube.com/embed/" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 何謂整體學習？
 整體學習 (Ensemble Learning) 又稱集成學習、整合學習，指的是以一個系統化的方式將好幾個監督式學習的模型結合在一起，目的是希望結合眾多的模型產生一個更強大的模型。在許多科學競賽中 Ensemble Learning 在實務上是非常有效的提升預測準確率。依照 Ensemble 的處理方式的不同，我們可以將它分為三類。第一類為 Bagging，第二類為 Boosting，第三類為 Stacking。

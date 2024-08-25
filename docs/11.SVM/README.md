@@ -9,6 +9,7 @@
     - 藉由圖形化的邊界，來了解使用不同的 Kernel 及不同參數的意義。
     - 查看 SVR 方法在簡單線性迴歸和非線性迴歸表現。
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 範例程式 SVM(Classification)：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/11.SVM/11.1.SVM(Classification-iris).ipynb)
 
