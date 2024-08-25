@@ -1,5 +1,5 @@
 
-# 全民瘋AI系列2.0
+# 全民瘋AI系列 [經典機器學習]
 > 第13屆iT邦幫忙鐵人賽
 
 ## 公告
@@ -43,10 +43,10 @@
 | [[Day 9] 邏輯迴歸 (Logistic Regression)](https://ithelp.ithome.com.tw/articles/10269006) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/9.邏輯迴歸/9.邏輯迴歸.ipynb) |
 | [[Day 10] 近朱者赤，近墨者黑 - KNN](https://ithelp.ithome.com.tw/articles/10269826) | [KNN(Classification)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/10.KNN/10.1.KNN(Classification-iris).ipynb)、[KNN(Regression)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/10.KNN/10.2.KNN(Regression).ipynb) |
 | [[Day 11] 核模型 - 支持向量機 (SVM)](https://ithelp.ithome.com.tw/articles/10270447) | [SVM(Classification)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/11.SVM/11.1.SVM(Classification-iris).ipynb)、[SVR(Regression)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/11.SVM/11.2.SVR(Regression).ipynb) |
-| [[Day 12] 決策樹 (Decision tree)](https://ithelp.ithome.com.tw/articles/10271143) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.1.決策樹(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.2.決策樹(Regression).ipynb) |
+| [[Day 12] 決策樹 (Decision tree)](https://ithelp.ithome.com.tw/articles/10271143) | [決策樹(Classification)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.1.決策樹(Classification-iris).ipynb)、[決策樹(Regression)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.2.決策樹(Regression).ipynb) |
 | [[Day 13] 整體學習 (Ensemble Learning)](https://ithelp.ithome.com.tw/articles/10271882) | - |
-| [[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)](https://ithelp.ithome.com.tw/articles/10272586) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.1.隨機森林(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.2.隨機森林(Regression).ipynb) |
-| [[Day 15] 機器學習常勝軍 - XGBoost](https://ithelp.ithome.com.tw/articles/10273094) | [Code 1](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/15.XGBoost/15.1.XGBoost(Classification-iris).ipynb)、[Code 2](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/15.XGBoost/15.2.XGBoost(Regression).ipynb) |
+| [[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)](https://ithelp.ithome.com.tw/articles/10272586) | [隨機森林(Classification)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.1.隨機森林(Classification-iris).ipynb)、[隨機森林(Regression)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.2.隨機森林(Regression).ipynb) |
+| [[Day 15] 機器學習常勝軍 - XGBoost](https://ithelp.ithome.com.tw/articles/10273094) | [XGBoost(Classification)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/15.XGBoost/15.1.XGBoost(Classification-iris).ipynb)、[XGBoost(Regression)](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/15.XGBoost/15.2.XGBoost(Regression).ipynb) |
 | [[Day 16] 每個模型我全都要 - 堆疊法 (Stacking)](https://ithelp.ithome.com.tw/articles/10274009) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/16.Stacking/16.house-price-prediction-stacking.ipynb) |
 | [[Day 17] 輕量化的梯度提升機 - LightGBM](https://ithelp.ithome.com.tw/articles/10274577) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/17.LightGBM/17.creditcard-fraud-detection-lightgbm.ipynb) |
 | [[Day 18] 機器學習 boosting 神器 - CatBoost](https://ithelp.ithome.com.tw/articles/10275263) | [Code](https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/18.CatBoost/18.CatBoost(house_prices).ipynb) |
