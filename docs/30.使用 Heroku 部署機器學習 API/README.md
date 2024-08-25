@@ -2,13 +2,16 @@
 
 ## 今日學習目標
 - 動手部署自己的機器學習 API
-- 使用 Heroku 免費雲端平台部署應用程式
+- 使用 Heroku 雲端平台部署應用程式
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/X2ncrARsB70" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 前言
-開發的最後一哩路`部署應用`。部署 API 必須在一個穩定的伺服器上運行，大多數企業可能會租用雲端的虛擬伺服器。常見的雲端平台三巨頭有 Google Cloud Platform (GCP)、Amazon Web Service (AWS) 以及 Microsoft Azure。以上三家供應商都有提供免費的試用額度以及部署的教學，另外雲端伺服器計費的方式是採用多少付多少的概念收費。若有 GCP 使用需求可以參考我過去所錄製的系列教學影片 [GCP教學-Python](https://www.youtube.com/watch?v=z3bU_MYPlOs&list=PLXSkku8eiD-hcW9N9A6M8Y6Hma8DHBsEJ)。假設你只有自用需求，或是正在尋找免費的雲端伺服器，這一篇文章可以幫助到你。
+開發的最後一哩路`部署應用`。部署 API 必須在一個穩定的伺服器上運行，大多數企業可能會租用雲端的虛擬伺服器。常見的雲端平台三巨頭有 Google Cloud Platform (GCP)、Amazon Web Service (AWS) 以及 Microsoft Azure。以上三家供應商都有提供免費的試用額度以及部署的教學，另外雲端伺服器計費的方式是採用多少付多少的概念收費。若有 GCP 使用需求可以參考我過去所錄製的系列教學影片 [GCP教學-Python](https://www.youtube.com/watch?v=z3bU_MYPlOs&list=PLXSkku8eiD-hcW9N9A6M8Y6Hma8DHBsEJ)。
 
 ## Heroku 雲端平台
-[Heroku](https://www.heroku.com) 是一個支援多種程式語言的雲平台即服務。並且提供一個免費的雲端服務，這個雲端平台一個帳號可以免費建立五個專案，雖然是免費當然也有使用上的限制。例如：(1) 超過`30分鐘`閒置將會進入睡眠狀態，之後重新啟動 API 時會需要等待一些時間才有回應。(2) `500MB`的儲存空間限制。當然 Heroku 也提供多種語言的部署環境像是 Ruby、Node.js、PHP、Go、Python ...等。本篇文章會教你如何部署 Python 的 Flask API。
+[Heroku](https://www.heroku.com) 是一個支援多種程式語言的雲平台即服務。並且提供一個~~免費~~(現在要付費了)的雲端服務，這個雲端平台~~一個帳號可以免費建立五個專案~~，雖然是~~免費當然也有使用上的限制。例如：(1) 超過`30分鐘`閒置將會進入睡眠狀態，之後重新啟動 API 時會需要等待一些時間才有回應。(2) `500MB`的儲存空間限制。當然 Heroku 也提供多種語言的部署環境像是 Ruby、Node.js、PHP、Go、Python ...等。~~
+本篇文章會教你如何部署 Python 的 Flask API。
 
 ## 1. 前置作業
 ### 1.1) 範例程式碼
