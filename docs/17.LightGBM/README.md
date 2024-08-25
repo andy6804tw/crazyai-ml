@@ -1,4 +1,4 @@
-# LightGBM
+# [Day 17] 輕量化的梯度提升機 - LightGBM
 
 ## 今日學習目標
 - LightGBM 與 XGBoost 比較

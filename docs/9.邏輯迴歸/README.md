@@ -1,4 +1,4 @@
-# 邏輯迴歸 (Logistic Regression)
+# [Day 9] 邏輯迴歸 (Logistic Regression)
 ## 今日學習目標
 - 認識邏輯迴歸
     - 線性分類器

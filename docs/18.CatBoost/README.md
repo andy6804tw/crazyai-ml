@@ -1,4 +1,4 @@
-# CatBoost
+# [Day 18] 機器學習 boosting 神器 - CatBoost
 
 ## 今日學習目標
 - 了解 CatBoost 模型

@@ -1,4 +1,4 @@
-# 隨機森林 (Random forest)
+# [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
 
 ## 今日學習目標
 - 隨機森林介紹

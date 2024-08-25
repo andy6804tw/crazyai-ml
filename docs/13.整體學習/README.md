@@ -1,5 +1,4 @@
-# 整體學習 (Ensemble Learning)
-
+# [Day 13] 整體學習 (Ensemble Learning)
 ## 今日學習目標
 - 了解整體學習
     - 何謂整體學習？

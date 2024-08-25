@@ -1,5 +1,4 @@
- 
-# 線性迴歸(Linear Regression)
+# [Day 8] 線性迴歸 (Linear Regression)
  ## 今日學習目標
 - 認識線性迴歸
     - 透過機器學習來找出一條函式，來最佳化模型

@@ -1,4 +1,4 @@
-# Plotly Express
+# [Day 22] Python 視覺化解釋數據 - Plotly Express
 ## 今日學習目標
 - 安裝 plotly
 - 手把手實作視覺化鳶尾花朵資料集

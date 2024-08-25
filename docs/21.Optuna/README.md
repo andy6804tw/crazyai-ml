@@ -1,4 +1,4 @@
-# Optuna
+# [Day 21] 調整模型超參數利器 - Optuna
 ## 今日學習目標
 - Optuna 如何採樣參數？
 - 實作 Optuna 搜尋最佳超參數
