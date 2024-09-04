@@ -5,6 +5,7 @@ extra_css:
   - 'stylesheets/extra.css'
 extra_javascript:
   - javascripts/extra.js
+  - javascripts/analytics.js
 theme:
   name: material
   language: 'zh-TW'
