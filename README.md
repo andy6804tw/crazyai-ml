@@ -1,6 +1,6 @@
 
 # 全民瘋AI系列 [經典機器學習]
-<a href="https://www.youtube.com/watch?v=C9mvGMtrPXo&list=PLXSkku8eiD-iFRBr11rV83579hing3gMU">
+<a href="https://andy6804tw.github.io/crazyai-ml/">
   <img align="left" width=130 alt="blog" src="design/ebook-dark.png" />
 </a>
 <a href="https://www.youtube.com/watch?v=C9mvGMtrPXo&list=PLXSkku8eiD-iFRBr11rV83579hing3gMU">
