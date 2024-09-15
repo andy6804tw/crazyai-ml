@@ -1,5 +1,13 @@
 
 # 全民瘋AI系列 [經典機器學習]
+<a href="https://www.youtube.com/watch?v=C9mvGMtrPXo&list=PLXSkku8eiD-iFRBr11rV83579hing3gMU">
+  <img align="left" alt="blog" src="https://github.com/nathangathright/podcast-badges/blob/main/badges/youtube-dark.svg" />
+</a>
+<a href="https://podcasters.spotify.com/pod/show/10413/episodes/Ep-1-Your-Journey-Begins-Here-e2obnbm/a-abhb0dn">
+  <img align="left" alt="blog" src="https://github.com/nathangathright/podcast-badges/raw/main/badges/spotify-dark.svg" />
+</a>
+<br><br>
+
 > 第13屆iT邦幫忙鐵人賽
 
 ## 公告
@@ -33,22 +41,11 @@
 </details>
 
 
-
-
-#### 鐵人賽列表
-
 ![](./screenshot/ebook.png)
 
 電子書： https://andy6804tw.github.io/2021-13th-ironman/
 
-<a href="https://www.youtube.com/watch?v=C9mvGMtrPXo&list=PLXSkku8eiD-iFRBr11rV83579hing3gMU">
-  <img align="left" alt="blog" src="https://github.com/nathangathright/podcast-badges/blob/main/badges/youtube-dark.svg" />
-</a>
-<a href="https://podcasters.spotify.com/pod/show/10413/episodes/Ep-1-Your-Journey-Begins-Here-e2obnbm/a-abhb0dn">
-  <img align="left" alt="blog" src="https://github.com/nathangathright/podcast-badges/raw/main/badges/spotify-dark.svg" />
-</a>
-
-
+#### 鐵人賽列表
 | 文章 | 程式 |
 | ------------- | ------------- |
 | [[Day 1] 全民瘋AI系列2.0-機器學習實戰手冊](https://ithelp.ithome.com.tw/articles/10263409) | -  |
