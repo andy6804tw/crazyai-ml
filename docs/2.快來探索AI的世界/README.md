@@ -6,6 +6,8 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zt7ZoPVrZHQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/5MyJX8k0X047jfzlSzyELR?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
 
 ## 人工智慧的演進
 AI 與機器學習技術正在蓬勃發展中，你能想像人工智慧曾被認為是一個毫無出路的領域嗎? 從人工智慧的時間軸來看可以分為三個熱潮。第一次熱潮（1950~1960年），由於早期的電腦硬體資源的不足導致複雜的問題無法輕易的解決。第二次熱潮（1980~1990年）將帶有知是本體的代理人放入機器人中使具有智慧，也就是所謂的專家系統。但人類資源有限不可能把所有的知識都逐一地輸入到電腦。因此大家開始思考機器是否能夠讓他自己去學習？而不是人類一昧的餵入這些知識。第三次熱潮（2000年~現在）由於 CPU、GPU 以及雲端運算資源普及，早期複雜難解的演算法陸續可以透過超級電腦來解決。當手邊有了大量的數據就能拿來機器學習，因此大家踏入了大數據以及深度學習的時代。時間不斷的往前走，你能想像未來的 AI 在世界上是扮演什麼樣的角色嗎？
