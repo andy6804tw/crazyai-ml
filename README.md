@@ -4,6 +4,18 @@
 
 ## 公告
 <details>
+  <summary>📢 [2024/09] 此系列新增英文版Podcast！ </summary>
+
+  無論是上學或上班途中，讓我們陪伴你一起展開新的學習旅程！
+  我們很高興宣布，此系列節目已新增英文版Podcast，適合想加強英文聽力或喜歡用英文學習的朋友們！
+  > 此Podcast內容由生成式AI產生，因此在某些情況下，可能會提供不完全準確的資訊。
+
+##### 快速收聽 ⬇
+- [Soptify平台](https://podcasters.spotify.com/pod/show/10413/episodes/Ep-1-Your-Journey-Begins-Here-e2obnbm/a-abhb0dn)
+
+</details>
+
+<details>
   <summary>📢 [2024/08] 此系列新增電子書版本～ 全民瘋AI系列 [經典機器學習]</summary>
 
   提供方便的學習平台，匯集影片與文章形式。
@@ -28,6 +40,13 @@
 ![](./screenshot/ebook.png)
 
 電子書： https://andy6804tw.github.io/2021-13th-ironman/
+
+<a href="https://www.youtube.com/watch?v=C9mvGMtrPXo&list=PLXSkku8eiD-iFRBr11rV83579hing3gMU">
+  <img align="left" alt="blog" src="https://github.com/nathangathright/podcast-badges/blob/main/badges/youtube-dark.svg" />
+</a>
+<a href="https://podcasters.spotify.com/pod/show/10413/episodes/Ep-1-Your-Journey-Begins-Here-e2obnbm/a-abhb0dn">
+  <img align="left" alt="blog" src="https://github.com/nathangathright/podcast-badges/raw/main/badges/spotify-dark.svg" />
+</a>
 
 
 | 文章 | 程式 |
