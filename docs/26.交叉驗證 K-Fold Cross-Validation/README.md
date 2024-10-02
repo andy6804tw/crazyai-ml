@@ -41,12 +41,14 @@
 
 ![](./image/img26-4.png)
 
-優點:
+**優點**:
+
 1. 優於一般的 K-Fold 因為test set能充分代表整體數據。
 2. 預測結果的方差也會變小，使得交叉驗證的 error 更可靠。
 3. 對於資料不平衡的數據很有用
 
-缺點:
+**缺點**:
+
 1. 大多實例都以分類問題為主
 
 - [[scikit-learn] StratifiedKFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold)
