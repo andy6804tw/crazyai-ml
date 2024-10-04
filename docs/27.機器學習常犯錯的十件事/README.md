@@ -37,6 +37,7 @@
 大家應該都使用過 Sklearn 的 `train_test_split` 進行資料切割。在此方法中 Sklearn 提供了一個 `stratify` 參數達到分層隨機抽樣的目的。特別是在原始數據中樣本標籤分佈不均衡時非常有用，一些分類問題可能會在目標類的分佈中表現出很大的不平衡：例如，負樣本與正樣本比例懸殊(信用卡盜刷預測、離職員工預測)。以下用紅酒分類預測來進行示範，首先我們不使用 `stratify` 隨機切割資料並查看資料切割前後的三種類別比例。
 
 ```py
+import pandas as pd
 from sklearn.datasets import load_wine
 from sklearn.model_selection import train_test_split
 
