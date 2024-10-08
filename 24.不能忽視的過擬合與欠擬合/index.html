@@ -91,7 +91,7 @@
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
 <div class="md-header-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2021-13th-ironman" title="前往倉庫">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
 <div class="md-source__icon">
 <svg height="24" viewbox="0 0 24 24" width="24">
 <use height="24" width="24" xlink:href="#__github"></use>
@@ -120,7 +120,7 @@
     全民瘋AI系列 [經典機器學習]
   </label>
 <div class="md-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2021-13th-ironman" title="前往倉庫">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
 <div class="md-source__icon">
 <svg height="24" viewbox="0 0 24 24" width="24">
 <use height="24" width="24" xlink:href="#__github"></use>
@@ -377,13 +377,15 @@
 <p>接著我們拿測試資料進行模型預測，可以發現由於紅色虛線的模型已經完整記住了訓練集的趨勢，因此在新的沒看過的資料表現就沒有那麼好了。尤其是在兩類別分隔線附近的資料最能看出端倪。於是我們可以很確定紅色虛線的模型已經過度擬合訓練資料了。另外紅色實現的模型雖然在訓練集中有幾筆會預測錯誤，但是它再測試集資料中一樣保持穩定的預測能力。</p>
 <p><img alt="" src="image/img02.png"/></p>
 <p>從上述的例子我們可以得知，在訓練模型時並非訓練集的誤差越小越好。我們必須同時拿測試集驗證模型的預測能力，目標是訓練集與測試集的平均誤差要越近越好。</p>
-<p>一個適當的機器學習工作流程包括：
-- 切割訓練集與測試集
-- 資料視覺化與前處理
-- 尋找適合的模型
-- 調整模型超參數
-- 使用適當的指標評估模型
-- 交叉驗證模型</p>
+<p>一個適當的機器學習工作流程包括：</p>
+<ul>
+<li>切割訓練集與測試集</li>
+<li>資料視覺化與前處理</li>
+<li>尋找適合的模型</li>
+<li>調整模型超參數</li>
+<li>使用適當的指標評估模型</li>
+<li>交叉驗證模型</li>
+</ul>
 <h2 id="overfitting-vs-underfitting">Overfitting vs. Underfitting</h2>
 <p>過度擬合的反義就是欠擬合，從字面上可以得知模型預測能力是不好的。當模型太簡單時會發生欠擬合，或是加入太多的 L1/L2 正則化限制模型預測能力，使模型在從數據集中學習時變得不靈活。一個過於簡單的模型在預測中往往具有較小的方差(variance)而導致偏差(bias)就會變大。相反的過於複雜的模型會有較的變異進而導致方差大，同時偏差會變小。偏差和方差都是機器學習中的預測誤差的方式。在一般情況下我們可以減少偏差所引起的誤差，但可能會導致增加方差引起的誤差，反之亦然。</p>
 <p><img alt="" src="image/img03.png"/></p>

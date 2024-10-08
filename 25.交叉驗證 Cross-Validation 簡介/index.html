@@ -91,7 +91,7 @@
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
 <div class="md-header-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2021-13th-ironman" title="前往倉庫">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
 <div class="md-source__icon">
 <svg height="24" viewbox="0 0 24 24" width="24">
 <use height="24" width="24" xlink:href="#__github"></use>
@@ -120,7 +120,7 @@
     全民瘋AI系列 [經典機器學習]
   </label>
 <div class="md-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2021-13th-ironman" title="前往倉庫">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
 <div class="md-source__icon">
 <svg height="24" viewbox="0 0 24 24" width="24">
 <use height="24" width="24" xlink:href="#__github"></use>
@@ -465,36 +465,69 @@
 <p>此方法是最經典且最簡單實作的交叉驗證法，Holdout 顧名思義就是將資料切出一部分作為模型評估的依據。在這種方法中，我們將資料隨機分為三部分：訓練集、驗證集和測試集。其中只有訓練集資料實際參與訓練，其餘的資料僅拿來評估模型好壞。驗證集使用時機是在訓練過程中可以檢視訓練的趨勢，若有發現過擬合擬合跡象可以提早發現並解決。以及方便我們進行調整超參數以及選擇最佳的模型。當然僅透過驗證集不能代表全部，因此最後確定好模型時。我們會再拿事先切好的測試集進行最終的評估，檢視模型的泛化能力。</p>
 <p><img alt="" src="image/img25-2.png"/></p>
 <p><a href="https://www.datavedas.com/holdout-cross-validation/">參考</a></p>
-<p>優點:
-1. 簡單實作。
-2. 驗證集可以被拿來評估模型在訓練過程中的學習成果。
-3. 測試集可以評估模型泛化能力。</p>
-<p>缺點:
-1. 當資料集變異量較大時，驗證集與測試集可能無法足以評估模型。
-2. 不適合用在資料不平衡的資料集。</p>
+<p><strong>優點</strong>:</p>
+<ol>
+<li>簡單實作。</li>
+<li>驗證集可以被拿來評估模型在訓練過程中的學習成果。</li>
+<li>測試集可以評估模型泛化能力。</li>
+</ol>
+<p><strong>缺點</strong>:</p>
+<ol>
+<li>當資料集變異量較大時，驗證集與測試集可能無法足以評估模型。</li>
+<li>不適合用在資料不平衡的資料集。</li>
+</ol>
 <h2 id="k-fold-cross-validation">K-fold Cross-Validation</h2>
 <p>上一個方法雖然簡單，但是在訓練過程中僅切一份驗證集往往不能夠代表全部。因此我們可以透過一些技巧切割驗證集，使得訓練過程中有一個更公正的評估方式。我們可以透過 K-Fold 方法將訓練資料再依序切割訓練集與測試集，K-Fold 裡面的測試集可以當成驗證集。K-Fold 的方法中 K 是由我們自由調控的，在每次的迭代中會選擇一組作為驗證集，其餘 (k-1) 組作為訓練集。透過這種方式學習，不同分組訓練的結果進行平均來減少方差，因此模型的性能對數據的劃分就不會那麼敏感。</p>
 <p><img alt="" src="image/img25-3.png"/></p>
 <p><a href="https://www.datavedas.com/k-fold-cross-validation/">參考</a></p>
-<p>優點:
-1. 降低模型訓練對於資料集的偏差。
-2. 訓練集與驗證集完整被充分利用與學習。</p>
-<p>缺點:
-1. 不適合用於資料不平衡的資料集。
-2. 如果要簡單的 K-fold 來尋找超參數會有資料洩漏問題導致訓練結果有偏差，因為在每個 Fold 中都會使用同一組資料進行驗證。
-3. 在相同的驗證集計算模型的誤差，當找到了最佳的超參數。這可能會導致重大偏差，有過擬合擬合疑慮。</p>
+<p><strong>優點</strong>:</p>
+<ol>
+<li>降低模型訓練對於資料集的偏差。</li>
+<li>訓練集與驗證集完整被充分利用與學習。</li>
+</ol>
+<p><strong>缺點</strong>:</p>
+<ol>
+<li>不適合用於資料不平衡的資料集。</li>
+<li>如果要簡單的 K-fold 來尋找超參數會有資料洩漏問題導致訓練結果有偏差，因為在每個 Fold 中都會使用同一組資料進行驗證。</li>
+<li>在相同的驗證集計算模型的誤差，當找到了最佳的超參數。這可能會導致重大偏差，有過擬合擬合疑慮。</li>
+</ol>
 <h2 id="leave-one-out">Leave One Out</h2>
 <p>此方法是 K-fold 其中一種特例，當 K 等於資料集的數量時就等於 Leave One Out 方法。也就是在每次訓練時僅會把一筆資料當成測試資料，其餘的 N-1 筆資料作為訓練模型的資料。此作法相當簡單明瞭，但是訓練負擔會非常重且耗時。然而 Leave p-out 是另一種技巧，其中的 p 使用者可以自己設定每次訓練需要留幾筆資料作為測試集。</p>
 <p><img alt="" src="image/img25-4.png"/></p>
-<p>優點:
-1. 簡單且容易理解，好實作。</p>
-<p>缺點:
-1. 需要花費更多的訓練時間。</p>
+<p><strong>優點</strong>:</p>
+<ol>
+<li>簡單且容易理解，好實作。</li>
+</ol>
+<p><strong>缺點</strong>:</p>
+<ol>
+<li>需要花費更多的訓練時間。</li>
+</ol>
 <h2 id="random-subsampling">Random Subsampling</h2>
+<p>Random Subsampling 方法是一種簡單且常用的交叉驗證技術，它透過多次隨機抽樣將資料集切割成訓練集與測試集。每次隨機分割時，測試集的比例固定，而訓練集和測試集則隨機選取。這種方法主要透過多次隨機測試不同的資料切分方式來評估模型性能，最後取測試結果的平均值。</p>
 <p><img alt="" src="image/img25-5.png"/></p>
+<p><strong>優點</strong>:</p>
+<ol>
+<li>多次隨機抽樣能減少資料劃分的偏差。</li>
+<li>可以靈活選擇訓練和測試集的比例。</li>
+</ol>
+<p><strong>缺點</strong>:</p>
+<ol>
+<li>多次重複抽樣需要較大的計算資源。</li>
+<li>每次隨機抽樣的資料集可能會有所不同，結果不穩定。</li>
+</ol>
 <h2 id="bootstrapping">Bootstrapping</h2>
 <p>還有一種比較特殊的交叉驗證方式，Bootstrapping 自助抽樣法。是一種從給定訓練集中有放回的均勻抽樣，也就是說，每當選中一個樣本，它等可能地被再次選中並被再次添加到訓練集中。假設每次訓練都採樣十個樣本，在這十筆資料中很有可能會再次被隨機抽到。剩下沒有抽到的資料則都變成測試集，用來評估訓練完的模型。</p>
 <p><img alt="" src="image/img25-6.png"/></p>
+<p><strong>優點</strong>:</p>
+<ol>
+<li>能在小數據集的情況下提高模型穩定性。</li>
+<li>可重複利用相同的數據來進行多次訓練。</li>
+</ol>
+<p><strong>缺點</strong>:</p>
+<ol>
+<li>重複樣本可能導致模型過擬合。</li>
+<li>測試集中資料量較少，可能導致模型泛化能力評估不夠充分。</li>
+</ol>
 <h2 id="_4">小結</h2>
 <p>交叉驗證是訓練模型中非常重要的技巧，尤其是當手邊的資料集有限時更應該使用。透過交叉驗證技巧，即使在數據有限的情況下，我們也能夠獲得準確的結果，並且可以避免模型過度擬合。並為我們提供更準確的模型預測性能估計方式，同時也能夠提升模型的泛化能力。以上的方法可以直接使用 scikit-learn 裡面 model_selection 底下的 cross_val_score 方法進行實作。</p>
 <blockquote>

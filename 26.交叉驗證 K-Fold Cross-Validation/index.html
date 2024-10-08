@@ -91,7 +91,7 @@
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
 <div class="md-header-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2021-13th-ironman" title="前往倉庫">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
 <div class="md-source__icon">
 <svg height="24" viewbox="0 0 24 24" width="24">
 <use height="24" width="24" xlink:href="#__github"></use>
@@ -120,7 +120,7 @@
     全民瘋AI系列 [經典機器學習]
   </label>
 <div class="md-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/2021-13th-ironman" title="前往倉庫">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
 <div class="md-source__icon">
 <svg height="24" viewbox="0 0 24 24" width="24">
 <use height="24" width="24" xlink:href="#__github"></use>
@@ -315,8 +315,8 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#k-fold-cross-validation" title="K-Fold Cross-Validation">
-    K-Fold Cross-Validation
+<a class="md-nav__link" href="#k-fold-cross-validation" title="K-Fold Cross Validation">
+    K-Fold Cross Validation
   </a>
 </li>
 <li class="md-nav__item">
@@ -325,18 +325,18 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#repeated-k-fold" title="Repeated K-Fold">
-    Repeated K-Fold
+<a class="md-nav__link" href="#repeated-k-fold-cross-validation" title="Repeated K-Fold Cross Validation">
+    Repeated K-Fold Cross Validation
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#stratified-k-fold" title="Stratified K-Fold">
-    Stratified K-Fold
+<a class="md-nav__link" href="#stratified-k-fold-cross-validation" title="Stratified K-Fold Cross Validation">
+    Stratified K-Fold Cross Validation
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#group-k-fold" title="Group K-Fold">
-    Group K-Fold
+<a class="md-nav__link" href="#group-k-fold-cross-validation" title="Group K-Fold Cross Validation">
+    Group K-Fold Cross Validation
   </a>
 </li>
 </ul>
@@ -387,8 +387,8 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#k-fold-cross-validation" title="K-Fold Cross-Validation">
-    K-Fold Cross-Validation
+<a class="md-nav__link" href="#k-fold-cross-validation" title="K-Fold Cross Validation">
+    K-Fold Cross Validation
   </a>
 </li>
 <li class="md-nav__item">
@@ -397,18 +397,18 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#repeated-k-fold" title="Repeated K-Fold">
-    Repeated K-Fold
+<a class="md-nav__link" href="#repeated-k-fold-cross-validation" title="Repeated K-Fold Cross Validation">
+    Repeated K-Fold Cross Validation
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#stratified-k-fold" title="Stratified K-Fold">
-    Stratified K-Fold
+<a class="md-nav__link" href="#stratified-k-fold-cross-validation" title="Stratified K-Fold Cross Validation">
+    Stratified K-Fold Cross Validation
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#group-k-fold" title="Group K-Fold">
-    Group K-Fold
+<a class="md-nav__link" href="#group-k-fold-cross-validation" title="Group K-Fold Cross Validation">
+    Group K-Fold Cross Validation
   </a>
 </li>
 </ul>
@@ -422,17 +422,17 @@
 <h2 id="_1">今日學習目標</h2>
 <ul>
 <li>了解 K-Fold 各種不同變形<ul>
-<li>K-Fold Cross-Validation</li>
+<li>K-Fold Cross Validation</li>
 <li>Nested K-Fold Cross Validation</li>
-<li>Repeated K-Fold</li>
-<li>Stratified K-Fold</li>
-<li>Group K-Fold</li>
+<li>Repeated K-Fold Cross Validation</li>
+<li>Stratified K-Fold Cross Validation</li>
+<li>Group K-Fold Cross Validation</li>
 </ul>
 </li>
 </ul>
 <h2 id="_2">前言</h2>
 <p>交叉驗證又稱為樣本外測試，是資料科學中重要的一環。透過資料間的重複採樣過程，用於評估機器學習模型並驗證模型對獨立測試數據集的泛化能力。在今天的文章中我們將詳細的來介紹每一種 K-Fold 變型。</p>
-<h2 id="k-fold-cross-validation">K-Fold Cross-Validation</h2>
+<h2 id="k-fold-cross-validation">K-Fold Cross Validation</h2>
 <p>在 K-Fold 的方法中我們會將資料切分為 K 等份，K 是由我們自由調控的，以下圖為例：假設我們設定 K=10，也就是將訓練集切割為十等份。這意味著相同的模型要訓練十次，每一次的訓練都會從這十等份挑選其中九等份作為訓練資料，剩下一等份未參與訓練並作為驗證集。因此訓練十回將會有十個不同驗證集的 Error，這個 Error 通常我們會稱作 loss 也就是模型評估方式。模型評估方式有很多種，以回歸問題來說就有 MSE、MAE、RMSE...等。最終把這十次的 loss 加總起來取平均就可以當成最終結果。透過這種方式，不同分組訓練的結果進行平均來減少方差，因此模型的性能對數據的劃分就不會那麼敏感。</p>
 <p><img alt="" src="image/img26-1.png"/></p>
 <p><a href="https://www.datavedas.com/K-Fold-cross-validation/">參考</a></p>
@@ -446,26 +446,32 @@
 <ul>
 <li><a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html">[scikit-learn] Nested K-Fold</a></li>
 </ul>
-<h2 id="repeated-k-fold">Repeated K-Fold</h2>
+<h2 id="repeated-k-fold-cross-validation">Repeated K-Fold Cross Validation</h2>
 <p>另一個 K-Fold 變型為 Repeated K-Fold 顧名思義就是重複 n 次 K-Fold cross-validation。假設 K=2、n=2 代表 2-fold cross validation，在每一回合又會將資料將會打亂得到新組合。因此最終會得到 4 組的資料，意味著模型將訓練四遍。此種方法會確保每次組合的隨機資料並不會重複。簡單來說執行 K-Fold 交叉驗證，然後重新洗牌數據，然後再次執行 K-Fold。</p>
 <p><img alt="" src="image/img26-3.png"/></p>
 <ul>
 <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RepeatedKFold.html#sklearn.model_selection.RepeatedKFold">[scikit-learn] RepeatedKFold</a></li>
 </ul>
-<h2 id="stratified-k-fold">Stratified K-Fold</h2>
+<h2 id="stratified-k-fold-cross-validation">Stratified K-Fold Cross Validation</h2>
 <p>分層交叉驗證，每個 Fold 都是按照類別的比例抽出來的。假設這個分類任務一共有三個類別A、B、C，它們的比例是1:4:8。那麼每個fold中的A、B、C的比例也必須是1:4:8。其實現方式也非常簡單，首先依序把A、B、C類別的數據隨機分成k組，最後再把它們合併依照比例起來，就得到了k組滿足1:2:10的數據了。</p>
 <p><img alt="" src="image/img26-4.png"/></p>
-<p>優點:
-1. 優於一般的 K-Fold 因為test set能充分代表整體數據。
-2. 預測結果的方差也會變小，使得交叉驗證的 error 更可靠。
-3. 對於資料不平衡的數據很有用</p>
-<p>缺點:
-1. 大多實例都以分類問題為主</p>
-<ul>
-<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold">[scikit-learn] StratifiedKFold</a></li>
+<p><strong>優點</strong>:</p>
+<ol>
+<li>優於一般的 K-Fold 因為test set能充分代表整體數據。</li>
+<li>預測結果的方差也會變小，使得交叉驗證的 error 更可靠。</li>
+<li>對於資料不平衡的數據很有用</li>
+</ol>
+<p><strong>缺點</strong>:</p>
+<ol>
+<li>
+<p>大多實例都以分類問題為主</p>
+</li>
+<li>
+<p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html#sklearn.model_selection.StratifiedKFold">[scikit-learn] StratifiedKFold</a></p>
+</li>
 <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html#sklearn.model_selection.StratifiedShuffleSplit">[scikit-learn] StratifiedShuffleSplit</a></li>
-</ul>
-<h2 id="group-k-fold">Group K-Fold</h2>
+</ol>
+<h2 id="group-k-fold-cross-validation">Group K-Fold Cross Validation</h2>
 <p>此做法為了避免取連續的資料而造成測試集或驗證集偏向某一特別的狀況而造成過度擬和訓練集，反而在未看過的資料下表現不好。Group K-Fold 為了避免此情況發生，它切割資料時有效的從資料集中每個區塊隨機挑選作為驗證集。同時保證每一個 Fold 的驗證集並不會重複的資料。假設你有三個類別，至少驗證集必須從三個不同的分組中抽樣取出，同時確保每一個 Fold 所抽出來的這三個分組並不會重複。</p>
 <p><img alt="" src="image/img26-5.png"/></p>
 <ul>
