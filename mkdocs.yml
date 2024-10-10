@@ -1,6 +1,6 @@
 site_name: 全民瘋AI系列 [經典機器學習]
 site_author: 10程式中
-# site_url: 
+site_url: https://andy6804tw.github.io/crazyai-ml/
 extra_css:
   - 'stylesheets/extra.css'
 extra_javascript:
