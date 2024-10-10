@@ -1,3 +1,8 @@
+---
+title: '[Day 15] 機器學習常勝軍 - XGBoost'
+description: 'XGBoost 今日學習目標 XGBoost 介紹 XGBoost 是什麼？為什麼它那麼強大？ XGBoost 優點 比較兩種整體學習架構差異？ Bagging vs. Boosting Boosti...'
+---
+
 # [Day 15] 機器學習常勝軍 - XGBoost
 
 ## 今日學習目標
