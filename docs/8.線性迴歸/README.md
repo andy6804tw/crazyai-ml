@@ -1,5 +1,5 @@
 # [Day 8] 線性迴歸 (Linear Regression)
- ## 今日學習目標
+## 今日學習目標
 - 認識線性迴歸
     - 透過機器學習來找出一條函式，來最佳化模型
     - 兩種求解方法
@@ -258,4 +258,6 @@ plt.show()
 ![](./image/img8-13.png)
 
 
-本系列教學內容及範例程式都可以從我的 [GitHub](https://github.com/andy6804tw/2021-13th-ironman) 取得！
+!!! info "延伸閱讀"
+
+    - [15 Types of Regression (with Examples)](https://www.listendata.com/2018/03/regression-analysis.html)
