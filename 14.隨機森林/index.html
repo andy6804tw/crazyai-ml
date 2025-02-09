@@ -1,462 +1,1260 @@
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh-TW" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="10程式中">
+      
+      
+        <link rel="canonical" href="https://andy6804tw.github.io/crazyai-ml/14.%E9%9A%A8%E6%A9%9F%E6%A3%AE%E6%9E%97/">
+      
+      
+        <link rel="prev" href="../13.%E6%95%B4%E9%AB%94%E5%AD%B8%E7%BF%92/">
+      
+      
+        <link rel="next" href="../15.XGBoost/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest) - 全民瘋AI系列 [經典機器學習]</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
 
-<html class="no-js" lang="zh-Hant">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="ie=edge" http-equiv="x-ua-compatible"/>
-<link href="https://andy6804tw.github.io/crazyai-ml/14.隨機森林/" rel="canonical"/>
-<meta content="10程式中" name="author"/>
-<meta content="複製" name="lang:clipboard.copy"/>
-<meta content="已複製" name="lang:clipboard.copied"/>
-<meta content="ja" name="lang:search.language"/>
-<meta content="True" name="lang:search.pipeline.stopwords"/>
-<meta content="True" name="lang:search.pipeline.trimmer"/>
-<meta content="沒有符合的項目" name="lang:search.result.none"/>
-<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
-<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
-<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
-<title>[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest) - 全民瘋AI系列 [經典機器學習]</title>
-<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
-<meta content="#795548" name="theme-color"/>
-<script src="../assets/javascripts/modernizr.74668098.js"></script>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
-<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
-<link href="../stylesheets/extra.css" rel="stylesheet"/>
-</head>
-<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
-<svg class="md-svg">
-<defs>
-<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
-</defs>
-</svg>
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-<a class="md-skip" href="#day-14-random-forest" tabindex="1">
-        跳轉到
-      </a>
-<header class="md-header" data-md-component="header">
-<nav class="md-header-nav md-grid">
-<div class="md-flex">
-<div class="md-flex__cell md-flex__cell--shrink">
-<a class="md-header-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
-<i class="md-icon"></i>
-</a>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch">
-<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-<span class="md-header-nav__topic">
-              全民瘋AI系列 [經典機器學習]
-            </span>
-<span class="md-header-nav__topic">
-              
-                [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
-              
-            </span>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-<div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
-<label class="md-icon md-search__icon" for="__search"></label>
-<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
-        
-      </button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="result">
-<div class="md-search-result__meta">
-            打字進行搜尋
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/dify.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#day-14-random-forest" class="md-skip">
+          跳轉到
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="頁首">
+    <a href=".." title="全民瘋AI系列 [經典機器學習]" class="md-header__button md-logo" aria-label="全民瘋AI系列 [經典機器學習]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            全民瘋AI系列 [經典機器學習]
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜尋" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="搜尋">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清除" aria-label="清除" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜尋引擎
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<div class="md-header-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-</div>
-</div>
-</nav>
+      </div>
+    
+  </nav>
+  
 </header>
-<div class="md-container">
-<main class="md-main">
-<div class="md-main__inner md-grid" data-md-component="container">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title md-nav__title--site" for="__drawer">
-<a class="md-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
-<i class="md-icon"></i>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="導覽列" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="全民瘋AI系列 [經典機器學習]" class="md-nav__button md-logo" aria-label="全民瘋AI系列 [經典機器學習]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
     全民瘋AI系列 [經典機器學習]
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
-<label class="md-nav__link" for="nav-1">
-      第一部分 AI基礎概念
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    第一部分 AI基礎概念
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            第一部分 AI基礎概念
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%E5%85%A8%E6%B0%91%E7%98%8BAI%E7%B3%BB%E5%88%972.0%E7%9B%AE%E6%A8%99%E4%BB%8B%E7%B4%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 1] 目標介紹
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%E5%BF%AB%E4%BE%86%E6%8E%A2%E7%B4%A2AI%E7%9A%84%E4%B8%96%E7%95%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 2] 快來探索AI的世界
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%E4%BD%A0%E7%9C%9F%E4%BA%86%E8%A7%A3%E8%B3%87%E6%96%99%E5%97%8E%E8%A9%A6%E8%A9%A6%E7%9C%8B%E8%A6%96%E8%A6%BA%E5%8C%96%E5%88%86%E6%9E%90%E5%90%A7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 3] 你真了解資料嗎?試試看視覺化分析吧!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%E5%92%B1%E5%80%91%E4%B8%80%E8%B5%B7%E5%81%9A%E8%B3%87%E6%96%99%E6%B8%85%E7%90%86%E5%92%8C%E5%89%8D%E8%99%95%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 4] 咱們一起做資料清理和前處理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%A4%A7%E8%A3%9C%E5%B8%96/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 5] 機器學習大補帖
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    第二部分 機器學習入門
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第二部分 機器學習入門
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92k-means%E5%88%86%E7%BE%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 6] 非監督式學習 K-means 分群
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92-%E9%99%8D%E7%B6%AD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 7] 非監督式學習-降維
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8.%E7%B7%9A%E6%80%A7%E8%BF%B4%E6%AD%B8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 8] 線性迴歸 (Linear Regression)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9.%E9%82%8F%E8%BC%AF%E8%BF%B4%E6%AD%B8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 9] 邏輯迴歸 (Logistic Regression)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10.KNN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 10] 近朱者赤，近墨者黑 - KNN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11.SVM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 11] 核模型 - 支持向量機 (SVM)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12.%E6%B1%BA%E7%AD%96%E6%A8%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 12] 決策樹 (Decision tree)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13.%E6%95%B4%E9%AB%94%E5%AD%B8%E7%BF%92/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 13] 整體學習 (Ensemble Learning)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-1">
-        第一部分 AI基礎概念
-      </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/" title="[Day 1] 目標介紹">
-      [Day 1] 目標介紹
-    </a>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      今日學習目標
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2.快來探索AI的世界/" title="[Day 2] 快來探索AI的世界">
-      [Day 2] 快來探索AI的世界
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../3.你真了解資料嗎試試看視覺化分析吧/" title="[Day 3] 你真了解資料嗎?試試看視覺化分析吧!">
-      [Day 3] 你真了解資料嗎?試試看視覺化分析吧!
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林的生成方法
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/" title="[Day 4] 咱們一起做資料清理和前處理">
-      [Day 4] 咱們一起做資料清理和前處理
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林中的隨機？
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../5.機器學習大補帖/" title="[Day 5] 機器學習大補帖">
-      [Day 5] 機器學習大補帖
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林的優點
+    </span>
+  </a>
+  
 </li>
-</ul>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      [程式實作]
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林(分類器)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="隨機森林(分類器)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#score" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用Score評估模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      特徵重要程度
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林(迴歸器)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
-      第二部分 機器學習入門
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15.XGBoost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 15] 機器學習常勝軍 - XGBoost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16.Stacking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 16] 每個模型我全都要 - 堆疊法 (Stacking)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17.LightGBM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 17] 輕量化的梯度提升機 - LightGBM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18.CatBoost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 18] 機器學習 boosting 神器 - CatBoost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    第三部分 進階概念與應用
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第三部分 進階概念與應用
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19.AutoML/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 19] 自動化機器學習 - AutoML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20.Auto-Sklearn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 20] 機器學習金手指 - Auto-sklearn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21.Optuna/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 21] 調整模型超參數利器 - Optuna
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22.Plotly-Express/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 22] Python 視覺化解釋數據 - Plotly Express
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../23.%E8%B3%87%E6%96%99%E5%88%86%E5%B8%83%E8%88%87%E9%9B%A2%E7%BE%A4%E5%80%BC%E8%99%95%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 23] 資料分布與離群值處理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../24.%E4%B8%8D%E8%83%BD%E5%BF%BD%E8%A6%96%E7%9A%84%E9%81%8E%E6%93%AC%E5%90%88%E8%88%87%E6%AC%A0%E6%93%AC%E5%90%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 24] 機器學習 - 不能忽視的過擬合與欠擬合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../25.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20Cross-Validation%20%E7%B0%A1%E4%BB%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 25] 交叉驗證 Cross-Validation 簡介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../26.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20K-Fold%20Cross-Validation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 26] 交叉驗證 K-Fold Cross-Validation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../27.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%B8%B8%E7%8A%AF%E9%8C%AF%E7%9A%84%E5%8D%81%E4%BB%B6%E4%BA%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 27] 機器學習常犯錯的十件事
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../28.%E5%84%B2%E5%AD%98%E8%A8%93%E7%B7%B4%E5%A5%BD%E7%9A%84%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 28] 儲存訓練好的模型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../29.%E4%BD%BF%E7%94%A8Python-Flask%E6%9E%B6%E8%A8%ADAPI%E5%90%A7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 29] 使用 Python Flask 架設 API 吧！
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30.%E4%BD%BF%E7%94%A8%20Heroku%20%E9%83%A8%E7%BD%B2%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%20API/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 30] 使用 Heroku 部署機器學習 API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
-        第二部分 機器學習入門
-      </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../6.非監督式學習k-means分群/" title="[Day 6] 非監督式學習 K-means 分群">
-      [Day 6] 非監督式學習 K-means 分群
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../7.非監督式學習-降維/" title="[Day 7] 非監督式學習-降維">
-      [Day 7] 非監督式學習-降維
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../8.線性迴歸/" title="[Day 8] 線性迴歸 (Linear Regression)">
-      [Day 8] 線性迴歸 (Linear Regression)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../9.邏輯迴歸/" title="[Day 9] 邏輯迴歸 (Logistic Regression)">
-      [Day 9] 邏輯迴歸 (Logistic Regression)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../10.KNN/" title="[Day 10] 近朱者赤，近墨者黑 - KNN">
-      [Day 10] 近朱者赤，近墨者黑 - KNN
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../11.SVM/" title="[Day 11] 核模型 - 支持向量機 (SVM)">
-      [Day 11] 核模型 - 支持向量機 (SVM)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../12.決策樹/" title="[Day 12] 決策樹 (Decision tree)">
-      [Day 12] 決策樹 (Decision tree)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../13.整體學習/" title="[Day 13] 整體學習 (Ensemble Learning)">
-      [Day 13] 整體學習 (Ensemble Learning)
-    </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-        [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
-      </label>
-<a class="md-nav__link md-nav__link--active" href="./" title="[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)">
-      [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
-    </a>
-<nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">本頁目錄</label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1" title="今日學習目標">
-    今日學習目標
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      今日學習目標
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2" title="隨機森林">
-    隨機森林
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_3" title="隨機森林的生成方法">
-    隨機森林的生成方法
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林的生成方法
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_4" title="隨機森林中的隨機？">
-    隨機森林中的隨機？
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林中的隨機？
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_5" title="隨機森林的優點">
-    隨機森林的優點
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林的優點
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_6" title="[程式實作]">
-    [程式實作]
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      [程式實作]
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_7" title="隨機森林(分類器)">
-    隨機森林(分類器)
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林(分類器)
+    </span>
   </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#score" title="使用Score評估模型">
-    使用Score評估模型
+  
+    <nav class="md-nav" aria-label="隨機森林(分類器)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#score" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用Score評估模型
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_8" title="特徵重要程度">
-    特徵重要程度
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      特徵重要程度
+    </span>
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      隨機森林(迴歸器)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_9" title="隨機森林(迴歸器)">
-    隨機森林(迴歸器)
-  </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../15.XGBoost/" title="[Day 15] 機器學習常勝軍 - XGBoost">
-      [Day 15] 機器學習常勝軍 - XGBoost
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../16.Stacking/" title="[Day 16] 每個模型我全都要 - 堆疊法 (Stacking)">
-      [Day 16] 每個模型我全都要 - 堆疊法 (Stacking)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../17.LightGBM/" title="[Day 17] 輕量化的梯度提升機 - LightGBM">
-      [Day 17] 輕量化的梯度提升機 - LightGBM
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../18.CatBoost/" title="[Day 18] 機器學習 boosting 神器 - CatBoost">
-      [Day 18] 機器學習 boosting 神器 - CatBoost
-    </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
-<label class="md-nav__link" for="nav-3">
-      第三部分 進階概念與應用
-    </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-3">
-        第三部分 進階概念與應用
-      </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../19.AutoML/" title="[Day 19] 自動化機器學習 - AutoML">
-      [Day 19] 自動化機器學習 - AutoML
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../20.Auto-Sklearn/" title="[Day 20] 機器學習金手指 - Auto-sklearn">
-      [Day 20] 機器學習金手指 - Auto-sklearn
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../21.Optuna/" title="[Day 21] 調整模型超參數利器 - Optuna">
-      [Day 21] 調整模型超參數利器 - Optuna
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../22.Plotly-Express/" title="[Day 22] Python 視覺化解釋數據 - Plotly Express">
-      [Day 22] Python 視覺化解釋數據 - Plotly Express
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../23.資料分布與離群值處理/" title="[Day 23] 資料分布與離群值處理">
-      [Day 23] 資料分布與離群值處理
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../24.不能忽視的過擬合與欠擬合/" title="[Day 24] 機器學習 - 不能忽視的過擬合與欠擬合">
-      [Day 24] 機器學習 - 不能忽視的過擬合與欠擬合
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
-      [Day 25] 交叉驗證 Cross-Validation 簡介
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
-      [Day 26] 交叉驗證 K-Fold Cross-Validation
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../27.機器學習常犯錯的十件事/" title="[Day 27] 機器學習常犯錯的十件事">
-      [Day 27] 機器學習常犯錯的十件事
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../28.儲存訓練好的模型/" title="[Day 28] 儲存訓練好的模型">
-      [Day 28] 儲存訓練好的模型
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../29.使用Python-Flask架設API吧/" title="[Day 29] 使用 Python Flask 架設 API 吧！">
-      [Day 29] 使用 Python Flask 架設 API 吧！
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/" title="[Day 30] 使用 Heroku 部署機器學習 API">
-      [Day 30] 使用 Heroku 部署機器學習 API
-    </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">本頁目錄</label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1" title="今日學習目標">
-    今日學習目標
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2" title="隨機森林">
-    隨機森林
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_3" title="隨機森林的生成方法">
-    隨機森林的生成方法
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_4" title="隨機森林中的隨機？">
-    隨機森林中的隨機？
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_5" title="隨機森林的優點">
-    隨機森林的優點
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_6" title="[程式實作]">
-    [程式實作]
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_7" title="隨機森林(分類器)">
-    隨機森林(分類器)
-  </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#score" title="使用Score評估模型">
-    使用Score評估模型
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_8" title="特徵重要程度">
-    特徵重要程度
-  </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_9" title="隨機森林(迴歸器)">
-    隨機森林(迴歸器)
-  </a>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_經典機器學習_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
 <h1 id="day-14-random-forest">[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)</h1>
 <h2 id="_1">今日學習目標</h2>
 <ul>
@@ -471,13 +1269,15 @@
 </ul>
 </li>
 </ul>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/Ix0UhijD4Ks" width="560"></iframe>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/6sYMlwl2SWg" width="560"></iframe>
-<p>範例程式 隨機森林(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.1.隨機森林(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
-範例程式 隨機森林(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.2.隨機森林(Regression).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ix0UhijD4Ks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6sYMlwl2SWg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>範例程式 隨機森林(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.1.隨機森林(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>
+範例程式 隨機森林(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.2.隨機森林(Regression).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <h2 id="_2">隨機森林</h2>
 <p>隨機森林其實就是進階版的決策樹，所謂的森林就是由很多棵決策樹所組成。隨機森林是使用 Bagging 加上隨機特徵採樣的方法所產生出來的整體學習演算法。還記得在前幾天的決策樹演算法中，當模型的樹最大深度設定太大的話容易讓模型過擬合。因此隨機森林藉由多棵不同樹的概念所組成，讓結果比較不容易過度擬合，並使得預測能力更提升。</p>
-<p><img alt="" src="image/img14-1.png"/></p>
+<p><img alt="" src="image/img14-1.png" /></p>
 <h2 id="_3">隨機森林的生成方法</h2>
 <p>首先從訓練集中抽取 n’ 筆資料出來，然而這 n’ 筆資料是可以被重複抽取的。假設我們有一千筆資料我們要從中抽取 100 筆資料出來，這 100 筆資料裡面可能會有重複的數據。接著第二步從這些抽取出來的資料中挑選 k 個特徵當作決策因子的後選，因此每一棵樹只能看見部分的特徵。第三步重複以上步驟 m 次並產生 m 棵決策樹。透過 Bootstrap 步驟重複 m 次，做完之後我們會有 m 組的訓練資料，每一組訓練資料內都有 n’ 筆資料。最後再透過每棵樹的決策並採多數決投票的方式，決定最終預測的類別。因為隨機森林每一棵樹的特徵數量可能都不同，所以最後決策出來的結果都會不一樣。最後再根據任務的不同來做迴歸或是分類的問題，如果是迴歸問題我們就將這些決策數的輸出做平均得到最後答案，若是分類問題我們則用投標採多數決的方式來整合所有樹預測的結果。</p>
 <ol>
@@ -486,7 +1286,7 @@
 <li>重複 m 次，產生 m 棵決策樹</li>
 <li>分類: 多數投票機制進行預測、迴歸: 平均機制進行預測</li>
 </ol>
-<p><img alt="" src="image/img14-2.png"/></p>
+<p><img alt="" src="image/img14-2.png" /></p>
 <h2 id="_4">隨機森林中的隨機？</h2>
 <p>隨機森林中的隨機有兩種方面可以解釋。首先第一個是隨機取樣，在模型訓練的過程中每棵樹的生成都會先從訓練集中隨機抽取 n’ 筆資料出來，而這 n’ 筆資料是可以被重複抽取的。此抽取資料的方式又稱為 Bootstrap，它是一種在統計學上常用的資料估計方法。第二個解釋隨機的理由是在隨機森林中每一棵樹都是隨機的特徵選取。每一棵樹都是從 n’ 筆資料中隨機挑選 k 個特徵做樣本。</p>
 <blockquote>
@@ -519,34 +1319,39 @@
 - score: 預測成功的比例。
 - predict_proba: 預測每個類別的機率值。
 - get_depth: 取得樹的深度。</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 
 <span class="c1"># 建立 Random Forest Classifier 模型</span>
-<span class="n">randomForestModel</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">criterion</span> <span class="o">=</span> <span class="s1">'gini'</span><span class="p">)</span>
+<span class="n">randomForestModel</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">criterion</span> <span class="o">=</span> <span class="s1">&#39;gini&#39;</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料訓練模型</span>
 <span class="n">randomForestModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料預測分類</span>
 <span class="n">predicted</span> <span class="o">=</span> <span class="n">randomForestModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
+
 <h3 id="score">使用Score評估模型</h3>
 <p>我們可以直接呼叫 <code>score()</code> 直接計算模型預測的準確率。</p>
-<div class="codehilite"><pre><span></span><span class="c1"># 預測成功的比例</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'訓練集: '</span><span class="p">,</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'測試集: '</span><span class="p">,</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 預測成功的比例</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;訓練集: &#39;</span><span class="p">,</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;測試集: &#39;</span><span class="p">,</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
+</code></pre></div>
+
 <p>輸出結果：</p>
-<div class="codehilite"><pre><span></span>訓練集:  1.0
+<div class="codehilite"><pre><span></span><code>訓練集:  1.0
 測試集:  0.8888888888888888
-</pre></div>
+</code></pre></div>
+
 <p>我們可以查看訓練好的模型在測試集上的預測能力，下圖中左邊的是測試集的真實分類，右邊的是模型預測的分類結果。由於訓練資料筆數不多，因此模型訓練容易過度擬合訓練集的分布。最終在測試及預測的表現上僅有 0.88 的準確率。</p>
-<p><img alt="" src="image/img14-3.png"/></p>
+<p><img alt="" src="image/img14-3.png" /></p>
 <h3 id="_8">特徵重要程度</h3>
 <p>只要是決策樹系列演算法，不管是分類器或是迴歸器都能透過 <code>feature_importances_</code> 來檢視模型預測對於特徵的重要程度。</p>
-<div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'特徵重要程度: '</span><span class="p">,</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;特徵重要程度: &#39;</span><span class="p">,</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+</code></pre></div>
+
 <p>輸出結果：</p>
-<div class="codehilite"><pre><span></span>特徵重要程度:  [0.09864249 0.01363871 0.44211602 0.44560278]
-</pre></div>
+<div class="codehilite"><pre><span></span><code>特徵重要程度:  [0.09864249 0.01363871 0.44211602 0.44560278]
+</code></pre></div>
+
 <h2 id="_9">隨機森林(迴歸器)</h2>
 <p>Parameters:
 - n_estimators: 森林中樹木的數量，預設=100。
@@ -564,75 +1369,79 @@
 - predict: 預測並回傳預測。
 - score: 預測成功的比例。
 - get_depth: 取得樹的深度。</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 
 <span class="c1"># 建立RandomForestRegressor模型</span>
-<span class="n">randomForestModel</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">criterion</span> <span class="o">=</span> <span class="s1">'mse'</span><span class="p">)</span>
+<span class="n">randomForestModel</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">criterion</span> <span class="o">=</span> <span class="s1">&#39;mse&#39;</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料訓練模型</span>
 <span class="n">randomForestModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料預測</span>
 <span class="n">predicted</span><span class="o">=</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-<p><img alt="" src="image/img14-4.png"/></p>
+</code></pre></div>
+
+<p><img alt="" src="image/img14-4.png" /></p>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
-</article>
-</div>
-</div>
-</main>
-<footer class="md-footer">
-<div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../13.整體學習/" rel="prev" title="[Day 13] 整體學習 (Ensemble Learning)">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-                  上一頁
-                </span>
-                [Day 13] 整體學習 (Ensemble Learning)
-              </span>
-</div>
-</a>
-<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../15.XGBoost/" rel="next" title="[Day 15] 機器學習常勝軍 - XGBoost">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-                  下一頁
-                </span>
-                [Day 15] 機器學習常勝軍 - XGBoost
-              </span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a>
-</nav>
-</div>
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-footer-copyright">
-<div class="md-footer-copyright__highlight">
-            Copyright © 2021 - 2024 10程式中
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
         
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2021 - 2024 10程式中
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-</div>
-</div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/application.245445c6.js"></script>
-<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
-<script src="../assets/javascripts/lunr/tinyseg.js"></script>
-<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
-<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
-<script src="../javascripts/extra.js"></script>
-<script src="../javascripts/analytics.js"></script>
-</body>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../javascripts/extra.js"></script>
+      
+        <script src="../javascripts/analytics.js"></script>
+      
+        <script src="../javascripts/dify.js"></script>
+      
+    
+  </body>
 </html>

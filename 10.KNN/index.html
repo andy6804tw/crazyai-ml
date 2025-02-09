@@ -1,480 +1,1290 @@
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh-TW" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="10程式中">
+      
+      
+        <link rel="canonical" href="https://andy6804tw.github.io/crazyai-ml/10.KNN/">
+      
+      
+        <link rel="prev" href="../9.%E9%82%8F%E8%BC%AF%E8%BF%B4%E6%AD%B8/">
+      
+      
+        <link rel="next" href="../11.SVM/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>[Day 10] 近朱者赤，近墨者黑 - KNN - 全民瘋AI系列 [經典機器學習]</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
 
-<html class="no-js" lang="zh-Hant">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="ie=edge" http-equiv="x-ua-compatible"/>
-<link href="https://andy6804tw.github.io/crazyai-ml/10.KNN/" rel="canonical"/>
-<meta content="10程式中" name="author"/>
-<meta content="複製" name="lang:clipboard.copy"/>
-<meta content="已複製" name="lang:clipboard.copied"/>
-<meta content="ja" name="lang:search.language"/>
-<meta content="True" name="lang:search.pipeline.stopwords"/>
-<meta content="True" name="lang:search.pipeline.trimmer"/>
-<meta content="沒有符合的項目" name="lang:search.result.none"/>
-<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
-<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
-<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
-<title>[Day 10] 近朱者赤，近墨者黑 - KNN - 全民瘋AI系列 [經典機器學習]</title>
-<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
-<meta content="#795548" name="theme-color"/>
-<script src="../assets/javascripts/modernizr.74668098.js"></script>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
-<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
-<link href="../stylesheets/extra.css" rel="stylesheet"/>
-</head>
-<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
-<svg class="md-svg">
-<defs>
-<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
-</defs>
-</svg>
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-<a class="md-skip" href="#day-10-knn" tabindex="1">
-        跳轉到
-      </a>
-<header class="md-header" data-md-component="header">
-<nav class="md-header-nav md-grid">
-<div class="md-flex">
-<div class="md-flex__cell md-flex__cell--shrink">
-<a class="md-header-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
-<i class="md-icon"></i>
-</a>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch">
-<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-<span class="md-header-nav__topic">
-              全民瘋AI系列 [經典機器學習]
-            </span>
-<span class="md-header-nav__topic">
-              
-                [Day 10] 近朱者赤，近墨者黑 - KNN
-              
-            </span>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-<div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
-<label class="md-icon md-search__icon" for="__search"></label>
-<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
-        
-      </button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="result">
-<div class="md-search-result__meta">
-            打字進行搜尋
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/dify.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#day-10-knn" class="md-skip">
+          跳轉到
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="頁首">
+    <a href=".." title="全民瘋AI系列 [經典機器學習]" class="md-header__button md-logo" aria-label="全民瘋AI系列 [經典機器學習]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            全民瘋AI系列 [經典機器學習]
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              [Day 10] 近朱者赤，近墨者黑 - KNN
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜尋" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="搜尋">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清除" aria-label="清除" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜尋引擎
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<div class="md-header-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-</div>
-</div>
-</nav>
+      </div>
+    
+  </nav>
+  
 </header>
-<div class="md-container">
-<main class="md-main">
-<div class="md-main__inner md-grid" data-md-component="container">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title md-nav__title--site" for="__drawer">
-<a class="md-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
-<i class="md-icon"></i>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="導覽列" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="全民瘋AI系列 [經典機器學習]" class="md-nav__button md-logo" aria-label="全民瘋AI系列 [經典機器學習]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
     全民瘋AI系列 [經典機器學習]
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
-<label class="md-nav__link" for="nav-1">
-      第一部分 AI基礎概念
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    第一部分 AI基礎概念
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            第一部分 AI基礎概念
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%E5%85%A8%E6%B0%91%E7%98%8BAI%E7%B3%BB%E5%88%972.0%E7%9B%AE%E6%A8%99%E4%BB%8B%E7%B4%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 1] 目標介紹
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%E5%BF%AB%E4%BE%86%E6%8E%A2%E7%B4%A2AI%E7%9A%84%E4%B8%96%E7%95%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 2] 快來探索AI的世界
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%E4%BD%A0%E7%9C%9F%E4%BA%86%E8%A7%A3%E8%B3%87%E6%96%99%E5%97%8E%E8%A9%A6%E8%A9%A6%E7%9C%8B%E8%A6%96%E8%A6%BA%E5%8C%96%E5%88%86%E6%9E%90%E5%90%A7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 3] 你真了解資料嗎?試試看視覺化分析吧!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%E5%92%B1%E5%80%91%E4%B8%80%E8%B5%B7%E5%81%9A%E8%B3%87%E6%96%99%E6%B8%85%E7%90%86%E5%92%8C%E5%89%8D%E8%99%95%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 4] 咱們一起做資料清理和前處理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%A4%A7%E8%A3%9C%E5%B8%96/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 5] 機器學習大補帖
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    第二部分 機器學習入門
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第二部分 機器學習入門
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92k-means%E5%88%86%E7%BE%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 6] 非監督式學習 K-means 分群
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92-%E9%99%8D%E7%B6%AD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 7] 非監督式學習-降維
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8.%E7%B7%9A%E6%80%A7%E8%BF%B4%E6%AD%B8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 8] 線性迴歸 (Linear Regression)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9.%E9%82%8F%E8%BC%AF%E8%BF%B4%E6%AD%B8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 9] 邏輯迴歸 (Logistic Regression)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    [Day 10] 近朱者赤，近墨者黑 - KNN
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    [Day 10] 近朱者赤，近墨者黑 - KNN
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-1">
-        第一部分 AI基礎概念
-      </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/" title="[Day 1] 目標介紹">
-      [Day 1] 目標介紹
-    </a>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      今日學習目標
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2.快來探索AI的世界/" title="[Day 2] 快來探索AI的世界">
-      [Day 2] 快來探索AI的世界
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#k-knn" class="md-nav__link">
+    <span class="md-ellipsis">
+      K-近鄰演算法 (KNN)
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../3.你真了解資料嗎試試看視覺化分析吧/" title="[Day 3] 你真了解資料嗎?試試看視覺化分析吧!">
-      [Day 3] 你真了解資料嗎?試試看視覺化分析吧!
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#knn" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 分類器
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/" title="[Day 4] 咱們一起做資料清理和前處理">
-      [Day 4] 咱們一起做資料清理和前處理
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#knn_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 迴歸器
+    </span>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../5.機器學習大補帖/" title="[Day 5] 機器學習大補帖">
-      [Day 5] 機器學習大補帖
-    </a>
+      
+        <li class="md-nav__item">
+  <a href="#knn_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 度量距離的方法
+    </span>
+  </a>
+  
 </li>
-</ul>
+      
+        <li class="md-nav__item">
+  <a href="#knn-k-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 與 k-means 勿混淆
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      [程式實作]
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knn_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 分類器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="KNN 分類器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#score" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用Score評估模型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knn_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 迴歸器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="KNN 迴歸器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      模型評估
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
-      第二部分 機器學習入門
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11.SVM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 11] 核模型 - 支持向量機 (SVM)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12.%E6%B1%BA%E7%AD%96%E6%A8%B9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 12] 決策樹 (Decision tree)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13.%E6%95%B4%E9%AB%94%E5%AD%B8%E7%BF%92/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 13] 整體學習 (Ensemble Learning)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14.%E9%9A%A8%E6%A9%9F%E6%A3%AE%E6%9E%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15.XGBoost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 15] 機器學習常勝軍 - XGBoost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16.Stacking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 16] 每個模型我全都要 - 堆疊法 (Stacking)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17.LightGBM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 17] 輕量化的梯度提升機 - LightGBM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18.CatBoost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 18] 機器學習 boosting 神器 - CatBoost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    第三部分 進階概念與應用
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第三部分 進階概念與應用
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19.AutoML/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 19] 自動化機器學習 - AutoML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20.Auto-Sklearn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 20] 機器學習金手指 - Auto-sklearn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21.Optuna/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 21] 調整模型超參數利器 - Optuna
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../22.Plotly-Express/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 22] Python 視覺化解釋數據 - Plotly Express
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../23.%E8%B3%87%E6%96%99%E5%88%86%E5%B8%83%E8%88%87%E9%9B%A2%E7%BE%A4%E5%80%BC%E8%99%95%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 23] 資料分布與離群值處理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../24.%E4%B8%8D%E8%83%BD%E5%BF%BD%E8%A6%96%E7%9A%84%E9%81%8E%E6%93%AC%E5%90%88%E8%88%87%E6%AC%A0%E6%93%AC%E5%90%88/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 24] 機器學習 - 不能忽視的過擬合與欠擬合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../25.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20Cross-Validation%20%E7%B0%A1%E4%BB%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 25] 交叉驗證 Cross-Validation 簡介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../26.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20K-Fold%20Cross-Validation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 26] 交叉驗證 K-Fold Cross-Validation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../27.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%B8%B8%E7%8A%AF%E9%8C%AF%E7%9A%84%E5%8D%81%E4%BB%B6%E4%BA%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 27] 機器學習常犯錯的十件事
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../28.%E5%84%B2%E5%AD%98%E8%A8%93%E7%B7%B4%E5%A5%BD%E7%9A%84%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 28] 儲存訓練好的模型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../29.%E4%BD%BF%E7%94%A8Python-Flask%E6%9E%B6%E8%A8%ADAPI%E5%90%A7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 29] 使用 Python Flask 架設 API 吧！
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30.%E4%BD%BF%E7%94%A8%20Heroku%20%E9%83%A8%E7%BD%B2%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%20API/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    [Day 30] 使用 Heroku 部署機器學習 API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
-        第二部分 機器學習入門
-      </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../6.非監督式學習k-means分群/" title="[Day 6] 非監督式學習 K-means 分群">
-      [Day 6] 非監督式學習 K-means 分群
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../7.非監督式學習-降維/" title="[Day 7] 非監督式學習-降維">
-      [Day 7] 非監督式學習-降維
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../8.線性迴歸/" title="[Day 8] 線性迴歸 (Linear Regression)">
-      [Day 8] 線性迴歸 (Linear Regression)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../9.邏輯迴歸/" title="[Day 9] 邏輯迴歸 (Logistic Regression)">
-      [Day 9] 邏輯迴歸 (Logistic Regression)
-    </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-        [Day 10] 近朱者赤，近墨者黑 - KNN
-      </label>
-<a class="md-nav__link md-nav__link--active" href="./" title="[Day 10] 近朱者赤，近墨者黑 - KNN">
-      [Day 10] 近朱者赤，近墨者黑 - KNN
-    </a>
-<nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">本頁目錄</label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1" title="今日學習目標">
-    今日學習目標
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      今日學習目標
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#k-knn" title="K-近鄰演算法 (KNN)">
-    K-近鄰演算法 (KNN)
+      
+        <li class="md-nav__item">
+  <a href="#k-knn" class="md-nav__link">
+    <span class="md-ellipsis">
+      K-近鄰演算法 (KNN)
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn" title="KNN 分類器">
-    KNN 分類器
+      
+        <li class="md-nav__item">
+  <a href="#knn" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 分類器
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_1" title="KNN 迴歸器">
-    KNN 迴歸器
+      
+        <li class="md-nav__item">
+  <a href="#knn_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 迴歸器
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_2" title="KNN 度量距離的方法">
-    KNN 度量距離的方法
+      
+        <li class="md-nav__item">
+  <a href="#knn_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 度量距離的方法
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn-k-means" title="KNN 與 k-means 勿混淆">
-    KNN 與 k-means 勿混淆
+      
+        <li class="md-nav__item">
+  <a href="#knn-k-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 與 k-means 勿混淆
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2" title="[程式實作]">
-    [程式實作]
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      [程式實作]
+    </span>
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_3" title="KNN 分類器">
-    KNN 分類器
+      
+        <li class="md-nav__item">
+  <a href="#knn_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 分類器
+    </span>
   </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#score" title="使用Score評估模型">
-    使用Score評估模型
+  
+    <nav class="md-nav" aria-label="KNN 分類器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#score" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用Score評估模型
+    </span>
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knn_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      KNN 迴歸器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="KNN 迴歸器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      模型評估
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_4" title="KNN 迴歸器">
-    KNN 迴歸器
-  </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_3" title="模型評估">
-    模型評估
-  </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../11.SVM/" title="[Day 11] 核模型 - 支持向量機 (SVM)">
-      [Day 11] 核模型 - 支持向量機 (SVM)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../12.決策樹/" title="[Day 12] 決策樹 (Decision tree)">
-      [Day 12] 決策樹 (Decision tree)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../13.整體學習/" title="[Day 13] 整體學習 (Ensemble Learning)">
-      [Day 13] 整體學習 (Ensemble Learning)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../14.隨機森林/" title="[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)">
-      [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../15.XGBoost/" title="[Day 15] 機器學習常勝軍 - XGBoost">
-      [Day 15] 機器學習常勝軍 - XGBoost
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../16.Stacking/" title="[Day 16] 每個模型我全都要 - 堆疊法 (Stacking)">
-      [Day 16] 每個模型我全都要 - 堆疊法 (Stacking)
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../17.LightGBM/" title="[Day 17] 輕量化的梯度提升機 - LightGBM">
-      [Day 17] 輕量化的梯度提升機 - LightGBM
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../18.CatBoost/" title="[Day 18] 機器學習 boosting 神器 - CatBoost">
-      [Day 18] 機器學習 boosting 神器 - CatBoost
-    </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
-<label class="md-nav__link" for="nav-3">
-      第三部分 進階概念與應用
-    </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-3">
-        第三部分 進階概念與應用
-      </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../19.AutoML/" title="[Day 19] 自動化機器學習 - AutoML">
-      [Day 19] 自動化機器學習 - AutoML
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../20.Auto-Sklearn/" title="[Day 20] 機器學習金手指 - Auto-sklearn">
-      [Day 20] 機器學習金手指 - Auto-sklearn
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../21.Optuna/" title="[Day 21] 調整模型超參數利器 - Optuna">
-      [Day 21] 調整模型超參數利器 - Optuna
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../22.Plotly-Express/" title="[Day 22] Python 視覺化解釋數據 - Plotly Express">
-      [Day 22] Python 視覺化解釋數據 - Plotly Express
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../23.資料分布與離群值處理/" title="[Day 23] 資料分布與離群值處理">
-      [Day 23] 資料分布與離群值處理
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../24.不能忽視的過擬合與欠擬合/" title="[Day 24] 機器學習 - 不能忽視的過擬合與欠擬合">
-      [Day 24] 機器學習 - 不能忽視的過擬合與欠擬合
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
-      [Day 25] 交叉驗證 Cross-Validation 簡介
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
-      [Day 26] 交叉驗證 K-Fold Cross-Validation
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../27.機器學習常犯錯的十件事/" title="[Day 27] 機器學習常犯錯的十件事">
-      [Day 27] 機器學習常犯錯的十件事
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../28.儲存訓練好的模型/" title="[Day 28] 儲存訓練好的模型">
-      [Day 28] 儲存訓練好的模型
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../29.使用Python-Flask架設API吧/" title="[Day 29] 使用 Python Flask 架設 API 吧！">
-      [Day 29] 使用 Python Flask 架設 API 吧！
-    </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/" title="[Day 30] 使用 Heroku 部署機器學習 API">
-      [Day 30] 使用 Heroku 部署機器學習 API
-    </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">本頁目錄</label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1" title="今日學習目標">
-    今日學習目標
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#k-knn" title="K-近鄰演算法 (KNN)">
-    K-近鄰演算法 (KNN)
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn" title="KNN 分類器">
-    KNN 分類器
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_1" title="KNN 迴歸器">
-    KNN 迴歸器
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_2" title="KNN 度量距離的方法">
-    KNN 度量距離的方法
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn-k-means" title="KNN 與 k-means 勿混淆">
-    KNN 與 k-means 勿混淆
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2" title="[程式實作]">
-    [程式實作]
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_3" title="KNN 分類器">
-    KNN 分類器
-  </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#score" title="使用Score評估模型">
-    使用Score評估模型
-  </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#knn_4" title="KNN 迴歸器">
-    KNN 迴歸器
-  </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_3" title="模型評估">
-    模型評估
-  </a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_經典機器學習_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
 <h1 id="day-10-knn">[Day 10] 近朱者赤，近墨者黑 - KNN</h1>
 <h2 id="_1">今日學習目標</h2>
 <ul>
@@ -490,13 +1300,15 @@
 </ul>
 </li>
 </ul>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/npfJiromN5Q" width="560"></iframe>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/ZQC_gYiOzHI" width="560"></iframe>
-<p>範例程式 KNN(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/10.KNN/10.1.KNN(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
-<p>範例程式 KNN(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/10.KNN/10.2.KNN(Regression).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/npfJiromN5Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZQC_gYiOzHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>範例程式 KNN(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/10.KNN/10.1.KNN(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p>範例程式 KNN(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/10.KNN/10.2.KNN(Regression).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <h2 id="k-knn">K-近鄰演算法 (KNN)</h2>
 <p>KNN 的全名 K Nearest Neighbor 是屬於機器學習中的 Supervised learning 其中一種算法，顧名思義就是 k 個最接近你的<code>鄰居</code>。分類的標準是由鄰居「多數表決」決定的。在 Sklearn 中 KNN 可以用作分類或迴歸的模型。</p>
-<p><img alt="" src="image/img10-1.png"/></p>
+<p><img alt="" src="image/img10-1.png" /></p>
 <h2 id="knn">KNN 分類器</h2>
 <p>在分類問題中 KNN 演算法採多數決標準，利用 k 個最近的鄰居來判定新的資料是在哪一群。其演算法流程非常簡單，首先使用者先決定 k 的大小。接著計算目前該筆新的資料與鄰近的資料間的距離。第三步找出跟自己最近的 k 個鄰居，查看哪一組鄰居數量最多，就加入哪一組。</p>
 <ol>
@@ -508,16 +1320,16 @@
 </li>
 </ol>
 <p>k 的大小會影響模型最終的分類結果。以下圖為例，假設綠色點是新的資料。當 k 等於 3 時會搜尋離綠色點最近的鄰居，我們可以發現藍色三角形為預測的結果。當 k 設為 5 的時候結果又不一樣了，我們發現距離最近的三個鄰居為紅色正方形。</p>
-<p><img alt="" src="image/img10-2.png"/></p>
+<p><img alt="" src="image/img10-2.png" /></p>
 <h2 id="knn_1">KNN 迴歸器</h2>
 <p>KNN 同時也能運用在迴歸問題上面。迴歸模型輸出的結果是一個連續性數值，其預測該值是 k 個最近鄰居輸出的平均值。以下圖為例當 k=2 時，假設我們有一個輸入特徵 x 要預測的輸出為 y。當有一筆新的 x 進來的時候， KNN 迴歸器會尋找鄰近 2 個 x 的輸出做平均當作是該筆資料的預測結果。</p>
-<p><img alt="" src="image/img10-3.png"/></p>
+<p><img alt="" src="image/img10-3.png" /></p>
 <h2 id="knn_2">KNN 度量距離的方法</h2>
 <p>要判斷那些是鄰居的話，首先要量化相似度，而歐幾里得距離 (Euclidean distance) 是比較常用的方法來量度相似度。除此之外還有明可夫斯基距離(Sklearn 預設)、曼哈頓距離、柴比雪夫距離、夾角餘弦、漢明距離、傑卡德相似係數 都可以評估距離的遠近。</p>
-<p><img alt="" src="image/img10-4.png"/></p>
+<p><img alt="" src="image/img10-4.png" /></p>
 <h2 id="knn-k-means">KNN 與 k-means 勿混淆</h2>
 <p>KNN 的缺點是對資料的局部結構非常敏感，因此調整適當的 k 值極為重要。另外大家很常將 KNN 與 K-means 混淆，雖然兩者都有 k 值要設定但其實兩者無任何關聯。KNN 的 k 是設定鄰居的數量採多數決作為輸出的依據。而 K-means 的 k 是設定集群的類別中心點數量。</p>
-<p><img alt="" src="image/img10-5.gif"/></p>
+<p><img alt="" src="image/img10-5.gif" /></p>
 <h2 id="_2">[程式實作]</h2>
 <h2 id="knn_3">KNN 分類器</h2>
 <p>採用鳶尾花朵資料集做為分類範例，使用 Sklearn 建立 k-nearest neighbors(KNN) 模型。以下是 KNN 常見的模型操作參數：</p>
@@ -532,7 +1344,7 @@
 - fit: 放入X、y進行模型擬合。
 - predict: 預測並回傳預測類別。
 - score: 預測成功的比例。</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
 
 <span class="c1"># 建立 KNN 模型</span>
 <span class="n">knnModel</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -540,19 +1352,22 @@
 <span class="n">knnModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料預測分類</span>
 <span class="n">predicted</span> <span class="o">=</span> <span class="n">knnModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
+
 <h3 id="score">使用Score評估模型</h3>
 <p>我們可以直接呼叫 <code>score()</code> 直接計算模型預測的準確率。</p>
-<div class="codehilite"><pre><span></span><span class="c1"># 預測成功的比例</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'訓練集: '</span><span class="p">,</span><span class="n">knnModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'測試集: '</span><span class="p">,</span><span class="n">knnModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 預測成功的比例</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;訓練集: &#39;</span><span class="p">,</span><span class="n">knnModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;測試集: &#39;</span><span class="p">,</span><span class="n">knnModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
+</code></pre></div>
+
 <p>執行結果：</p>
-<div class="codehilite"><pre><span></span>訓練集:  0.9619047619047619
+<div class="codehilite"><pre><span></span><code>訓練集:  0.9619047619047619
 測試集:  0.9555555555555556
-</pre></div>
+</code></pre></div>
+
 <p>我們可以查看訓練好的模型在測試集上的預測能力，下圖中左邊的是測試集的真實分類，右邊的是模型預測的分類結果。從圖中可以發現藍色的 <code>Setosa</code> 完整的被分類出來，而橘色與綠色的分佈是緊密相連在交界處分類的結果比較不穩定。但最終預測結果結果在訓練集與測試集都有百分之95以上的準確率。</p>
-<p><img alt="" src="image/img10-6.png"/></p>
+<p><img alt="" src="image/img10-6.png" /></p>
 <h2 id="knn_4">KNN 迴歸器</h2>
 <p>KNN 不僅能夠作為分類器，也可以做迴歸連續性的數值預測。其預測值為k個最近鄰居的值的平均值。</p>
 <p>Parameters:
@@ -566,7 +1381,7 @@
 - fit: 放入X、y進行模型擬合。
 - predict: 預測並回傳預測類別。
 - score: 預測成功的比例。</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
 
 <span class="c1"># 建立 KNN 模型</span>
 <span class="n">knnModel</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -574,74 +1389,79 @@
 <span class="n">knnModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料預測</span>
 <span class="n">predicted</span><span class="o">=</span> <span class="n">knnModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
+
 <h3 id="_3">模型評估</h3>
 <p>Sklearn 中 KNN 迴歸模型的 score 函式是 R2 score，可作為模型評估依據，其數值越接近於1代表模型越佳。除了 R2 score 還有其他許多迴歸模型的評估方法，例如： MSE、MAE、RMSE。</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'R2 score: '</span><span class="p">,</span> <span class="n">knnModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R2 score: &#39;</span><span class="p">,</span> <span class="n">knnModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 <span class="n">mse</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'MSE score: '</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
-</pre></div>
-<p><img alt="" src="image/img10-7.png"/></p>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSE score: &#39;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img alt="" src="image/img10-7.png" /></p>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
-</article>
-</div>
-</div>
-</main>
-<footer class="md-footer">
-<div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../9.邏輯迴歸/" rel="prev" title="[Day 9] 邏輯迴歸 (Logistic Regression)">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-                  上一頁
-                </span>
-                [Day 9] 邏輯迴歸 (Logistic Regression)
-              </span>
-</div>
-</a>
-<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../11.SVM/" rel="next" title="[Day 11] 核模型 - 支持向量機 (SVM)">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
-                  下一頁
-                </span>
-                [Day 11] 核模型 - 支持向量機 (SVM)
-              </span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a>
-</nav>
-</div>
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-footer-copyright">
-<div class="md-footer-copyright__highlight">
-            Copyright © 2021 - 2024 10程式中
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
         
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2021 - 2024 10程式中
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-</div>
-</div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/application.245445c6.js"></script>
-<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
-<script src="../assets/javascripts/lunr/tinyseg.js"></script>
-<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
-<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
-<script src="../javascripts/extra.js"></script>
-<script src="../javascripts/analytics.js"></script>
-</body>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../javascripts/extra.js"></script>
+      
+        <script src="../javascripts/analytics.js"></script>
+      
+        <script src="../javascripts/dify.js"></script>
+      
+    
+  </body>
 </html>

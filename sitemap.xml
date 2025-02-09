@@ -1,153 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/1.全民瘋AI系列2.0目標介紹/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/2.快來探索AI的世界/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/1.%E5%85%A8%E6%B0%91%E7%98%8BAI%E7%B3%BB%E5%88%972.0%E7%9B%AE%E6%A8%99%E4%BB%8B%E7%B4%B9/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/3.你真了解資料嗎試試看視覺化分析吧/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/10.KNN/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/4.咱們一起做資料清理和前處理/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/11.SVM/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/5.機器學習大補帖/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/12.%E6%B1%BA%E7%AD%96%E6%A8%B9/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/6.非監督式學習k-means分群/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/13.%E6%95%B4%E9%AB%94%E5%AD%B8%E7%BF%92/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/7.非監督式學習-降維/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/14.%E9%9A%A8%E6%A9%9F%E6%A3%AE%E6%9E%97/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/8.線性迴歸/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/15.XGBoost/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/9.邏輯迴歸/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/16.Stacking/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/10.KNN/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/17.LightGBM/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/11.SVM/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/18.CatBoost/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/12.決策樹/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/19.AutoML/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/13.整體學習/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/2.%E5%BF%AB%E4%BE%86%E6%8E%A2%E7%B4%A2AI%E7%9A%84%E4%B8%96%E7%95%8C/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/14.隨機森林/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/20.Auto-Sklearn/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/15.XGBoost/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/21.Optuna/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/16.Stacking/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/22.Plotly-Express/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/17.LightGBM/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/23.%E8%B3%87%E6%96%99%E5%88%86%E5%B8%83%E8%88%87%E9%9B%A2%E7%BE%A4%E5%80%BC%E8%99%95%E7%90%86/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/18.CatBoost/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/24.%E4%B8%8D%E8%83%BD%E5%BF%BD%E8%A6%96%E7%9A%84%E9%81%8E%E6%93%AC%E5%90%88%E8%88%87%E6%AC%A0%E6%93%AC%E5%90%88/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/19.AutoML/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/25.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20Cross-Validation%20%E7%B0%A1%E4%BB%8B/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/20.Auto-Sklearn/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/26.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20K-Fold%20Cross-Validation/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/21.Optuna/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/27.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%B8%B8%E7%8A%AF%E9%8C%AF%E7%9A%84%E5%8D%81%E4%BB%B6%E4%BA%8B/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/22.Plotly-Express/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/28.%E5%84%B2%E5%AD%98%E8%A8%93%E7%B7%B4%E5%A5%BD%E7%9A%84%E6%A8%A1%E5%9E%8B/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/23.資料分布與離群值處理/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/29.%E4%BD%BF%E7%94%A8Python-Flask%E6%9E%B6%E8%A8%ADAPI%E5%90%A7/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/24.不能忽視的過擬合與欠擬合/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/3.%E4%BD%A0%E7%9C%9F%E4%BA%86%E8%A7%A3%E8%B3%87%E6%96%99%E5%97%8E%E8%A9%A6%E8%A9%A6%E7%9C%8B%E8%A6%96%E8%A6%BA%E5%8C%96%E5%88%86%E6%9E%90%E5%90%A7/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/25.交叉驗證 Cross-Validation 簡介/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/30.%E4%BD%BF%E7%94%A8%20Heroku%20%E9%83%A8%E7%BD%B2%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%20API/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/26.交叉驗證 K-Fold Cross-Validation/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/4.%E5%92%B1%E5%80%91%E4%B8%80%E8%B5%B7%E5%81%9A%E8%B3%87%E6%96%99%E6%B8%85%E7%90%86%E5%92%8C%E5%89%8D%E8%99%95%E7%90%86/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/27.機器學習常犯錯的十件事/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/5.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%A4%A7%E8%A3%9C%E5%B8%96/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/28.儲存訓練好的模型/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/6.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92k-means%E5%88%86%E7%BE%A4/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/29.使用Python-Flask架設API吧/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/7.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92-%E9%99%8D%E7%B6%AD/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://andy6804tw.github.io/crazyai-ml/30.使用 Heroku 部署機器學習 API/</loc>
-     <lastmod>2024-10-27</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>https://andy6804tw.github.io/crazyai-ml/8.%E7%B7%9A%E6%80%A7%E8%BF%B4%E6%AD%B8/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://andy6804tw.github.io/crazyai-ml/9.%E9%82%8F%E8%BC%AF%E8%BF%B4%E6%AD%B8/</loc>
+         <lastmod>2025-02-09</lastmod>
+         <changefreq>daily</changefreq>
     </url>
 </urlset>
