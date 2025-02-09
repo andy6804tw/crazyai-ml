@@ -16,7 +16,40 @@
 
 > 第13屆iT邦幫忙鐵人賽
 
+### 2025 新書預購中！
+
+<table>
+    <tr>
+        <td>
+            <a href="https://deepwisdom.com.tw/product/%e5%85%a8%e6%b0%91%e7%98%8b-ai-%e7%b3%bb%e5%88%97-%e7%b6%93%e5%85%b8%e6%a9%9f%e5%99%a8%e5%ad%b8%e7%bf%92dm2510/" target="_blank">
+                <img src="https://deepwisdom.com.tw/wp-content/uploads/2025/02/DM2510-%E7%AB%8B%E9%AB%94%E6%9B%B8-500x500-1.jpg" width="250px" alt="全民瘋AI系列 經典機器學習">
+            </a>
+        </td>
+        <td>
+            <p>📢 <strong>2/19 前預購 7.9 折優惠！</strong> 🎉</p>
+            <p>本書改寫自 <strong>「第12屆iT邦幫忙鐵人賽 全民瘋AI系列」</strong>，在原有的內容基礎上，增添 <strong>十三種經典實務範例</strong>，並強化 <strong>模型部署實作</strong>，讓讀者能更全面掌握 AI 技術的實際應用。</p>
+            <p>從基礎機器學習演算法入門，本書循序漸進解析 AI 技術，涵蓋 <strong>資料處理、模型構建、優化與部署</strong>，並提供豐富的 <strong>Python 範例</strong> 與 <strong>實務應用</strong>，讓讀者不僅理解理論，更能將 AI 技術應用於實際場景。</p>
+            <p>如果你喜歡我的創作 ❤️，歡迎 <a href="https://www.tenlong.com.tw/products/9786267569511" target="_blank"><strong>購買書籍</strong></a> 作為支持！🙏你的支持將成為我持續開源與分享更多 AI 相關內容的動力！</p>
+        </td>
+    </tr>
+</table>
+
 ## 公告
+<details>
+  <summary>📢 [2025/02] ✨此系列出版實體書籍囉！</summary>
+
+  <p>2/19 前預購 7.9 折優惠！ 🎉</p>
+            <p>本書改寫自 <strong>「第12屆iT邦幫忙鐵人賽 全民瘋AI系列」</strong>，在原有的內容基礎上，增添 <strong>十三種經典實務範例</strong>，並強化 <strong>模型部署實作</strong>，讓讀者能更全面掌握 AI 技術的實際應用。</p>
+            <p>從基礎機器學習演算法入門，本書循序漸進解析 AI 技術，涵蓋 <strong>資料處理、模型構建、優化與部署</strong>，並提供豐富的 <strong>Python 範例</strong> 與 <strong>實務應用</strong>，讓讀者不僅理解理論，更能將 AI 技術應用於實際場景。</p>
+            <p>如果你喜歡我的創作 ❤️，歡迎<a href="https://www.tenlong.com.tw/products/9786267569511" target="_blank"><strong>購買書籍</strong></a>作為支持！🙏 你的支持將成為我持續開源與分享更多 AI 相關內容的動力！</p>
+
+</details>
+<details>
+  <summary>📢 [2025/01] 電子書新增ChatBot🤖學習小助手 </summary>
+
+  > 點選網頁右下角 icon 即可免費快速詢問此系列電子書內容。
+
+</details>
 <details>
   <summary>📢 [2024/09] 此系列新增英文版Podcast！ </summary>
 
