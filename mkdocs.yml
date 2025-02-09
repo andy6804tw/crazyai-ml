@@ -3,9 +3,11 @@ site_author: 10程式中
 site_url: https://andy6804tw.github.io/crazyai-ml/
 extra_css:
   - 'stylesheets/extra.css'
+  - stylesheets/dify.css
 extra_javascript:
   - javascripts/extra.js
   - javascripts/analytics.js
+  - javascripts/dify.js
 theme:
   name: material
   language: 'zh-TW'

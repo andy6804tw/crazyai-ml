@@ -3,8 +3,23 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C9mvGMtrPXo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## 前言
-哈囉大家好我是10程式中的10！我是[上一屆](https://ithelp.ithome.com.tw/users/20107247/ironman/3719)鐵人賽影片教學組`全民瘋AI系列`的作者，當時講解了人工智慧的基礎以及常見的機器學習演算法與手把手教學。由於大家反應很熱烈，讓我看到了大家對於AI的學習熱忱。也因為上一屆獲得了影片教學組優選，收到了許多書商的出版邀請，由於我沒有時間與動力將這些大量知識寫成文章因此都婉拒了。因此我想藉由這一次鐵人賽將上一屆的影片內容整理成電子書版本，提供大家影片教學與文字版的筆記內容(唷呼書商快看過來～)當然內容會以之前影片教學為基底，並加入一些新的元素讓文章內容變得更紮實。在全新的`全民瘋AI系列2.0`中我會介紹實用的機器學習演算法並含有程式手把手實作，以及近年來熱門的機器學習套件與模型調參技巧。除此之外我還會提到大家最感興趣的 AI 模型落地與整合。希望在這次的鐵人賽能夠將AI的資源整理得更詳細並分享給各位。
+### 2025 新書預購中！
+
+<table>
+    <tr>
+        <td>
+            <a href="https://deepwisdom.com.tw/product/%e5%85%a8%e6%b0%91%e7%98%8b-ai-%e7%b3%bb%e5%88%97-%e7%b6%93%e5%85%b8%e6%a9%9f%e5%99%a8%e5%ad%b8%e7%bf%92dm2510/" target="_blank">
+                <img src="https://deepwisdom.com.tw/wp-content/uploads/2025/02/DM2510-%E7%AB%8B%E9%AB%94%E6%9B%B8-500x500-1.jpg" width="250px" alt="全民瘋AI系列 經典機器學習">
+            </a>
+        </td>
+        <td>
+            <p>📢 <strong>2/19 前預購 7.9 折優惠！</strong> 🎉</p>
+            <p>本書改寫自 <strong>「第12屆iT邦幫忙鐵人賽 全民瘋AI系列」</strong>，在原有的內容基礎上，增添 <strong>十三種經典實務範例</strong>，並強化 <strong>模型部署實作</strong>，讓讀者能更全面掌握 AI 技術的實際應用。</p>
+            <p>從基礎機器學習演算法入門，本書循序漸進解析 AI 技術，涵蓋 <strong>資料處理、模型構建、優化與部署</strong>，並提供豐富的 <strong>Python 範例</strong> 與 <strong>實務應用</strong>，讓讀者不僅理解理論，更能將 AI 技術應用於實際場景。</p>
+            <p>如果你喜歡我的創作 ❤️，歡迎 <a href="https://www.tenlong.com.tw/products/9786267569511" target="_blank"><strong>購買書籍</strong></a> 作為支持！🙏</p>
+        </td>
+    </tr>
+</table>
 
 
 ![](./1.全民瘋AI系列2.0目標介紹/image/img1-1.jpg)
