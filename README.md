@@ -3,7 +3,7 @@
 <a href="https://andy6804tw.github.io/crazyai-ml/">
   <img align="left" width=140 alt="blog" src="design/ebook-dark.png" />
 </a>
-<a href="https://andy6804tw.github.io/crazyai-ml/pdf/全民瘋AI系列_經典機器學習_v2.1.pdf">
+<a href="https://github.com/andy6804tw/crazyai-ml/releases/download/v2.0/crazyai-ml_v2.1.pdf">
   <img align="left" width=150 alt="blog" src="design/pdf-dark.png" />
 </a>
 <a href="https://www.youtube.com/watch?v=C9mvGMtrPXo&list=PLXSkku8eiD-iFRBr11rV83579hing3gMU">
