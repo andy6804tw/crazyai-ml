@@ -95,6 +95,7 @@
 | [探索可解釋人工智慧](https://andy6804tw.github.io/crazyai-xai/)| 介紹解釋AI模型的最新技術與方法，幫助讀者理解AI決策的背後原因。 | 100%       | [加入討論](https://github.com/andy6804tw/crazyai-xai/issues) |
 | [深度學習與神經網路](https://andy6804tw.github.io/crazyai-dl/)| 深入介紹深度學習與神經網路的概念與實作，適合進階讀者。       | 20%       | [加入討論](https://github.com/andy6804tw/crazyai-dl/issues) |
 | [深度強化學習](https://andy6804tw.github.io/crazyai-rl/)| 涵蓋深度強化學習的理論與應用，適合對最佳化有深入興趣的讀者。   | 10%       | [加入討論](https://github.com/andy6804tw/crazyai-rl/issues) |
+| [大語言模型應用與實戰](https://andy6804tw.github.io/crazyai-llm/)|  探討 LLM 基礎、微調與應用，透過實作輕鬆上手打造專屬 AI 機器人。   | 10%       | [加入討論](https://github.com/andy6804tw/crazyai-llm/issues) |
 
 #### 鐵人賽列表
 | 文章 | 程式 |
