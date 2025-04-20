@@ -3,6 +3,13 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C9mvGMtrPXo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+《全民瘋AI系列 - 經典機器學習》新書導讀講座
+
+- 時間：4/26(六)19:00-21:00
+- 地點：Teams線上直播
+- 報名連結：[https://forms.gle/k8bww4dBcWE8Bzue9](https://forms.gle/k8bww4dBcWE8Bzue9)
+- 報名費：200元，已購書優惠價160元
+
 ### 2025 新書預購中！
 
 <table>
@@ -13,7 +20,7 @@
             </a>
         </td>
         <td>
-            <p>📢 <strong>新書推播 7.9 折優惠！</strong> 🎉</p>
+            <p>📢 <strong>歡迎購書支持！</strong> 🎉</p>
             <p>本書改寫自 <strong>「第12屆iT邦幫忙鐵人賽 全民瘋AI系列」</strong>，在原有的內容基礎上，增添 <strong>十三種經典實務範例</strong>，並強化 <strong>模型部署實作</strong>，讓讀者能更全面掌握 AI 技術的實際應用。</p>
             <p>從基礎機器學習演算法入門，本書循序漸進解析 AI 技術，涵蓋 <strong>資料處理、模型構建、優化與部署</strong>，並提供豐富的 <strong>Python 範例</strong> 與 <strong>實務應用</strong>，讓讀者不僅理解理論，更能將 AI 技術應用於實際場景。</p>
             <p>如果你喜歡我的創作 ❤️，歡迎 <a href="https://www.tenlong.com.tw/products/9786267569511" target="_blank"><strong>購買書籍</strong></a> 作為支持！🙏</p>

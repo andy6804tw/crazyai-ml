@@ -68,10 +68,10 @@ markdown_extensions:
       permalink: false
 plugins:
   - search
-  - mkpdfs:
-      design: design/report.css
-      author: Tsai Yi Lin
-      # company: "10程式中"
-      toc_title: Table of contents
-      output_path: pdf/全民瘋AI系列_經典機器學習_v2.1.pdf
+  # - mkpdfs:
+  #     design: design/report.css
+  #     author: Tsai Yi Lin
+  #     # company: "10程式中"
+  #     toc_title: Table of contents
+  #     output_path: pdf/全民瘋AI系列_經典機器學習_v2.1.pdf
 
