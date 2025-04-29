@@ -3,13 +3,6 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C9mvGMtrPXo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-《全民瘋AI系列 - 經典機器學習》新書導讀講座
-
-- 時間：4/26(六)19:00-21:00
-- 地點：Teams線上直播
-- 報名連結：[https://forms.gle/k8bww4dBcWE8Bzue9](https://forms.gle/k8bww4dBcWE8Bzue9)
-- 報名費：200元，已購書優惠價160元
-
 ### 2025 新書預購中！
 
 <table>

@@ -38,13 +38,6 @@
     </tr>
 </table>
 
-《全民瘋AI系列 - 經典機器學習》新書導讀講座
-
-- 時間：4/26(六)19:00-21:00
-- 地點：Teams線上直播
-- 報名連結：[https://forms.gle/k8bww4dBcWE8Bzue9](https://forms.gle/k8bww4dBcWE8Bzue9)
-- 報名費：200元，已購書優惠價160元
-
 ## 公告
 <details>
   <summary>📢 [2025/02] ✨此系列出版實體書籍囉！</summary>
