@@ -1,1356 +1,515 @@
 
-<!doctype html>
-<html lang="zh-TW" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-        <meta name="author" content="10程式中">
-      
-      
-        <link rel="canonical" href="https://andy6804tw.github.io/crazyai-ml/12.%E6%B1%BA%E7%AD%96%E6%A8%B9/">
-      
-      
-        <link rel="prev" href="../11.SVM/">
-      
-      
-        <link rel="next" href="../13.%E6%95%B4%E9%AB%94%E5%AD%B8%E7%BF%92/">
-      
-      
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.42">
-    
-    
-      
-        <title>[Day 12] 決策樹 (Decision tree) - 全民瘋AI系列 [經典機器學習]</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
-      
-      
+<!DOCTYPE html>
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-      <link rel="stylesheet" href="../stylesheets/extra.css">
-    
-      <link rel="stylesheet" href="../stylesheets/dify.css">
-    
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#day-12-decision-tree" class="md-skip">
-          跳轉到
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="頁首">
-    <a href=".." title="全民瘋AI系列 [經典機器學習]" class="md-header__button md-logo" aria-label="全民瘋AI系列 [經典機器學習]" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            全民瘋AI系列 [經典機器學習]
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              [Day 12] 決策樹 (Decision tree)
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-      
-    
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="搜尋" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="搜尋">
-        
-        <button type="reset" class="md-search__icon md-icon" title="清除" aria-label="清除" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            正在初始化搜尋引擎
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<html class="no-js" lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="ie=edge" http-equiv="x-ua-compatible"/>
+<link href="https://andy6804tw.github.io/crazyai-ml/12.決策樹/" rel="canonical"/>
+<meta content="10程式中" name="author"/>
+<meta content="複製" name="lang:clipboard.copy"/>
+<meta content="已複製" name="lang:clipboard.copied"/>
+<meta content="ja" name="lang:search.language"/>
+<meta content="True" name="lang:search.pipeline.stopwords"/>
+<meta content="True" name="lang:search.pipeline.trimmer"/>
+<meta content="沒有符合的項目" name="lang:search.result.none"/>
+<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
+<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
+<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
+<link href="../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
+<title>[Day 12] 決策樹 (Decision tree) - 全民瘋AI系列 [經典機器學習]</title>
+<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
+<meta content="#795548" name="theme-color"/>
+<script src="../assets/javascripts/modernizr.74668098.js"></script>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<link href="../stylesheets/dify.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
+<svg class="md-svg">
+<defs>
+<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
+</defs>
+</svg>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+<a class="md-skip" href="#day-12-decision-tree" tabindex="1">
+        跳轉到
+      </a>
+<header class="md-header" data-md-component="header">
+<nav class="md-header-nav md-grid">
+<div class="md-flex">
+<div class="md-flex__cell md-flex__cell--shrink">
+<a class="md-header-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
+<i class="md-icon"></i>
+</a>
 </div>
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch">
+<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
+              全民瘋AI系列 [經典機器學習]
+            </span>
+<span class="md-header-nav__topic">
+              
+                [Day 12] 決策樹 (Decision tree)
+              
+            </span>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
+<label class="md-icon md-search__icon" for="__search"></label>
+<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
+        
+      </button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="result">
+<div class="md-search-result__meta">
+            打字進行搜尋
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<div class="md-header-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-      </div>
-    
-  </nav>
-  
+</div>
+</div>
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="導覽列" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href=".." title="全民瘋AI系列 [經典機器學習]" class="md-nav__button md-logo" aria-label="全民瘋AI系列 [經典機器學習]" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
+<div class="md-container">
+<main class="md-main">
+<div class="md-main__inner md-grid" data-md-component="container">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title md-nav__title--site" for="__drawer">
+<a class="md-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
+<i class="md-icon"></i>
+</a>
     全民瘋AI系列 [經典機器學習]
   </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
+<div class="md-source__icon">
+<svg height="24" viewbox="0 0 24 24" width="24">
+<use height="24" width="24" xlink:href="#__github"></use>
+</svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
-        
-          
-          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    第一部分 AI基礎概念
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1">
-            <span class="md-nav__icon md-icon"></span>
-            第一部分 AI基礎概念
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1.%E5%85%A8%E6%B0%91%E7%98%8BAI%E7%B3%BB%E5%88%972.0%E7%9B%AE%E6%A8%99%E4%BB%8B%E7%B4%B9/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 1] 目標介紹
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2.%E5%BF%AB%E4%BE%86%E6%8E%A2%E7%B4%A2AI%E7%9A%84%E4%B8%96%E7%95%8C/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 2] 快來探索AI的世界
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../3.%E4%BD%A0%E7%9C%9F%E4%BA%86%E8%A7%A3%E8%B3%87%E6%96%99%E5%97%8E%E8%A9%A6%E8%A9%A6%E7%9C%8B%E8%A6%96%E8%A6%BA%E5%8C%96%E5%88%86%E6%9E%90%E5%90%A7/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 3] 你真了解資料嗎?試試看視覺化分析吧!
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../4.%E5%92%B1%E5%80%91%E4%B8%80%E8%B5%B7%E5%81%9A%E8%B3%87%E6%96%99%E6%B8%85%E7%90%86%E5%92%8C%E5%89%8D%E8%99%95%E7%90%86/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 4] 咱們一起做資料清理和前處理
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../5.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%A4%A7%E8%A3%9C%E5%B8%96/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 5] 機器學習大補帖
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    第二部分 機器學習入門
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            第二部分 機器學習入門
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../6.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92k-means%E5%88%86%E7%BE%A4/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 6] 非監督式學習 K-means 分群
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../7.%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92-%E9%99%8D%E7%B6%AD/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 7] 非監督式學習-降維
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../8.%E7%B7%9A%E6%80%A7%E8%BF%B4%E6%AD%B8/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 8] 線性迴歸 (Linear Regression)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../9.%E9%82%8F%E8%BC%AF%E8%BF%B4%E6%AD%B8/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 9] 邏輯迴歸 (Logistic Regression)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10.KNN/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 10] 近朱者赤，近墨者黑 - KNN
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../11.SVM/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 11] 核模型 - 支持向量機 (SVM)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    [Day 12] 決策樹 (Decision tree)
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    [Day 12] 決策樹 (Decision tree)
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目錄">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目錄
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
+<label class="md-nav__link" for="nav-1">
+      第一部分 AI基礎概念
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      今日學習目標
-    </span>
-  </a>
-  
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-1">
+        第一部分 AI基礎概念
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/" title="[Day 1] 目標介紹">
+      [Day 1] 目標介紹
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2.快來探索AI的世界/" title="[Day 2] 快來探索AI的世界">
+      [Day 2] 快來探索AI的世界
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹如何生成？
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../3.你真了解資料嗎試試看視覺化分析吧/" title="[Day 3] 你真了解資料嗎?試試看視覺化分析吧!">
+      [Day 3] 你真了解資料嗎?試試看視覺化分析吧!
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹的混亂評估指標
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/" title="[Day 4] 咱們一起做資料清理和前處理">
+      [Day 4] 咱們一起做資料清理和前處理
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      評估分割資訊量
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../5.機器學習大補帖/" title="[Day 5] 機器學習大補帖">
+      [Day 5] 機器學習大補帖
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#entropy" class="md-nav__link">
-    <span class="md-ellipsis">
-      熵 (Entropy)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gini-gini-impurity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gini 不純度 (Gini Impurity)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      迴歸樹
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      樹越深模型越複雜
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      迴歸樹該如何選擇切割點?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cart" class="md-nav__link">
-    <span class="md-ellipsis">
-      CART 決策樹
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹模型的優缺點
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹總結
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      [程式實作]
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      分類決策樹
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      迴歸決策樹
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
+</ul>
 </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13.%E6%95%B4%E9%AB%94%E5%AD%B8%E7%BF%92/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 13] 整體學習 (Ensemble Learning)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../14.%E9%9A%A8%E6%A9%9F%E6%A3%AE%E6%9E%97/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../15.XGBoost/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 15] 機器學習常勝軍 - XGBoost
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../16.Stacking/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 16] 每個模型我全都要 - 堆疊法 (Stacking)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../17.LightGBM/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 17] 輕量化的梯度提升機 - LightGBM
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../18.CatBoost/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 18] 機器學習 boosting 神器 - CatBoost
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    第三部分 進階概念與應用
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            第三部分 進階概念與應用
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../19.AutoML/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 19] 自動化機器學習 - AutoML
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../20.Auto-Sklearn/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 20] 機器學習金手指 - Auto-sklearn
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../21.Optuna/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 21] 調整模型超參數利器 - Optuna
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../22.Plotly-Express/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 22] Python 視覺化解釋數據 - Plotly Express
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../23.%E8%B3%87%E6%96%99%E5%88%86%E5%B8%83%E8%88%87%E9%9B%A2%E7%BE%A4%E5%80%BC%E8%99%95%E7%90%86/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 23] 資料分布與離群值處理
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../24.%E4%B8%8D%E8%83%BD%E5%BF%BD%E8%A6%96%E7%9A%84%E9%81%8E%E6%93%AC%E5%90%88%E8%88%87%E6%AC%A0%E6%93%AC%E5%90%88/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 24] 機器學習 - 不能忽視的過擬合與欠擬合
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../25.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20Cross-Validation%20%E7%B0%A1%E4%BB%8B/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 25] 交叉驗證 Cross-Validation 簡介
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../26.%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%20K-Fold%20Cross-Validation/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 26] 交叉驗證 K-Fold Cross-Validation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../27.%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%B8%B8%E7%8A%AF%E9%8C%AF%E7%9A%84%E5%8D%81%E4%BB%B6%E4%BA%8B/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 27] 機器學習常犯錯的十件事
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../28.%E5%84%B2%E5%AD%98%E8%A8%93%E7%B7%B4%E5%A5%BD%E7%9A%84%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 28] 儲存訓練好的模型
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../29.%E4%BD%BF%E7%94%A8Python-Flask%E6%9E%B6%E8%A8%ADAPI%E5%90%A7/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 29] 使用 Python Flask 架設 API 吧！
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../30.%E4%BD%BF%E7%94%A8%20Heroku%20%E9%83%A8%E7%BD%B2%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%20API/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    [Day 30] 使用 Heroku 部署機器學習 API
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="目錄">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目錄
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
+<label class="md-nav__link" for="nav-2">
+      第二部分 機器學習入門
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      今日學習目標
-    </span>
-  </a>
-  
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-2">
+        第二部分 機器學習入門
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../6.非監督式學習k-means分群/" title="[Day 6] 非監督式學習 K-means 分群">
+      [Day 6] 非監督式學習 K-means 分群
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../7.非監督式學習-降維/" title="[Day 7] 非監督式學習-降維">
+      [Day 7] 非監督式學習-降維
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹如何生成？
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../8.線性迴歸/" title="[Day 8] 線性迴歸 (Linear Regression)">
+      [Day 8] 線性迴歸 (Linear Regression)
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹的混亂評估指標
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../9.邏輯迴歸/" title="[Day 9] 邏輯迴歸 (Logistic Regression)">
+      [Day 9] 邏輯迴歸 (Logistic Regression)
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      評估分割資訊量
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../10.KNN/" title="[Day 10] 近朱者赤，近墨者黑 - KNN">
+      [Day 10] 近朱者赤，近墨者黑 - KNN
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#entropy" class="md-nav__link">
-    <span class="md-ellipsis">
-      熵 (Entropy)
-    </span>
-  </a>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11.SVM/" title="[Day 11] 核模型 - 支持向量機 (SVM)">
+      [Day 11] 核模型 - 支持向量機 (SVM)
+    </a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#gini-gini-impurity" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gini 不純度 (Gini Impurity)
-    </span>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        [Day 12] 決策樹 (Decision tree)
+      </label>
+<a class="md-nav__link md-nav__link--active" href="./" title="[Day 12] 決策樹 (Decision tree)">
+      [Day 12] 決策樹 (Decision tree)
+    </a>
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1" title="今日學習目標">
+    今日學習目標
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      迴歸樹
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="決策樹">
+    決策樹
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      樹越深模型越複雜
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3" title="決策樹如何生成？">
+    決策樹如何生成？
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      迴歸樹該如何選擇切割點?
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4" title="決策樹的混亂評估指標">
+    決策樹的混亂評估指標
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cart" class="md-nav__link">
-    <span class="md-ellipsis">
-      CART 決策樹
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5" title="評估分割資訊量">
+    評估分割資訊量
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹模型的優缺點
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#entropy" title="熵 (Entropy)">
+    熵 (Entropy)
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      決策樹總結
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gini-gini-impurity" title="Gini 不純度 (Gini Impurity)">
+    Gini 不純度 (Gini Impurity)
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      [程式實作]
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6" title="迴歸樹">
+    迴歸樹
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      分類決策樹
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7" title="樹越深模型越複雜">
+    樹越深模型越複雜
   </a>
-  
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      迴歸決策樹
-    </span>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8" title="迴歸樹該如何選擇切割點?">
+    迴歸樹該如何選擇切割點?
   </a>
-  
 </li>
-      
-    </ul>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cart" title="CART 決策樹">
+    CART 決策樹
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_9" title="決策樹模型的優缺點">
+    決策樹模型的優缺點
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_10" title="決策樹總結">
+    決策樹總結
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_11" title="[程式實作]">
+    [程式實作]
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_12" title="分類決策樹">
+    分類決策樹
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_13" title="迴歸決策樹">
+    迴歸決策樹
+  </a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../13.整體學習/" title="[Day 13] 整體學習 (Ensemble Learning)">
+      [Day 13] 整體學習 (Ensemble Learning)
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../14.隨機森林/" title="[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)">
+      [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../15.XGBoost/" title="[Day 15] 機器學習常勝軍 - XGBoost">
+      [Day 15] 機器學習常勝軍 - XGBoost
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../16.Stacking/" title="[Day 16] 每個模型我全都要 - 堆疊法 (Stacking)">
+      [Day 16] 每個模型我全都要 - 堆疊法 (Stacking)
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../17.LightGBM/" title="[Day 17] 輕量化的梯度提升機 - LightGBM">
+      [Day 17] 輕量化的梯度提升機 - LightGBM
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../18.CatBoost/" title="[Day 18] 機器學習 boosting 神器 - CatBoost">
+      [Day 18] 機器學習 boosting 神器 - CatBoost
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
+<label class="md-nav__link" for="nav-3">
+      第三部分 進階概念與應用
+    </label>
+<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+<label class="md-nav__title" for="nav-3">
+        第三部分 進階概念與應用
+      </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../19.AutoML/" title="[Day 19] 自動化機器學習 - AutoML">
+      [Day 19] 自動化機器學習 - AutoML
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../20.Auto-Sklearn/" title="[Day 20] 機器學習金手指 - Auto-sklearn">
+      [Day 20] 機器學習金手指 - Auto-sklearn
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../21.Optuna/" title="[Day 21] 調整模型超參數利器 - Optuna">
+      [Day 21] 調整模型超參數利器 - Optuna
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../22.Plotly-Express/" title="[Day 22] Python 視覺化解釋數據 - Plotly Express">
+      [Day 22] Python 視覺化解釋數據 - Plotly Express
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../23.資料分布與離群值處理/" title="[Day 23] 資料分布與離群值處理">
+      [Day 23] 資料分布與離群值處理
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../24.不能忽視的過擬合與欠擬合/" title="[Day 24] 機器學習 - 不能忽視的過擬合與欠擬合">
+      [Day 24] 機器學習 - 不能忽視的過擬合與欠擬合
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
+      [Day 25] 交叉驗證 Cross-Validation 簡介
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
+      [Day 26] 交叉驗證 K-Fold Cross-Validation
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../27.機器學習常犯錯的十件事/" title="[Day 27] 機器學習常犯錯的十件事">
+      [Day 27] 機器學習常犯錯的十件事
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../28.儲存訓練好的模型/" title="[Day 28] 儲存訓練好的模型">
+      [Day 28] 儲存訓練好的模型
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../29.使用Python-Flask架設API吧/" title="[Day 29] 使用 Python Flask 架設 API 吧！">
+      [Day 29] 使用 Python Flask 架設 API 吧！
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/" title="[Day 30] 使用 Heroku 部署機器學習 API">
+      [Day 30] 使用 Heroku 部署機器學習 API
+    </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">本頁目錄</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1" title="今日學習目標">
+    今日學習目標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="決策樹">
+    決策樹
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3" title="決策樹如何生成？">
+    決策樹如何生成？
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4" title="決策樹的混亂評估指標">
+    決策樹的混亂評估指標
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5" title="評估分割資訊量">
+    評估分割資訊量
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#entropy" title="熵 (Entropy)">
+    熵 (Entropy)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gini-gini-impurity" title="Gini 不純度 (Gini Impurity)">
+    Gini 不純度 (Gini Impurity)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6" title="迴歸樹">
+    迴歸樹
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7" title="樹越深模型越複雜">
+    樹越深模型越複雜
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8" title="迴歸樹該如何選擇切割點?">
+    迴歸樹該如何選擇切割點?
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cart" title="CART 決策樹">
+    CART 決策樹
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_9" title="決策樹模型的優缺點">
+    決策樹模型的優缺點
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_10" title="決策樹總結">
+    決策樹總結
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_11" title="[程式實作]">
+    [程式實作]
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_12" title="分類決策樹">
+    分類決策樹
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_13" title="迴歸決策樹">
+    迴歸決策樹
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_經典機器學習_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
 <h1 id="day-12-decision-tree">[Day 12] 決策樹 (Decision tree)</h1>
 <h2 id="_1">今日學習目標</h2>
 <ul>
@@ -1369,18 +528,16 @@
 </ul>
 </li>
 </ul>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1epy1EKVDkc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MeAUgKOhKhU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<p>範例程式 決策樹(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.1.決策樹(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>
-範例程式 決策樹(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.2.決策樹(Regression).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/1epy1EKVDkc" width="560"></iframe>
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/MeAUgKOhKhU" width="560"></iframe>
+<p>範例程式 決策樹(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.1.決策樹(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
+範例程式 決策樹(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/12.決策樹/12.2.決策樹(Regression).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
 <h2 id="_2">決策樹</h2>
 <p>決策樹會根據訓練資料產生一棵樹，依據訓練出來的規則來對新樣本進行預測。決策樹演算法可以使用不同的方式來評估分枝的好壞(亂度)，例如像是 Information gain、Gain ratio、Gini index。依據訓練資料找出合適的規則，最終生成一個規則樹來決策所有事情，其目的使每一個決策能夠使訊息增益最大化。就好比我們評估今天比賽是否舉行，天氣因子可能站比較大的因素，而 Co2 的濃度高低可能佔的因子程度較低。因此在第一層的決策中以天氣的特徵先進行第一次的決策判斷。接著第二層再從所有特徵中尋找最適合的決策因子，直到設定的最大樹的深度即停止樹的生長。</p>
-<p><img alt="" src="image/img12-1.png" /></p>
+<p><img alt="" src="image/img12-1.png"/></p>
 <h2 id="_3">決策樹如何生成？</h2>
 <p>決策樹是以一個貪婪法則來決定每一層要問什麼問題，目標是分類過後每一群能夠很明顯的知道是屬於哪一種類別。延續上面的例子，以分類問題來說假設要評估明天比賽是否舉行。在樹的第一層節點中我們要從已知的兩個特徵分別是溫度與特徵選一個作為該層的決策因子。假設目前訓練集有五筆資料，其中正常舉行的有兩筆資料，取消舉行的有三筆資料。在樹的結構中左子樹為決策正常取行，而右子樹是決策取消舉行。我們可以發現當特徵為天氣的時候可以一很清楚的將這兩類別完整分開，因此我們會將天氣作為這一層判斷的因子。這就是決策樹在生成中的貪婪機制。然而要如何去判斷每次決策的好壞，就必須依靠亂度的評估指標。</p>
-<p><img alt="" src="image/img12-2.png" /></p>
+<p><img alt="" src="image/img12-2.png"/></p>
 <h2 id="_4">決策樹的混亂評估指標</h2>
 <p>我們需要客觀的標準來決定決策樹的每個分支，因此我們需要有一個評斷的指標來協助我們決策。決策樹演算法可以使用不同的指標來評估分枝的好壞，常見的決策亂度評估指標有 Information gain、Gain ratio、Gini index。我們目標是從訓練資料中找出一套決策規則，讓每一個決策能夠使訊息增益最大化。以上的指標都是在衡量一個序列中的混亂程度，其數值越高代表越混亂。然而在 Sklearn 套件中預設使用 Gini。</p>
 <ul>
@@ -1390,35 +547,35 @@
 </ul>
 <h2 id="_5">評估分割資訊量</h2>
 <p>Information Gain 透過從訓練資料找出規則，讓每一個決策能夠使訊息增益最大化。其算法主要是計算熵，因此經由決策樹分割後的資訊量要越小越好。而 Gini 的數值越大代表序列中的資料亂，數值皆為 0~1 之間，其中 0 代表該特徵在序列中是完美的分類。常見的資訊量評估方法有兩種：資訊獲利 (Information Gain) 以及 Gini 不純度 (Gini Impurity)。</p>
-<p><img alt="" src="image/img12-3.png" /></p>
+<p><img alt="" src="image/img12-3.png"/></p>
 <h2 id="entropy">熵 (Entropy)</h2>
 <p>熵 (Entropy) 是計算 Information Gain 的一種方法。在了解 Information Gain 之前要先了解熵是如何被計算出來的。其中在下圖公式中 p 代表是的機率、q 代表否的機率。我們可以從圖中範例很清楚地知道當所有的資料都被分類一致的時候 Entropy 即為 0，當資料各有一半不同時 Entropy 即為 1。</p>
-<p><img alt="" src="image/img12-4.png" /></p>
+<p><img alt="" src="image/img12-4.png"/></p>
 <h2 id="gini-gini-impurity">Gini 不純度 (Gini Impurity)</h2>
 <p>Gini 不純度是另一種亂度的衡量方式，它的數字越大代表序列中的資料越混亂。公式如下所示，其中 p 代表是的機率、q 為代表否的機率。我們可以從圖中範例很清楚地知道當所有的資料都被分類一致的時候混亂程度即為 0，當資料各有一半不同時混亂程度即為 0.5。</p>
-<p><img alt="" src="image/img12-5.png" /></p>
+<p><img alt="" src="image/img12-5.png"/></p>
 <h2 id="_6">迴歸樹</h2>
 <p>決策樹迴歸方法與分類有點類似差別僅在於評估分枝好壞的方式不同，我們又可以稱作迴歸樹。當數據集的輸出爲連續性數值時，該樹算法就是一個迴歸樹。透過樹的展開，並用葉節點的均值作爲預測值。從根節點開始，對樣本的某一特徵進行測試。經過評估後，將樣本分配到其子結點。此時每一個子節點對應著該特徵的一個值。依照這樣方式進行，直至到達葉結點。此時誤差值要最小化，並且越接近零越好。</p>
 <blockquote>
 <p>迴歸樹的生長過程很推薦看<a href="https://zhuanlan.zhihu.com/p/82054400">這篇</a>文章</p>
 </blockquote>
 <p>以下舉一個例子假設 x 是輸入 y 是輸出，我們可以在一個平面上繪製出資料與正確答案間的分佈。假設迴歸樹的最大深度設定兩層。首先在第一層中會將所有的資料從中間切一刀此斷點為 <code>x=0.496</code> 當大於設定的值的數據點會繼續往右子樹下去延伸，反之小於 0.496 的資料點會往左子樹走。此時將會切出一個分支出來並往下擴展並形成第二層的決策分支。一直不斷持續拓展直到設定的最大深度終止，此時的節點即為葉節點也就是最終的模型輸出值。</p>
-<p><img alt="" src="image/img12-7.png" /></p>
+<p><img alt="" src="image/img12-7.png"/></p>
 <h2 id="_7">樹越深模型越複雜</h2>
 <p>假設我們生成一個 <code>f(x) = 3x+15 + noise</code> 的資料，其中 noise 為一個 0~1 之間的隨機數。從以下的測試可以看出隨著決策樹深度的增加，決策樹的擬合能力不斷上升。決策樹已經不僅僅擬合了我們的線性函式 <code>3x+15</code>，同時也擬合了我們添加的噪音(noise)。</p>
-<p><img alt="" src="image/img12-8.png" /></p>
+<p><img alt="" src="image/img12-8.png"/></p>
 <h2 id="_8">迴歸樹該如何選擇切割點?</h2>
 <p>在分類模型中決策樹是以亂度作為決策樹生成時候的評估指標。但是迴歸樹透過是 <code>MSE</code> 或 <code>MAE</code> 來評估模型，並找出誤差最小的值作為樹的特徵選擇與切割點。其中前者是均方差，後者是和均值之差的絕對值之和。</p>
-<p><img alt="" src="image/img12-9.png" /></p>
+<p><img alt="" src="image/img12-9.png"/></p>
 <h2 id="cart">CART 決策樹</h2>
 <p>在 Sklearn 套件中決策樹演算法是採用 CART (Classification and Regression Tree) 演算法，並且可以被拿來做分類和迴歸的預測。在決策樹的每一個節點上都是採用二分法，也就是每一個決策節點只分枝出兩個子節點。並且不斷地往下拓展，直到設定的最大深度為止，此時最大深度的節點稱為葉節點即為模型的預測輸出。</p>
-<p><img alt="" src="image/img12-10.png" /></p>
+<p><img alt="" src="image/img12-10.png"/></p>
 <h2 id="_9">決策樹模型的優缺點</h2>
 <p>建立決策樹的過程就是不斷的尋找特徵進行決策，透過這些決策盡量的使這些資料被分為同一個類別，且試著讓混亂程度越小越好。切記樹的深度越深不一定越好，他可能會造成過度擬合的問題。訓練好的模型我們能夠視覺化決策樹的結構，相對的可解釋性就變高。此外與其它的ML模型比較起來，決策樹執行速度是它的一大優勢。因為是樹狀結構，因此在進行機器學習的時候每個決策階段都相當的明確清楚，不是 0 就是 1。</p>
-<p><img alt="" src="image/img12-6.png" /></p>
+<p><img alt="" src="image/img12-6.png"/></p>
 <h2 id="_10">決策樹總結</h2>
 <p>決策樹透過所有特徵與對應的值將資料切分，來找出最適合的分枝並繼續往下拓展。若決策樹深度越深則決策的規則將越複雜，模型預測也會越接近真實答案。但若訓練集中含有過多的雜訊，太深的樹就有可能產生過擬合的情形。因此單一的決策樹肯定是不夠用的，我們可以利用集成學習中的 Boosting 架構，對迴歸樹進行改良升級。</p>
-<p><img alt="" src="image/img12-11.png" /></p>
+<p><img alt="" src="image/img12-11.png"/></p>
 <h2 id="_11">[程式實作]</h2>
 <h2 id="_12">分類決策樹</h2>
 <p>一個決策樹會根據訓練資料自動產生一棵樹。決策樹會根據資料產生很多樹狀的規則，最終訓練出來的規則會對新樣本進行預測。</p>
@@ -1437,20 +594,19 @@
 - score: 預測成功的比例。
 - predict_proba: 預測每個類別的機率值。
 - get_depth: 取得樹的深度。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
 
 <span class="c1"># 建立 DecisionTreeClassifier 模型</span>
-<span class="n">decisionTreeModel</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">criterion</span> <span class="o">=</span> <span class="s1">&#39;entropy&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">decisionTreeModel</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">criterion</span> <span class="o">=</span> <span class="s1">'entropy'</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料訓練模型</span>
 <span class="n">decisionTreeModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_reduced</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料預測分類</span>
 <span class="n">predicted</span> <span class="o">=</span> <span class="n">decisionTreeModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">train_reduced</span><span class="p">)</span>
 <span class="c1"># 計算準確率</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="n">decisionTreeModel</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_reduced</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</code></pre></div>
-
+</pre></div>
 <p>我們透過鳶尾花朵資料集進行 PCA 降維並訓練一個決策樹模型。透過繪製訓練決策邊界可以看到，在下圖右手邊的訓練集完整地將三個類別切割開來。而在右邊的測試集中僅有一筆紅色框起來的資料預測錯誤。</p>
-<p><img alt="" src="image/img12-12.png" /></p>
+<p><img alt="" src="image/img12-12.png"/></p>
 <h2 id="_13">迴歸決策樹</h2>
 <p>Parameters:
 - criterion: 評估切割點指標，mse/friedman_mse/mae。
@@ -1466,80 +622,77 @@
 - predict: 預測並回傳預測類別。
 - score: 預測成功的比例。
 - get_depth: 取得樹的深度。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 
 <span class="c1"># 建立 DecisionTreeRegressor 模型</span>
-<span class="n">decisionTreeModel</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">criterion</span> <span class="o">=</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">splitter</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">decisionTreeModel</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">criterion</span> <span class="o">=</span> <span class="s1">'mse'</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">splitter</span><span class="o">=</span><span class="s1">'best'</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料訓練模型</span>
 <span class="n">decisionTreeModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="c1"># 使用訓練資料預測</span>
 <span class="n">predicted</span><span class="o">=</span><span class="n">decisionTreeModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</code></pre></div>
-
+</pre></div>
 <p>在迴歸決策樹中我們使用了簡單線性迴歸與非線性迴歸兩種資料集進行數據擬合實驗。在簡單線性迴歸中我們將數據點添加一些噪音讓資料分布在斜直線上。左圖是迴歸樹在最大深度為 4 的訓練結果，可以隱約地看到模型決策的方式呈現階梯狀態。如果我們嘗試的將數的深度增加，模型相對複雜因此可以擬合得更好。而右邊是透過隨機產生的非線性資料進行模型訓練。從訓練結果可以發現在最大深度為 4 的時候，訓練結果就還不錯了。大家可以試看看調整模型的樹最大深度以及其他的超參數對模型訓練結果的影響。</p>
-<p><img alt="" src="image/img12-13.png" /></p>
+<p><img alt="" src="image/img12-13.png"/></p>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      Copyright © 2021 - 2025 10程式中
-    </div>
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
+</article>
 </div>
-      
-    </div>
-  </div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav class="md-footer-nav__inner md-grid">
+<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../11.SVM/" rel="prev" title="[Day 11] 核模型 - 支持向量機 (SVM)">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  上一頁
+                </span>
+                [Day 11] 核模型 - 支持向量機 (SVM)
+              </span>
+</div>
+</a>
+<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../13.整體學習/" rel="next" title="[Day 13] 整體學習 (Ensemble Learning)">
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+                  下一頁
+                </span>
+                [Day 13] 整體學習 (Ensemble Learning)
+              </span>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            Copyright © 2021 - 2025 10程式中
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+</div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}}</script>
-    
-    
-      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
-      
-        <script src="../javascripts/extra.js"></script>
-      
-        <script src="../javascripts/analytics.js"></script>
-      
-        <script src="../javascripts/dify.js"></script>
-      
-    
-  </body>
+</div>
+<script src="../assets/javascripts/application.245445c6.js"></script>
+<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+<script src="../assets/javascripts/lunr/tinyseg.js"></script>
+<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+<script src="../javascripts/extra.js"></script>
+<script src="../javascripts/analytics.js"></script>
+<script src="../javascripts/dify.js"></script>
+</body>
 </html>
