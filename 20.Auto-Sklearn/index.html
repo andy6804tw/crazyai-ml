@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -554,13 +554,13 @@
 </li>
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/-sTp50-fTDU" width="560"></iframe>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/20.Auto-Sklearn/20.Auto-sklearn(iris-classification).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/20.Auto-Sklearn/20.Auto-sklearn(iris-classification).ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">前言</h2>
 <p>Auto-sklearn 採用元學習 (Meta Learning) 選擇模型和超參數優化的方法作為搜尋最佳模型的重點。此 AutoML 套件主要是搜尋所有 Sklearn 機器學習演算法以模型的超參數，並使用貝葉斯優化 (Bayesian Optimization) 與自動整合 (Ensemble Selection) 的架構在有限時間內搜尋最佳的模型。第一版的 Auto-sklearn 於 2015 年發表在 NIPS(Neural Information Processing Systems) 會議上，論文名稱為 <a href="https://proceedings.neurips.cc/paper/2015/file/11d0e6287202fced83f79975ec59a3a6-Paper.pdf">Efficient and Robust Automated Machine Learning</a>。有別於其他的 AutoML 方法，Auto-sklearn 提出了元學習架構改善了貝葉斯優化在初始冷啟動的缺點，並提供一個好的採樣方向更快速尋找最佳的模型[1]。第二個版本於 2020 年發布，論文名稱為 <a href="https://arxiv.org/abs/2007.04074">Auto-Sklearn 2.0: Hands-free AutoML via Meta-Learning</a>。在新的版本中修改了元學習架構，並不依賴元特徵來選擇模型選擇與調參策略。而是引入了一個元學習策略選擇器，根據資料集中的樣本數量和特徵，訂定了一個模型選擇的策略[3]。</p>
-<p><img alt="" src="image/img20-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-1.png"><img alt="" src="image/img20-1.png"/></a></p>
 <h2 id="automl-cash">AutoML 視為 CASH 問題</h2>
 <p>在論文中作者將 AutoML 視為演算法選擇和超參數優化 (Combined Algorithm Selection and Hyperparameter, CASH) 的組合最佳化問題。因為在 AutoML 領域當中將會面臨兩個問題。第一個是沒有任何的演算法模型是可以保證在所有的資料集中表現最好，因此挑選一個好的演算法是自動化機器學習的首要任務。第二許多的機器學習模型往往依賴於超參數，透過不同的超參數設定可以取得更好的學習結果。例如在 SVM 方法中我們可以設定不同的核技巧讓模型具有非線性的能力，或是透過超參數 C 限制模型的複雜度防止過度擬合。然而貝葉斯優化如今成為 AutoML 超參數搜尋的重要核心方法。</p>
-<p><img alt="" src="image/img20-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-2.png"><img alt="" src="image/img20-2.png"/></a></p>
 <h2 id="auto-sklearn">Auto-sklearn 架構</h2>
 <p>Auto-sklearn 可以被拿來處理迴歸和分類的問題。下圖為第一版論文中所繪製的架構圖。我們可以將 Auto-sklearn 切成三個部分，其中第一個是引入元學習機制來模仿專家在處理機器學習的先驗知識。並採用元特徵讓我們更有效率的去決定在新的資料集中該挑選哪一種機器學習模型。接著挑好模型後並透過貝葉斯優化來挑選合適的模型超參數，以及嘗試一些資料前處理與特徵工程。最後挑選幾個不錯的模型並透過整體學習的技巧進行模型堆疊，將表現不錯的模型輸出結果做一個加權和或是投票。</p>
 <ul>
@@ -568,12 +568,12 @@
 <li>Bayesian Optimization</li>
 <li>Build Ensemble </li>
 </ul>
-<p><img alt="" src="image/img20-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-3.png"><img alt="" src="image/img20-3.png"/></a></p>
 <h2 id="meta-learning">Meta Learning</h2>
 <p>當我們想對新資料集做分類或迴歸時，Auto-sklearn 會先提取元特徵，具有相似元特徵的資料集在同一組超參數應該會有相似的表現。因此透過元特徵可以有效地評估在新資料集上應該使用哪種算法。元學習在這裡的目的是為了要找一個不錯的超參數做初始化，使其在一開始的表現優於隨機的方法。並提供貝葉斯優化有個明確的方向。Auto-sklearn 參考了 OpenML 140 個資料集，並彙整了 38 個元特徵，例如：偏度、峰度、特徵數量、類別數量......等。首先為這 140 個資料集使用貝葉斯優化進行模型訓練，並將這些資料集對應的模型與最佳的超參數儲存起來。當有新的資料集進來時會先透過元特徵進行相似度匹配，並將匹配程度最高的前 k 個資料集 (預設k=25) 所對應的模型和超參數作為貝葉斯優化的初始設定。</p>
 <h2 id="bayesian-optimization">Bayesian Optimization</h2>
 <p>在貝葉斯優化當中主要會尋找該資料集中最合適的資料前處理 (data pre-processors)、特徵前處理 (feature pre-processors) 與分類/迴歸模型。以上三大類合計共有 110 個超參數必須透過貝葉斯優化來尋找最適合的參數組合。其貝葉斯優化主要方法是透過建立目標函數的機率模型，並用它來選擇最有希望的超參數來評估真實的目標函數。</p>
-<p><img alt="" src="image/img20-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-4.png"><img alt="" src="image/img20-4.png"/></a></p>
 <blockquote>
 <p>以下內容摘錄自 Auto-sklearn v1.0 論文提供的內容 [1][2]</p>
 </blockquote>
@@ -593,13 +593,13 @@
 </blockquote>
 <h3 id="feature-pre-processors">Feature Pre-processors</h3>
 <p>在特徵前處理部分 Auto-sklearn 提供了 12 種特徵處理的技巧，然而在眾多方法中僅會挑選其中一種。</p>
-<p><img alt="" src="image/img20-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-5.png"><img alt="" src="image/img20-5.png"/></a></p>
 <blockquote>
 <p>詳細可以參考 Auto-sklearn <a href="https://github.com/automl/auto-sklearn/tree/master/autosklearn/pipeline/components/feature_preprocessing">feature_preprocessing</a> 的原始程式。</p>
 </blockquote>
 <h2 id="build-ensemble">Build Ensemble</h2>
 <p>在 Auto-sklearn 訓練階段會產生許多表現優良的模型，最終透過貪婪法的 <a href="http://www.cs.cornell.edu/~alexn/papers/shotgun.icml04.revised.rev2.pdf">Bagging Ensemble Selection</a> 方法來合併多個模型組合成一個更強更大的模型，並提高預測的準確性。下圖為第一版論文中進行的實驗，其中橫軸為程式執行時間，縱軸為在時間內搜尋到的最佳模型的排名。我們可以發現綠色線條再加入了整體學習機制表現效果比尚未加入的藍色線條實驗來得好。並且在短時間內就可以得到不錯的結果。</p>
-<p><img alt="" src="image/img20-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-6.png"><img alt="" src="image/img20-6.png"/></a></p>
 <h2 id="auto-sklearn_1">安裝 Auto-sklearn</h2>
 <p>目前 Auto-sklearn 僅支援 Lunux 系統。若沒有此系統的讀者可以透過 Colab 體驗。另外若安裝過程中出現錯誤，必須先確認 <a href="https://automl.github.io/auto-sklearn/master/installation.html">swig</a> 是否已完成安裝。</p>
 <div class="codehilite"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>auto-sklearn
@@ -607,7 +607,7 @@
 <blockquote>
 <p>若使用 Colab 執行，安裝完成後點選上方工具列 Runtime -&gt; Restart runtime 重啟才能正常執行此套件。</p>
 </blockquote>
-<p><img alt="" src="image/img20-7.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-7.png"><img alt="" src="image/img20-7.png"/></a></p>
 <h2 id="_3">載入資料集</h2>
 <p>本次範例沿用鳶尾花朵資料集，並使用 Auto-sklearn 來搜尋最佳的分類器模型。此外大家可以試著觀察 Auto-sklearn 找到的最佳模型在訓練集與測試集上的表現，並與前幾天所介紹的那些機器學習演算法來做比較。</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -621,7 +621,7 @@
                      <span class="n">columns</span><span class="o">=</span> <span class="p">[</span><span class="s1">'SepalLengthCm'</span><span class="p">,</span><span class="s1">'SepalWidthCm'</span><span class="p">,</span><span class="s1">'PetalLengthCm'</span><span class="p">,</span><span class="s1">'PetalWidthCm'</span><span class="p">,</span><span class="s1">'Species'</span><span class="p">])</span>
 <span class="n">df_data</span>
 </pre></div>
-<p><img alt="" src="image/img20-8.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-8.png"><img alt="" src="image/img20-8.png"/></a></p>
 <h2 id="_4">切割訓練集與測試集</h2>
 <p>我們按照花朵種類的數量對資料集以 7:3 的比例切割出訓練集與測試集。其中參數 <code>stratify=y</code> 設定是確保訓練集與測試集對於三種花朵類別的比例在這兩個切出來的資料集中比例要一樣，以免訓練出來的模型有很大的偏差。</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
@@ -687,12 +687,12 @@ automlclassifierV1 測試集:  0.9111111111111111
 automlclassifierV2 測試集:  0.9333333333333333
 </pre></div>
 <p>使用一樣的搜尋時間與訓練限制，最終訓練出來的模型在訓練集與測試集都表現不錯。兩者的準確率更接近了。這樣的結果的確比系列教學所介紹的任一個單一模型還來得好。</p>
-<p><img alt="" src="image/img20-9.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-9.png"><img alt="" src="image/img20-9.png"/></a></p>
 <h2 id="_5">查看每個模型的權重</h2>
 <p>我們可以使用模型提供的方法查看最終訓練結果，並查看 k 個 Ensemble 模型的訓練結果以及每個模型的權重。</p>
 <div class="codehilite"><pre><span></span><span class="n">automlclassifierV2</span><span class="o">.</span><span class="n">leaderboard</span><span class="p">(</span><span class="n">detailed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">ensemble_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img20-10.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img20-10.png"><img alt="" src="image/img20-10.png"/></a></p>
 <h2 id="_6">輸出模型</h2>
 <p>如果想將 AutoML 的模型儲存起來，可以透過 <code>joblib</code> 將模型打包匯出。</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">dump</span><span class="p">,</span> <span class="n">load</span>
@@ -714,7 +714,7 @@ automlclassifierV2 測試集:  0.9333333333333333
 <span class="n">profiler_data</span><span class="o">=</span> <span class="n">PipelineProfiler</span><span class="o">.</span><span class="n">import_autosklearn</span><span class="p">(</span><span class="n">automlclassifierV2</span><span class="p">)</span>
 <span class="n">PipelineProfiler</span><span class="o">.</span><span class="n">plot_pipeline_matrix</span><span class="p">(</span><span class="n">profiler_data</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="https://i.imgur.com/mCiuTpJ.gif"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/mCiuTpJ.gif"><img alt="" src="https://i.imgur.com/mCiuTpJ.gif"/></a></p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>[1] Feurer, Matthias et al. <a href="https://proceedings.neurips.cc/paper/2015/file/11d0e6287202fced83f79975ec59a3a6-Paper.pdf">Efficient and Robust Automated Machine Learning</a>, Advances in neural information processing systems 2015.</li>
@@ -788,5 +788,5 @@ automlclassifierV2 測試集:  0.9333333333333333
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

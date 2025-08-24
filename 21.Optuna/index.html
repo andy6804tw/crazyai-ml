@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -450,10 +450,10 @@
 </ul>
 </li>
 </ul>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/21.Optuna/21.optuna-tutorial.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/21.Optuna/21.optuna-tutorial.ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">前言</h2>
 <p>你是否曾經覺得模型有太多的超參數而感到厭煩嗎？要從某一個演算法得到好的解必須要調整超參數，所謂的超參數就是控制訓練模型的一組神秘數字，例如學習速率就是一種超參數。你永遠都不知道 0~1 之間哪一個數字是最適合的，唯一的方法就是試錯 (trial and error)。那萬一模型有多個超參數可以控制，豈不是就有成千上萬種組合要慢慢嘗試嗎？如果你有也這個問題，看這篇就對了！雖然你可能聽過 Sklearn 的 GridSearchCV 同樣也是暴力的找出最佳參數，或是使用 RandomizedSearchCV 指定超參數的範圍並隨機的抽取參數進⾏訓練，其它們的共同缺點是非常耗時與佔用機器資源。這裡我們要來介紹 Optuna 這個自動找超參數的方便工具，並且可以和多個常用的機器學習演算法整合。Optuna 透過調整適當的超參數來提高模型預測能力，此專案最初於 2019 發表於 arxiv 的一篇論文 <a href="https://arxiv.org/abs/1907.10902">Optuna: A Next-generation Hyperparameter Optimization Framework</a> 同時開源在 <a href="https://github.com/optuna/optuna">GitHub</a> 上免費提供大家使用。同時 Optuna 也是 2021 年 Kaggle 資料科學競賽中最常見的模型調參工具。那是什麼原因讓 Optuna 受到廣大的機器學習社群如此的歡迎呢？就讓我們來看看他是如此地強大吧！</p>
-<p><img alt="" src="image/img21-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img21-1.png"><img alt="" src="image/img21-1.png"/></a></p>
 <h2 id="optuna">關於 Optuna</h2>
 <p>Optuna 是一個專為機器學習設計的自動超參數優化的框架。其最突出的特點是：</p>
 <ul>
@@ -553,7 +553,7 @@ y: (506,)
 <span class="nb">print</span><span class="p">(</span><span class="s1">'Best trial parameters:'</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_trial</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">'Best score:'</span><span class="p">,</span> <span class="n">study</span><span class="o">.</span><span class="n">best_value</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img21-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img21-2.png"><img alt="" src="image/img21-2.png"/></a></p>
 <p>Optuna 預設的超參數搜尋方法能有效地在短時間內往最佳的方向去尋找一組適合的參數。與 GridSearch 相比原本可能需要數小時的搜索空間在短短的幾分鐘內就可以獲得不錯的經果。並且有效的降低 loss。除了迴歸問題 Optuna 也能對分類問題進行超參數搜尋，官方的 <a href="https://github.com/optuna/optuna-examples">GitHub</a> 也有提供各種不同機器學習框架的寫法。</p>
 <h2 id="optuna_2">Optuna 如何採樣參數？</h2>
 <p>TPESampler 為預設的超參數採樣器。它試圖透過提高最後一次試驗的分數來對超參數候選者進行採樣。除此之外 Optuna 提供了以下這幾個參數採樣的方式:
@@ -587,14 +587,14 @@ y: (506,)
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_optimization_history</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">plotly_config</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img21-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img21-3.png"><img alt="" src="image/img21-3.png"/></a></p>
 <p>接下來，讓我們繪製超參數重要性。從這張圖我們可以發現 eta(learning_rate) 學習速率是最為重要的。此外 grow_policy 與 lambda 對減少 loss 上無太大幫助。因此在下一次執行試驗的時候可以考慮將無用的參數移除，並將重要的超參數範圍加大取得更好的搜索結果。其他的使用方法可以 <a href="https://optuna.readthedocs.io/en/stable/reference/visualization/index.html">參考</a> 官方的說明文件。</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">optuna.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_param_importances</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_param_importances</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">plotly_config</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img21-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img21-4.png"><img alt="" src="image/img21-4.png"/></a></p>
 <h2 id="_3">小結</h2>
 <p>今天我們介紹了這一個超參數最佳化的工具，裡面有太多功能尚未提到。例如：試驗的剪枝，簡單來說就是設定試驗的例外條件當不滿足預定條件即不執行此次試驗。或是儲存歷史最佳的參數實現平行優化工作。除此之外此套件還支援像是 SQLite 等資料庫可以儲存歷史搜尋結果快速的達到最佳搜尋能力。重點此套件還支援神經網路的參數搜尋以及網路的寬度深度選擇。常見的深度學習框架都能支援例如 TensorFlow、PyTorch，MXNet...等。</p>
 <h2 id="reference">Reference</h2>
@@ -665,5 +665,5 @@ y: (506,)
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

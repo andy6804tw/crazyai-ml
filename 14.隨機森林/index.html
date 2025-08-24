@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -474,11 +474,11 @@
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/Ix0UhijD4Ks" width="560"></iframe>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/6sYMlwl2SWg" width="560"></iframe>
-<p>範例程式 隨機森林(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.1.隨機森林(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
-範例程式 隨機森林(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.2.隨機森林(Regression).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式 隨機森林(Classification)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.1.隨機森林(Classification-iris).ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a>
+範例程式 隨機森林(Regression)：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/14.隨機森林/14.2.隨機森林(Regression).ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">隨機森林</h2>
 <p>隨機森林其實就是進階版的決策樹，所謂的森林就是由很多棵決策樹所組成。隨機森林是使用 Bagging 加上隨機特徵採樣的方法所產生出來的整體學習演算法。還記得在前幾天的決策樹演算法中，當模型的樹最大深度設定太大的話容易讓模型過擬合。因此隨機森林藉由多棵不同樹的概念所組成，讓結果比較不容易過度擬合，並使得預測能力更提升。</p>
-<p><img alt="" src="image/img14-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img14-1.png"><img alt="" src="image/img14-1.png"/></a></p>
 <h2 id="_3">隨機森林的生成方法</h2>
 <p>首先從訓練集中抽取 n’ 筆資料出來，然而這 n’ 筆資料是可以被重複抽取的。假設我們有一千筆資料我們要從中抽取 100 筆資料出來，這 100 筆資料裡面可能會有重複的數據。接著第二步從這些抽取出來的資料中挑選 k 個特徵當作決策因子的後選，因此每一棵樹只能看見部分的特徵。第三步重複以上步驟 m 次並產生 m 棵決策樹。透過 Bootstrap 步驟重複 m 次，做完之後我們會有 m 組的訓練資料，每一組訓練資料內都有 n’ 筆資料。最後再透過每棵樹的決策並採多數決投票的方式，決定最終預測的類別。因為隨機森林每一棵樹的特徵數量可能都不同，所以最後決策出來的結果都會不一樣。最後再根據任務的不同來做迴歸或是分類的問題，如果是迴歸問題我們就將這些決策數的輸出做平均得到最後答案，若是分類問題我們則用投標採多數決的方式來整合所有樹預測的結果。</p>
 <ol>
@@ -487,7 +487,7 @@
 <li>重複 m 次，產生 m 棵決策樹</li>
 <li>分類: 多數投票機制進行預測、迴歸: 平均機制進行預測</li>
 </ol>
-<p><img alt="" src="image/img14-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img14-2.png"><img alt="" src="image/img14-2.png"/></a></p>
 <h2 id="_4">隨機森林中的隨機？</h2>
 <p>隨機森林中的隨機有兩種方面可以解釋。首先第一個是隨機取樣，在模型訓練的過程中每棵樹的生成都會先從訓練集中隨機抽取 n’ 筆資料出來，而這 n’ 筆資料是可以被重複抽取的。此抽取資料的方式又稱為 Bootstrap，它是一種在統計學上常用的資料估計方法。第二個解釋隨機的理由是在隨機森林中每一棵樹都是隨機的特徵選取。每一棵樹都是從 n’ 筆資料中隨機挑選 k 個特徵做樣本。</p>
 <blockquote>
@@ -540,7 +540,7 @@
 測試集:  0.8888888888888888
 </pre></div>
 <p>我們可以查看訓練好的模型在測試集上的預測能力，下圖中左邊的是測試集的真實分類，右邊的是模型預測的分類結果。由於訓練資料筆數不多，因此模型訓練容易過度擬合訓練集的分布。最終在測試及預測的表現上僅有 0.88 的準確率。</p>
-<p><img alt="" src="image/img14-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img14-3.png"><img alt="" src="image/img14-3.png"/></a></p>
 <h3 id="_8">特徵重要程度</h3>
 <p>只要是決策樹系列演算法，不管是分類器或是迴歸器都能透過 <code>feature_importances_</code> 來檢視模型預測對於特徵的重要程度。</p>
 <div class="codehilite"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'特徵重要程度: '</span><span class="p">,</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
@@ -574,7 +574,7 @@
 <span class="c1"># 使用訓練資料預測</span>
 <span class="n">predicted</span><span class="o">=</span><span class="n">randomForestModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img14-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img14-4.png"><img alt="" src="image/img14-4.png"/></a></p>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </article>
 </div>
@@ -636,5 +636,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

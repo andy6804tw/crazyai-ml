@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -454,22 +454,22 @@
 </li>
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/alVNcGNTAc8" width="560"></iframe>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/9.邏輯迴歸/9.邏輯迴歸.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/9.邏輯迴歸/9.邏輯迴歸.ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">認識邏輯迴歸</h2>
 <p>邏輯迴歸 (Logistic Regression) 是由線性迴歸變化而來的，它是一種分類的模型。其目標是要找出一條直線能夠將所有數據清楚地分開並做分類，我們又可以稱迴歸的線性分類器。邏輯迴歸其實是在說明一個機率的意義，透過一個 function 去訓練得到的一組參數，不同的 w,b 就會得到不同的 function。於是我們可以說 f<sub>w,b</sub>(x) 即為 posteriror probability。</p>
-<p><img alt="" src="image/img9-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img9-1.png"><img alt="" src="image/img9-1.png"/></a></p>
 <h2 id="_3">線性迴歸與邏輯迴歸</h2>
 <p>邏輯迴歸是用來處理分類問題，目標是找到一條直線可以將資料做分類。主要是利用 sigmoid function 將輸出轉換成 0~1 的值，表示可能為這個類別的機率值。而線性迴歸是用來預測一個連續的值，目標是想找一條直線可以逼近真實的資料。</p>
-<p><img alt="" src="image/img9-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img9-2.png"><img alt="" src="image/img9-2.png"/></a></p>
 <h2 id="_4">邏輯迴歸學習機制</h2>
 <p>邏輯迴歸是一個最基本的二元線性分類器。我們要找一個機率 (posterior probability) 當機率 P(C1|x) 大於 0.5 時則輸出預測 Class 1，反之機率小於 0.5 則輸出 Class 2。如果我們假設資料是 Gaussian 機率分佈，我們可以說這個 posterior probability 就是 𝜎(𝑧)。其中 <code>z=w*x+b</code>，x 為輸入特徵，而 w 與 b 分別為權重(weight)與偏權值(bias) 他們是透過訓練得到的一組參數。</p>
-<p><img alt="" src="image/img9-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img9-3.png"><img alt="" src="image/img9-3.png"/></a></p>
 <p>以下就是一個邏輯迴歸的運作機制，如果以圖像化表示會長這樣。我們的 function 會有兩組參數，一組是 w 我們稱為 weight，另一個常數 b 稱為 bias。假設我們有兩個輸入特徵，並將這兩個輸入分別乘上 w 再加上 b 就可以得到 z，然後通過一個 sigmoid function 得到的輸出就是 posterior probability。</p>
-<p><img alt="" src="image/img9-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img9-4.png"><img alt="" src="image/img9-4.png"/></a></p>
 <p>在邏輯迴歸中我們定義的損失函數是要去最小化的對象是所有訓練資料 cross entropy 的總和。我們希望模型的輸出要跟目標答案要越接近越好。因此我們可以將最小化的目標寫成一個函數：</p>
-<p><img alt="" src="image/img9-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img9-5.png"><img alt="" src="image/img9-5.png"/></a></p>
 <p>最後是尋找一組最好的參數，使得 loss 能夠最低。因此這裡採用梯度下降 (Gradient Descent) 來最小化交叉熵 (Cross Entropy)。我們將損失函數對權重求偏導後，可以得到下面的權重更新的式子：</p>
-<p><img alt="" src="image/img9-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img9-6.png"><img alt="" src="image/img9-6.png"/></a></p>
 <h2 id="multinomial-logistic-regression">多元分類邏輯迴歸 (Multinomial Logistic Regression)</h2>
 <p>在 Sklearn 中也能使用邏輯迴歸分類器應用在多類別的分類問題上，對於多元邏輯迴歸有 one-vs-rest(OvR) 和 many-vs-many(MvM) 兩種方法。兩者的做法都是將所有類別的資料依序作二元分類訓練。MvM 相較於 OvR 比較精準，但 <code>liblinear</code> 只支援 OvR。</p>
 <ul>
@@ -516,7 +516,7 @@
 測試集:  0.9333333333333333
 </pre></div>
 <p>透過 Sklearn 的 <code>LogisticRegression</code> 可以實作一個典型的二元分類器。不過當有多個類別的時候，我們可以透過參數 <code>multi_class</code> 來設定多元分類器的學習機制。我們可以觀察一下訓練好的模型在測試集上的預測能力，為了方便觀察訓練結果，因此我們只挑選其中兩個特徵並繪製平面的點散圖。下圖中左邊的是測試集的真實分類，右邊的是模型預測的分類結果。</p>
-<p><img alt="" src="image/img9-7.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img9-7.png"><img alt="" src="image/img9-7.png"/></a></p>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </article>
 </div>
@@ -578,5 +578,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

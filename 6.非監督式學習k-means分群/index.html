@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -492,10 +492,10 @@
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/AYGEgkDZCc8" width="560"></iframe>
 <iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameborder="0" height="152" loading="lazy" src="https://open.spotify.com/embed/episode/3qCNVvZcKo5cea7Smnl9ps?utm_source=generator&amp;theme=0" style="border-radius:12px" width="100%"></iframe>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/6.非監督式學習k-means分群/6.非監督式學習k-means分群.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/6.非監督式學習k-means分群/6.非監督式學習k-means分群.ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="un-supervised-learning">非監督式學習(Un-supervised learning)</h2>
 <p>在訓練過程中沒有所謂的標準答案，故機器會自己從資料群中找出一套分群的法則。非監督式學習的優點是不需要事先以人力標籤，只給定特徵讓機器想辦法會從中找出規律。常見的非監督式的分群演算法有 K-means，它根據物以類聚的原理目標是根據特徵把資料樣本分為 K 群。其中在訓練模型時僅須對機器提供輸入的特徵，並利用分群演算法自動從這些特徵中找出鄰近的集群中心作為該類別。</p>
-<p><img alt="" src="image/img6-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img6-1.png"><img alt="" src="image/img6-1.png"/></a></p>
 <h2 id="k-means">K-means 演算法</h2>
 <p>透過分群分類演算法我們能夠將多種維度的資料進行分類。K-means 演算法的概念很簡單也非常容易實作，僅一般加減乘除就好不需複雜的計算公式。</p>
 <ol>
@@ -506,7 +506,7 @@
 <blockquote>
 <p>重複步驟2、3，直到資料點不再變換群組為止</p>
 </blockquote>
-<p><img src="./image/img6-2.gif" width="300"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="./image/img6-2.gif"><img src="./image/img6-2.gif" width="300"/></a></p>
 <h2 id="_2">[程式實作]</h2>
 <h2 id="_3">載入相關套件</h2>
 <div class="codehilite"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -559,14 +559,14 @@
        [6.85      , 3.07368421, 5.74210526, 2.07105263]])
 </pre></div>
 <h2 id="_5">分類結果</h2>
-<p><img alt="" src="image/img6-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img6-3.png"><img alt="" src="image/img6-3.png"/></a></p>
 <h2 id="k">如何決定K?</h2>
 <p>當你手邊有一群資料，且無法一眼看出有多少個中心的狀況。可用使用下面兩種方法做 k-means 模型評估。</p>
 <ul>
 <li>Inertia 計算所有點到每群集中心距離的平方和。</li>
 <li>silhouette scores 側影函數驗證數據集群內一致性的方法。</li>
 </ul>
-<p><img alt="" src="image/img6-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img6-4.png"><img alt="" src="image/img6-4.png"/></a></p>
 <h3 id="inertia">使用 inertia 做模型評估</h3>
 <p>當K值越來越大，inertia 會隨之越來越小。正常情況下不會取K最大的，一般是取 elbow point 附近作為 K，即 inertia 迅速下降轉為平緩的那個點。</p>
 <div class="codehilite"><pre><span></span><span class="c1"># k = 1~9 做9次kmeans, 並將每次結果的inertia收集在一個list裡</span>
@@ -574,14 +574,14 @@
                 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
 <span class="n">inertias</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">inertia_</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">kmeans_list</span><span class="p">]</span>
 </pre></div>
-<p><img alt="" src="image/img6-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img6-5.png"><img alt="" src="image/img6-5.png"/></a></p>
 <h3 id="silhouette-scores">使用 silhouette scores 做模型評估</h3>
 <p>另外一個方法是用 silhouette scores 去評估，其分數越大代表分群效果越好。</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_score</span>
 <span class="n">silhouette_scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
                      <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">kmeans_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
 </pre></div>
-<p><img alt="" src="image/img6-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img6-6.png"><img alt="" src="image/img6-6.png"/></a></p>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </article>
 </div>
@@ -643,5 +643,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

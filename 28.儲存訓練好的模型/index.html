@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -517,10 +517,10 @@
 </li>
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/w2zMaPu1fbw" width="560"></iframe>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/28.儲存訓練好的模型/28.XGBoost(Classification-iris).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/28.儲存訓練好的模型/28.XGBoost(Classification-iris).ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">前言</h2>
 <p>今天的教學內容要教各位如何將訓練好的模型儲存，並提供下一次載入模型和預測。在本系列的教學中介紹了許多 Sklearn 的模型演算法。當模型訓練好了，可以將訓練結果儲存起來，並建立一個 API 接口提供模型預測。</p>
-<p><img alt="" src="image/img28-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img28-1.png"><img alt="" src="image/img28-1.png"/></a></p>
 <h2 id="_3">模型儲存方法</h2>
 <p>常見的儲存模型的套件有 <a href="https://docs.python.org/3/library/pickle.html">pickle</a> 與 <a href="https://joblib.readthedocs.io/en/latest/">joblib</a>。其中在 <a href="https://ithelp.ithome.com.tw/articles/10276333">[Day 20] 機器學習金手指 - Auto-sklearn</a> 最後有使用 joblib 來儲存模型，操作方法也非常簡單。然而在今天的教學中則使用另一種方法 pickle 來儲存模型。由於 pickle 儲存模型後容量可能會有好幾百 MB 因此建議可以透過 gzip 來壓縮模型並儲存。另外在 Python 官方文件中有警告絕對不要利用 pickle 來 unpickle 來路不明的檔案。因為透過 pickle 打包模型會有安全性疑慮，包括 <code>arbitrary code execution</code> 的問題，詳細內容可以參考這篇<a href="http://www.benfrederickson.com/dont-pickle-your-data/">文章</a>。如果要追求執行速度與安全性，建議可以採用 JSON 格式來存取模型的參數與設定。</p>
 <blockquote>
@@ -572,7 +572,7 @@
 <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">GzipFile</span><span class="p">(</span><span class="s1">'./model/xgboost-iris.pgz'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">xgboostModel</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img28-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img28-2.png"><img alt="" src="image/img28-2.png"/></a></p>
 <h3 id="xgboost_1">載入 XGboost 模型</h3>
 <p>試著載入兩種不同格式的模型，並預測一筆資料。注意模型預測輸入必須為 numpy 型態，且須為二維陣列格式。</p>
 <h4 id="1-gzip">1. 載入 gzip 格式模型</h4>
@@ -660,5 +660,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

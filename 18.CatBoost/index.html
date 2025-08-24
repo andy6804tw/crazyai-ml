@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -493,10 +493,10 @@
 </li>
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/" width="560"></iframe>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/18.CatBoost/18.CatBoost(house_prices).ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/18.CatBoost/18.CatBoost(house_prices).ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">前言</h2>
 <p>CatBoost 同樣是基於 Gradient Boosting Tree 的梯度提升樹模型框架，最大的特點對類別特徵的直接支援，甚至允許字串類型的特徵進行模型訓練。近年來在 Kaggle 上的比賽陸續有人使用 CatBoost 方法並取得不錯的成績，於是就來撰寫文章順便來瞧瞧它與其他 Boosting 演算法不同之處。其中最特別的地方是 CatBoost 能夠處理非數值型態的資料，也就是説無需對數據特徵進行任何的預處理就可以將類別轉換爲數字。CatBoost 採用決策樹梯度提升方法並宣稱在效能上比 XGBoost 和 LightGBM 更加優化，同時支援 CPU 和 GPU 運算。與其他 Boosting 方法相比 CatBoost 是一種相對較新的開源機器學習算法。該演算法是由一間俄羅斯的公司 Yandex 於 2017 年所提出，同時在 arxiv 有一篇 <a href="https://arxiv.org/pdf/1706.09516.pdf">CatBoost: unbiased boosting with categorical features</a> 的論文，文中作者詳細說明了 CatBoost 的方法與優點。</p>
-<p><img alt="" src="image/img18-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img18-1.png"><img alt="" src="image/img18-1.png"/></a></p>
 <h2 id="catboost">CatBoost 優點</h2>
 <p>CatBoost 名稱源於 Category 和 Boost 兩個單詞，承襲 Boosting 的優點之外該演算法在類別型的特徵上做了一些更公平的特徵工程。訓練過程中允許沒有編碼的類別特徵，透過分類和數字特徵組合的各種統計量為類別型的特徵做編碼。不過在訓練前必須確保該特徵中無缺失值。其訓練資料若有缺失值 CatBoost 預設會將數值型的資料補上最小值，詳細內容可以<a href="https://catboost.ai/docs/concepts/algorithm-missing-values-processing.html#numerical-features">參考</a>。另外對於 GPU 的使用者，它也能處理字串(類別)型態的特徵。</p>
 <ul>
@@ -543,7 +543,7 @@
 <span class="c1"># 使用訓練資料訓練模型</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span> <span class="n">eval_set</span><span class="o">=</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img18-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img18-2.png"><img alt="" src="image/img18-2.png"/></a></p>
 <h2 id="_4">特徵篩選</h2>
 <p>訓練過程中會自動從資料中篩選對模型預測有用的特徵，並移除無幫助預測的特徵。</p>
 <ul>
@@ -641,13 +641,13 @@
 <p><a href="https://catboost.ai/docs/concepts/python-usages-examples.html">參考</a></p>
 <h2 id="verbose">善用 Verbose</h2>
 <p>訓練過程中可以隨時觀察訓練集與測試集的loss，使用verbose=10即代表每10次迭代會顯示一次資訊，這種方式也解決每次疊代顯示一次的困擾。訓練過程中剩餘時間也會顯示出來。</p>
-<p><img alt="" src="https://i.imgur.com/GbtGQKA.gif"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/GbtGQKA.gif"><img alt="" src="https://i.imgur.com/GbtGQKA.gif"/></a></p>
 <h2 id="_6">模型的解釋</h2>
 <p>CatBoost 提供了 <code>plot</code> 可以方便在訓練時查看並作即時分析訓練趨勢。除此之外 CatBoost 也支援 SHAP 增加了模型可解釋。詳細的使用方式可以參考官方<a href="https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/tree_based_models/Catboost%20tutorial.html">教學</a>。</p>
-<p><img alt="" src="image/img18-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img18-4.png"><img alt="" src="image/img18-4.png"/></a></p>
 <h2 id="_7">小結</h2>
 <p>CatBoost 的優點和使用方法都介紹完了，是不是覺得十分簡單易用且功能強大。尤其是遇到資料需要大量處理和特徵數值化的任務時最適合使用 CatBoost 了。真的是所謂的懶人套件，名符其實的 Ying Train Yi Fa(硬Train一發)!</p>
-<p><img alt="" src="https://i.imgur.com/ctVixDM.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/ctVixDM.png"><img alt="" src="https://i.imgur.com/ctVixDM.png"/></a></p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://www.kaggle.com/mitribunskiy/tutorial-catboost-overview">Tutorial: CatBoost Overview</a></li>
@@ -719,5 +719,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

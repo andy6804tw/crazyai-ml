@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -555,7 +555,7 @@
 </li>
 <li>修正特徵偏度的方法</li>
 </ul>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/23.資料分布與離群值處理/23.資料分布與離群值處理.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/23.資料分布與離群值處理/23.資料分布與離群值處理.ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">前言</h2>
 <p>資料前處理 (Data Preprocessing)，是機器學習中最重要的一部分。今日的內容可分為兩部份，前半部份算是一些對資料的觀察與分析，後半部主要是針對特徵 x 進行統計方法的資料分布觀察以及如何修正資料單峰偏左和偏右的常見方法。</p>
 <h2 id="_3">載入資料</h2>
@@ -573,12 +573,12 @@
 <span class="n">boston</span><span class="p">[</span><span class="s1">'MEDV'</span><span class="p">]</span> <span class="o">=</span> <span class="n">boston_dataset</span><span class="o">.</span><span class="n">target</span>
 <span class="n">boston</span>
 </pre></div>
-<p><img alt="" src="image/img23-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-1.png"><img alt="" src="image/img23-1.png"/></a></p>
 <p>我們可以透過 Pandas 的 <code>describe()</code> 方法先來查看每個特徵的平均數、標準差、四分位數以及最大值與最小值。</p>
 <div class="codehilite"><pre><span></span><span class="c1"># 查看資料分布狀況</span>
 <span class="n">boston</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-2.png"><img alt="" src="image/img23-2.png"/></a></p>
 <h2 id="_4">離群值分析</h2>
 <p>以 <code>LSTAT</code> 特徵舉例。我們可以透過 boxplot 來查看該特徵在 506 筆資料中的分布狀況，我們可以看出平均值約 12，最大值接近 38，最小值接近 2。我們可以發現大於 32 以外有多個零散的數據點，這些資料我們可以來分析是否為異常點。因為這些異常點所造成的離群值可能會造成特徵的分布狀況嚴重的偏移。</p>
 <div class="codehilite"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -586,11 +586,11 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'LSTAT'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-3.png"><img alt="" src="image/img23-3.png"/></a></p>
 <h2 id="_5">偏度 &amp; 峰度</h2>
 <h3 id="skewness">偏度 (Skewness)</h3>
 <p>偏度 (Skewness) 是用來衡量資料分布的型態，同時也說明資料分配不對稱的程度。其判別方式如下：</p>
-<p><img alt="" src="image/img23-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-4.png"><img alt="" src="image/img23-4.png"/></a></p>
 <ul>
 <li>右偏(正偏)，表示有少數幾筆資料很大，故平均數&gt;中位數，所以偏度&gt;0。</li>
 <li>偏度=0 表示資料分布對稱，呈鐘形常態分布。</li>
@@ -598,7 +598,7 @@
 </ul>
 <h3 id="kurtosis">峰度 (Kurtosis)</h3>
 <p>峰度 (Kurtossis) 可以反映資料的分布形狀。例如該資料是否比較高聳或是扁平的形狀。其判別方式如下：</p>
-<p><img alt="" src="image/img23-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-5.png"><img alt="" src="image/img23-5.png"/></a></p>
 <ul>
 <li>峰度&gt;0 表示資料呈現高峽峰。</li>
 <li>峰度=0 表示資料呈現常態峰。</li>
@@ -617,7 +617,7 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">boston</span><span class="p">[</span><span class="s1">'LSTAT'</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-6.png"><img alt="" src="image/img23-6.png"/></a></p>
 <h3 id="age">AGE 特徵觀察</h3>
 <p>我們可以發現 AGE 特徵呈現左偏。透過 Pandas 計算該特徵的偏度與峰度。由結果可以得知偏度 <code>-0.6&lt;0</code> 呈左偏，而峰度 <code>-0.97&lt;0</code> 呈現低潤峰形狀。</p>
 <div class="codehilite"><pre><span></span><span class="c1"># 使用的資料是 AGE: 1940年之前建成的自用房屋比例</span>
@@ -630,7 +630,7 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">boston</span><span class="p">[</span><span class="s1">'AGE'</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-7.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-7.png"><img alt="" src="image/img23-7.png"/></a></p>
 <h2 id="_7">修正資料偏態的方法</h2>
 <p>在數學統計或是機器學習中我們都會提出假設，前提是資料樣本是具有常態分佈。我們可以透過剛剛所講的偏度與峰度來評估特徵的分布狀態，或是透過直方圖與核密度估計視覺化查看資料分布。當資料呈現單峰偏斜時，我們會透過一些資料轉換技巧，讓所有資料能夠修正回常態分佈。以下整幾幾個常見的修正特徵偏度的方法：</p>
 <ul>
@@ -653,7 +653,7 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">transform_data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-8.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-8.png"><img alt="" src="image/img23-8.png"/></a></p>
 <h2 id="_9">平方根轉換</h2>
 <div class="codehilite"><pre><span></span><span class="n">transform_data</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[</span><span class="s1">'LSTAT'</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="c1"># skewness 與 kurtosis</span>
@@ -665,7 +665,7 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">transform_data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-9.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-9.png"><img alt="" src="image/img23-9.png"/></a></p>
 <h2 id="_10">立方根轉換</h2>
 <div class="codehilite"><pre><span></span><span class="n">transform_data</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[</span><span class="s1">'LSTAT'</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
 <span class="c1"># skewness 與 kurtosis</span>
@@ -677,7 +677,7 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">transform_data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-10.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-10.png"><img alt="" src="image/img23-10.png"/></a></p>
 <h2 id="_11">次方轉換</h2>
 <p>次方轉換僅能使用在偏左的資料上。</p>
 <div class="codehilite"><pre><span></span><span class="n">transform_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">boston</span><span class="p">[</span><span class="s1">'AGE'</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
@@ -690,7 +690,7 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">transform_data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-11.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-11.png"><img alt="" src="image/img23-11.png"/></a></p>
 <blockquote>
 <p>原本的資料分布低潤峰且有點雙峰的趨勢，因此轉換出來會有兩座山的感覺。</p>
 </blockquote>
@@ -707,7 +707,7 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">transform_data</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img23-12.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-12.png"><img alt="" src="image/img23-12.png"/></a></p>
 <h2 id="_12">移除離群值</h2>
 <p>在 Q3＋1.5IQR（四分位距）和 Q1-1.5IQR 處畫兩條與中位線一樣的線段，這兩條線段為異常值截斷點，稱其為內限。在 Q3＋3IQR 和Q1－3IQR 處畫兩條線段稱其為外限。處於內限以外位置的點表示的數據都是異常值，其中在內限與外限之間的異常值為溫和的異常值（mild outliers），在外限以外的為極端的異常值 (extreme outliers)。</p>
 <div class="codehilite"><pre><span></span><span class="c1"># 將所有特徵超出1.5倍IQR的概念將這些Outlier先去掉，避免對Model造成影響。</span>
@@ -726,7 +726,7 @@
 <div class="codehilite"><pre><span></span>Shape Of The Before Ouliers:  (506,)
 Shape Of The After Ouliers:  (499,)
 </pre></div>
-<p><img alt="" src="image/img23-13.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img23-13.png"><img alt="" src="image/img23-13.png"/></a></p>
 <blockquote>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </blockquote>
@@ -790,5 +790,5 @@ Shape Of The After Ouliers:  (499,)
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

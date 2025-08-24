@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -495,7 +495,7 @@
 <ul>
 <li><a href="https://github.com/1010code/Flask-API-example-with-ML-model-heroku">範例程式碼</a></li>
 </ul>
-<p><img alt="" src="image/img30-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img30-1.png"><img alt="" src="image/img30-1.png"/></a></p>
 <blockquote>
 <p>以下簡單說明專案內部署 Heroku 的重要檔案。</p>
 </blockquote>
@@ -506,14 +506,14 @@
 <h2 id="2-heroku">2. 部署 Heroku 專案</h2>
 <h3 id="21-heroku">2.1 在 Heroku 建立應用程式</h3>
 <p>建立帳號後右上角「 New 」中的「 Create new app 」建立第一個應用程式：</p>
-<p><img alt="" src="image/img30-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img30-2.png"><img alt="" src="image/img30-2.png"/></a></p>
 <h3 id="22-github">2.2 專案與 GitHub 連動</h3>
 <p>這一步驟是將 GitHub 上的專案直接與 Heroku 做連動，你也可以直接 Fork 這個專案直接實作。或是你也可以透過 Heroku CLI 直接將本機的程式碼部署到 Heroku 主機中。部署階段蠻吃大家 Git 版控的能力，基本的教學這裡就不贅述，想了解更多 Git 技巧可以<a href="https://github.com/doggy8088/Learn-Git-in-30-days">參考</a>。</p>
-<p><img alt="" src="image/img30-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img30-3.png"><img alt="" src="image/img30-3.png"/></a></p>
 <p>點選 Enable Automatic Deploys 連動後可以選擇自動部署。當你 GitHub 專案的程式碼有更新時他會自動幫你把更新的程式部署到 Heroku 中。</p>
-<p><img alt="" src="image/img30-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img30-4.png"><img alt="" src="image/img30-4.png"/></a></p>
 <p>由於自動更新與部署會有上限次數，當你的專案在 GitHub 更新次數太頻繁。Heroku 就會停止自動發布，這時候你也可以試試手動部署。</p>
-<p><img alt="" src="image/img30-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img30-5.png"><img alt="" src="image/img30-5.png"/></a></p>
 <h2 id="_3">部署專案</h2>
 <p>確認以下事情都完成後就可以部署程式囉！記得我們有跟 GitHub 連動，當你的專案 <code>git push</code> 後 Heroku 就會幫你自動部署了。你可以從 Activity 內看到部署狀態，也能從右上角 More -&gt; View logs 觀看後台 Log 訊息。或者你也可以從 Deploy 內手動部署也行。</p>
 <ul>
@@ -526,10 +526,10 @@
 <blockquote>
 <p>https://flask-api-example-with-ml-mode.herokuapp.com</p>
 </blockquote>
-<p><img alt="" src="image/img30-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img30-6.png"><img alt="" src="image/img30-6.png"/></a></p>
 <h2 id="api">測試 API</h2>
 <p>昨天已經跟大家介紹 Postman 的使用方式。今天我們就來試試部署在雲端伺服器的結果，基本上測試的方式跟昨天在本機測試的方法一模一樣。打開 Postman 點選 POST 並貼上 API 網址 <code>https://專案名稱.herokuapp.com/predict</code>。並模擬前端使用者發送數值 Body -&gt; raw -&gt; JSON 將花朵的四個參數以 JSON 格式傳給後端 API。</p>
-<p><img alt="" src="image/img30-7.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img30-7.png"><img alt="" src="image/img30-7.png"/></a></p>
 <blockquote>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </blockquote>
@@ -580,5 +580,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

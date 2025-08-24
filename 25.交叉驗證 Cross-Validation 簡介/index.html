@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -462,10 +462,10 @@
 <li>Random Subsampling</li>
 <li>Bootstrap</li>
 </ul>
-<p><img alt="" src="image/img25-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img25-1.png"><img alt="" src="image/img25-1.png"/></a></p>
 <h2 id="holdout-method">Holdout Method</h2>
 <p>此方法是最經典且最簡單實作的交叉驗證法，Holdout 顧名思義就是將資料切出一部分作為模型評估的依據。在這種方法中，我們將資料隨機分為三部分：訓練集、驗證集和測試集。其中只有訓練集資料實際參與訓練，其餘的資料僅拿來評估模型好壞。驗證集使用時機是在訓練過程中可以檢視訓練的趨勢，若有發現過擬合擬合跡象可以提早發現並解決。以及方便我們進行調整超參數以及選擇最佳的模型。當然僅透過驗證集不能代表全部，因此最後確定好模型時。我們會再拿事先切好的測試集進行最終的評估，檢視模型的泛化能力。</p>
-<p><img alt="" src="image/img25-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img25-2.png"><img alt="" src="image/img25-2.png"/></a></p>
 <p><a href="https://www.datavedas.com/holdout-cross-validation/">參考</a></p>
 <p><strong>優點</strong>:</p>
 <ol>
@@ -480,7 +480,7 @@
 </ol>
 <h2 id="k-fold-cross-validation">K-fold Cross-Validation</h2>
 <p>上一個方法雖然簡單，但是在訓練過程中僅切一份驗證集往往不能夠代表全部。因此我們可以透過一些技巧切割驗證集，使得訓練過程中有一個更公正的評估方式。我們可以透過 K-Fold 方法將訓練資料再依序切割訓練集與測試集，K-Fold 裡面的測試集可以當成驗證集。K-Fold 的方法中 K 是由我們自由調控的，在每次的迭代中會選擇一組作為驗證集，其餘 (k-1) 組作為訓練集。透過這種方式學習，不同分組訓練的結果進行平均來減少方差，因此模型的性能對數據的劃分就不會那麼敏感。</p>
-<p><img alt="" src="image/img25-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img25-3.png"><img alt="" src="image/img25-3.png"/></a></p>
 <p><a href="https://www.datavedas.com/k-fold-cross-validation/">參考</a></p>
 <p><strong>優點</strong>:</p>
 <ol>
@@ -495,7 +495,7 @@
 </ol>
 <h2 id="leave-one-out">Leave One Out</h2>
 <p>此方法是 K-fold 其中一種特例，當 K 等於資料集的數量時就等於 Leave One Out 方法。也就是在每次訓練時僅會把一筆資料當成測試資料，其餘的 N-1 筆資料作為訓練模型的資料。此作法相當簡單明瞭，但是訓練負擔會非常重且耗時。然而 Leave p-out 是另一種技巧，其中的 p 使用者可以自己設定每次訓練需要留幾筆資料作為測試集。</p>
-<p><img alt="" src="image/img25-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img25-4.png"><img alt="" src="image/img25-4.png"/></a></p>
 <p><strong>優點</strong>:</p>
 <ol>
 <li>簡單且容易理解，好實作。</li>
@@ -506,7 +506,7 @@
 </ol>
 <h2 id="random-subsampling">Random Subsampling</h2>
 <p>Random Subsampling 方法是一種簡單且常用的交叉驗證技術，它透過多次隨機抽樣將資料集切割成訓練集與測試集。每次隨機分割時，測試集的比例固定，而訓練集和測試集則隨機選取。這種方法主要透過多次隨機測試不同的資料切分方式來評估模型性能，最後取測試結果的平均值。</p>
-<p><img alt="" src="image/img25-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img25-5.png"><img alt="" src="image/img25-5.png"/></a></p>
 <p><strong>優點</strong>:</p>
 <ol>
 <li>多次隨機抽樣能減少資料劃分的偏差。</li>
@@ -519,7 +519,7 @@
 </ol>
 <h2 id="bootstrapping">Bootstrapping</h2>
 <p>還有一種比較特殊的交叉驗證方式，Bootstrapping 自助抽樣法。是一種從給定訓練集中有放回的均勻抽樣，也就是說，每當選中一個樣本，它等可能地被再次選中並被再次添加到訓練集中。假設每次訓練都採樣十個樣本，在這十筆資料中很有可能會再次被隨機抽到。剩下沒有抽到的資料則都變成測試集，用來評估訓練完的模型。</p>
-<p><img alt="" src="image/img25-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img25-6.png"><img alt="" src="image/img25-6.png"/></a></p>
 <p><strong>優點</strong>:</p>
 <ol>
 <li>能在小數據集的情況下提高模型穩定性。</li>
@@ -595,5 +595,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

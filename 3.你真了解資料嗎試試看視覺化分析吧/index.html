@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -484,7 +484,7 @@
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/tATr84j1jqA" width="560"></iframe>
 <iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="" frameborder="0" height="152" loading="lazy" src="https://open.spotify.com/embed/episode/6wyPepddptSOUhoU8XboTS?utm_source=generator&amp;theme=0" style="border-radius:12px" width="100%"></iframe>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/3.你真了解資料嗎試試看視覺化分析吧/3.你真了解資料嗎試試看視覺化分析吧.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/3.你真了解資料嗎試試看視覺化分析吧/3.你真了解資料嗎試試看視覺化分析吧.ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="eda">探索式分析 (EDA)</h2>
 <p>探索式資料分析 (Exploratory Data Analysis, EDA)，主要概念是利用數據統計的方式視覺化資料。透過資料的探索式分析可以查看資料集當中每個特徵彼此的重要程度以及其資料分布狀況，有良好的數據分析習慣能夠幫助你更了解資料集的特性。另外做 EDA 的好處是可以從各種面向先了解資料的狀況，以利後續的模型分析。</p>
 <h2 id="eda_1">EDA 必要的套件</h2>
@@ -500,11 +500,11 @@
 </ul>
 </li>
 </ul>
-<p><img alt="" src="image/img3-1.png"/></p>
-<p><img alt="" src="image/img3-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-1.png"><img alt="" src="image/img3-1.png"/></a></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-2.png"><img alt="" src="image/img3-2.png"/></a></p>
 <h2 id="_2">鳶尾花朵資料集一覽</h2>
 <p>此資料集總共有4個輸入特徵。分別為花萼長度、花萼寬度、花瓣長度與花瓣寬度。輸出特徵為花朵的品種，共有三種類別分別為 0: iris setosa、 1: iris versicolor、 2: iris virginica。</p>
-<p><img alt="" src="image/img3-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-3.png"><img alt="" src="image/img3-3.png"/></a></p>
 <h2 id="_3">載入必要套件</h2>
 <p>首先我們載入資料探索式分析所需的套件。分別有進行數據處理的函式庫的
  <code>pandas</code>、高階大量的維度陣列與矩陣運算的 <code>numpy</code>、處理資料視覺化的繪圖庫 <code>matplotlib</code> 與 <code>seaborn</code>。最後一個是資料集來源，此系列範例我們採用 Sklearn 所提供的鳶尾花分類的資料集。</p>
@@ -556,7 +556,7 @@
                      <span class="n">columns</span><span class="o">=</span> <span class="p">[</span><span class="s1">'SepalLengthCm'</span><span class="p">,</span><span class="s1">'SepalWidthCm'</span><span class="p">,</span><span class="s1">'PetalLengthCm'</span><span class="p">,</span><span class="s1">'PetalWidthCm'</span><span class="p">,</span><span class="s1">'Species'</span><span class="p">])</span>
 <span class="n">df_data</span>
 </pre></div>
-<p><img alt="" src="image/img3-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-4.png"><img alt="" src="image/img3-4.png"/></a></p>
 <h2 id="_5">直方圖</h2>
 <p>直方圖是一種對數據分布情況的圖形表示，是一種二維統計圖表。我們可以直接呼叫 Pandas 內建函式 <code>hist()</code> 進行直方圖分析。其中我們可以設定 bins(箱數)，預設值為 10。如果設定的輸量越大，其代表需要分割的精度越細。通常取一個適當的箱數即可觀察該特徵在資料集中的分佈情況。藉由直方圖我們可以知道每個值域的分佈大小與數量。我們也能發現輸出項的類別共有三個，並且這三個類別的數量都剛好各有 50 筆資料。我們也能得知這一份資料集的輸出類別是一個非常均勻的資料。</p>
 <div class="codehilite"><pre><span></span><span class="c1">#直方圖 histograms</span>
@@ -564,7 +564,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<p><img alt="" src="image/img3-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-5.png"><img alt="" src="image/img3-5.png"/></a></p>
 <p>我們也可以透過 Seaborn 的 <code>histplot</code> 做出更詳細的直方圖分析。並利用和密度估計 <code>kde=True</code> 來查看每個特徵的分佈狀況。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -573,18 +573,18 @@
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s2">"PetalLengthCm"</span><span class="p">][:],</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s2">"PetalWidthCm"</span><span class="p">][:],</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img3-11.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-11.png"><img alt="" src="image/img3-11.png"/></a></p>
 <h2 id="_6">核密度估計</h2>
 <p>核密度估計分爲兩部分，分別有對角線部分和非對角線部分。在對角線部分是以核密度估計圖（Kernel Density Estimation）的方式呈現，也就是用來看某一個特徵的分佈情況，x軸對應著該特徵的數值，y軸對應著該特徵的密度也就是特徵出現的頻率。在非對角線的部分為兩個特徵之間分佈的關聯散點圖。將任意兩個特徵進行配對，以其中一個爲橫座標，另一個爲縱座標，將所有的數據點繪製在圖上，用來衡量兩個變量的關聯程度。 </p>
 <p>使用 Pandas 繪製：</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">scatter_matrix</span>
 <span class="n">scatter_matrix</span><span class="p">(</span> <span class="n">df_data</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">'b'</span><span class="p">,</span><span class="n">diagonal</span><span class="o">=</span><span class="s1">'kde'</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img3-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-6.png"><img alt="" src="image/img3-6.png"/></a></p>
 <p>使用 Seaborn 繪製：</p>
 <div class="codehilite"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"Species"</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s2">"kde"</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img3-7.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-7.png"><img alt="" src="image/img3-7.png"/></a></p>
 <h2 id="_7">關聯分析</h2>
 <p>透過 pandas 的 <code>corr()</code> 函式可以快速的計算每個特徵間的彼此關聯程度。其區間值為-1~1之間，數字越大代表關聯程度正相關越高。相反的當負的程度很高我們可以解釋這兩個特徵之間是有很高的負
 關聯性。</p>
@@ -593,16 +593,16 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"RdBu_r"</span><span class="p">)</span>
 </pre></div>
-<p><img alt="" src="image/img3-8.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-8.png"><img alt="" src="image/img3-8.png"/></a></p>
 <h2 id="_8">散佈圖</h2>
 <p>透過散佈圖我們可以從二維的平面上觀察兩兩特徵間彼此的分佈狀況。如果該特徵重要程度越高，群聚的效果會更加顯著。</p>
 <div class="codehilite"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="s2">"SepalLengthCm"</span><span class="p">,</span> <span class="s2">"SepalWidthCm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'Species'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span> <span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Species'</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'upper right'</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">'Iris-Setosa'</span><span class="p">,</span> <span class="s1">'Iris-Versicolour'</span><span class="p">,</span> <span class="s1">'Iris-Virginica'</span><span class="p">])</span>
 </pre></div>
-<p><img alt="" src="image/img3-9.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-9.png"><img alt="" src="image/img3-9.png"/></a></p>
 <h2 id="_9">箱形圖</h2>
 <p>透過箱形圖可以分析每個特徵的分布狀況以及是否有離群值。我們利用箱形圖來表示四分位數來觀察數據分散情況。箱形的兩端為第一個四分位數涵蓋25%之資料(Q1)與第三個四分位數涵蓋75%之資料(Q3)，而箱形圖的中間線為中位數顯示涵蓋前50%資料之位置。箱形上虛線的端點為極大值，箱型下虛線的點為極小值。</p>
-<p><img alt="" src="image/img3-10.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img3-10.png"><img alt="" src="image/img3-10.png"/></a></p>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </article>
 </div>
@@ -664,5 +664,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

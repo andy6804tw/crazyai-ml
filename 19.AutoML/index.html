@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -487,9 +487,9 @@
 </ul>
 <h2 id="automl_2">AutoML 能幫助多少事情</h2>
 <p>典型的機器學習流程是一個迭代的循環週期，從定義問題、資料收集與處理、模型設計到最終模型部署，每個步驟極為重要且缺一不可。此外一個好的機器學習的專案需要執行 MLOps 的流程，才能夠讓模型在實際應用場景越來越好真實地解決問題。MLOps 指的是從 AI 模型訓練到部署上線的一套完整機器學習工作流程，近年來這一名詞非常熱門，它其實就是 ML (機器學習) 與 DevOps (開發與維運) 的結合。如下圖所示從訓練模型到正式部署中間還有許多事情要處理，而模型上線後還是要持續監控並收集新的場域資料。最後將資料收集到一定程度，又回到週期的第一步重新訓練新模型。至於模型該如何重新訓練並保持資料的隱私性就是另一門議題。這時候我們就能採用一個技術叫做 Federated Learning (聯合學習) 想辦法處理這類的事情。</p>
-<p><img alt="" src="image/img19-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img19-1.png"><img alt="" src="image/img19-1.png"/></a></p>
 <p>但是我們可以發現訓練一個機器學習模型，在 MLOps 的週期中僅扮演小小的一塊角色。下圖是一個訓練機器學習模型的基本流程，中間橘色的部分就是 AutoML 可以幫助我們的事。從資料前處理、訓練模型到評估模型需要不斷地的進行試驗，並且嘗試各種不同的模型演算法與模型超參數。除此之外還有資料前處理與特徵工程，都可以透過 AutoML 自動化的訓練找到一個滿意的模型。</p>
-<p><img alt="" src="image/img19-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img19-2.png"><img alt="" src="image/img19-2.png"/></a></p>
 <h2 id="_2">超參數調參方法</h2>
 <p>機器學習自動化的困難點在於資料清洗與特徵工程技巧。一個好的特徵表達可以讓模型快速地抓到關鍵因子，並讓模型預測能力提升。慶幸的是模型挑選和超參數調整已經有比較成熟的方法可以協助我們有效的搜尋。</p>
 <ul>
@@ -536,9 +536,9 @@
 </pre></div>
 <h3 id="bayesian-optimization">Bayesian Optimization</h3>
 <p>Bayesian Optimization (貝葉斯優化) 目標是要在最少的試驗下尋找一組最佳的超參數使得錯誤率能夠越低越好。由於我們所收集到的資料無從得知該模型的目標函數是長怎樣，因此機器學習的目的就是要從這些資料中去擬合一個函數，目標是給予一筆輸入 X 該函數的輸出要與真實的答案越接近越好。透過代理優化 (surrogate optimization) 使用一個代理函數來估計目標函數。簡單來說代理函數是指目標函數的一種近似，此外代理函數可基於取樣得到的資料點被構建出來。</p>
-<p><img alt="" src="image/img19-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img19-3.png"><img alt="" src="image/img19-3.png"/></a></p>
 <p>代理函數的目的是在給定一組特定的候選超參數的情況下快速估計實際模型的錯誤率。透過這種方式可以快速決定該組超參數是否可以被拿來實際訓練模型。隨著試驗次數的增加，代理函數隨著先前的試驗結果而更新改進，並開始推薦更好的候選超參數。</p>
-<p><img alt="" src="image/img19-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img19-4.png"><img alt="" src="image/img19-4.png"/></a></p>
 <p><a href="https://automl.github.io/auto-sklearn/master/">Auto-sklearn</a> 就是一個透過貝葉斯優化來尋找最佳超參數的一個工具。同時它也能搜索在 Sklearn 中所有可能的算法，並為你推薦一個合適的模型與資料前處理方式。明天我們就來一探究竟該套件背後的神秘原理以及程式實作吧！</p>
 <h2 id="reference">Reference</h2>
 <ul>
@@ -610,5 +610,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

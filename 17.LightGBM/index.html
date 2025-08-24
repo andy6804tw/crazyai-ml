@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -421,10 +421,10 @@
 </li>
 </ul>
 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/" width="560"></iframe>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/17.LightGBM/17.creditcard-fraud-detection-lightgbm.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/17.LightGBM/17.creditcard-fraud-detection-lightgbm.ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">前言</h2>
 <p>LightGBM 是屬於 GBDT 家族中成員之一，相較於先前介紹的 XGBoost 兩者可以拿來做比較。簡單來說從 LightGBM 名字上觀察，我們可以看出它是輕量化 (Light) 的梯度提升機 (GBM) 的實例。其相對 XGBoost 來說它具有訓練速度快、記憶體佔用低的特點，因此近幾年 LightGBM 在 Kaggle 上也算是熱門模型一。</p>
-<p><img alt="" src="https://i.imgur.com/ecN4zor.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/ecN4zor.png"><img alt="" src="https://i.imgur.com/ecN4zor.png"/></a></p>
 <h2 id="lightgbm-xgboost">LightGBM 與 XGBoost 比較</h2>
 <p>這兩種演算法都使用貪婪的方法來最小化損失函數的梯度來構建所有的弱學習器。其 tree-based 演算法所面臨的挑戰是如何挑選最佳的葉節點的切割方式，然而 LightGBM 和 XGBoost 分別使用不同的優化技術與方法來識別最佳的分割點。</p>
 <h2 id="lightgbm">LightGBM 優點</h2>
@@ -460,7 +460,7 @@ Y: (284807,)
 X_test: (85443, 30)
 </pre></div>
 <p>訓練集與測試集經由 7:3 的比例下去隨機切割資料。我們可以透過 Pandas 做更近一步的分析，可以發現切割出來的訓練集與測試集在盜刷(1)與非盜刷(0)的資料比例是差不多的。</p>
-<p><img alt="" src="image/img17-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img17-1.png"><img alt="" src="image/img17-1.png"/></a></p>
 <p>接下來重頭戲出場。我們採用 LightGBM 分類器，若還沒安裝的讀者可以參考以下指令進行安裝。</p>
 <div class="codehilite"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lightgbm
 </pre></div>
@@ -520,9 +520,9 @@ X_test: (85443, 30)
 <div class="codehilite"><pre><span></span><span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
 </pre></div>
 <p>下圖為實際 <code>is_unbalance=True</code> 的訓練結果。我們可以發現在測試集中有 148 筆盜刷資料，其中有 124 筆盜刷被成功辨識出來。另外我們可以發現真實答案是沒盜刷的資料居然有 5088 筆被誤判成盜刷。</p>
-<p><img alt="" src="image/img17-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img17-2.png"><img alt="" src="image/img17-2.png"/></a></p>
 <p>我們再來試試將 <code>is_unbalance</code> 設為 <code>False</code> 並觀察混淆矩陣。可以發現雖然誤判的數量減少了，但是真實答案中有 148 筆盜刷資料僅有 88 筆被成功辨識出來。我們可以猜想模型在大多數狀況都會預測資料未被盜刷的機率較大。</p>
-<p><img alt="" src="image/img17-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img17-3.png"><img alt="" src="image/img17-3.png"/></a></p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://codingnote.cc/zh-tw/p/22596/">終於有人把XGBoost 和 LightGBM 講明白了，項目中最主流的集成演算法！</a></li>
@@ -591,5 +591,5 @@ X_test: (85443, 30)
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

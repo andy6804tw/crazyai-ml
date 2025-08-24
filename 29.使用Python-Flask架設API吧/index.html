@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -486,12 +486,12 @@
 <p>範例程式：<a href="https://github.com/andy6804tw/2021-13th-ironman/tree/main/29.使用Python-Flask架設API吧/Flask-API-example-with-ML-model">Code</a></p>
 <h2 id="_2">前言</h2>
 <p>當模型訓練完以後下一個步驟就是應用與落地。我們可以設計一個嵌入式系統與使用者互動，例如樹莓派、Jetson Nano、NeuroPilot...等硬體來協助 AI 模型的邊緣運算。或是設計一個手機 APP 以及網頁應用。很多人可能會有疑問模型訓練好然後下一個步驟該怎做？最常見的做法就是將訓練好的模型儲存起來並建立一個 API 部署在後端伺服器中，接著任何的終端設備都可以透過這一個 API 進行資料的存取與模型預測。下圖是一個簡單的模型落地的應用情境，我們可以在後端伺服器部署模型並建立一個 API 的接口與前端使用者互動。前端網頁的使用者透過 HTTP 的協定與後端伺服器進行通訊與資料交換，最終模型的預測結果會回傳到前端使用者並將結果選染在網頁上。我們延續昨天的內容 <a href="https://ithelp.ithome.com.tw/articles/10280076">[Day 28] 儲存訓練好的模型</a>，目前已經成功的輸出模型。今天就來教各位如何透過 Python Flask 架設一個鳶尾花朵分類器的 API 吧！</p>
-<p><img alt="" src="image/img29-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-1.png"><img alt="" src="image/img29-1.png"/></a></p>
 <h2 id="api">什麼是 API？</h2>
 <p>所謂的 API 中文全名為應用程式介面 (Application Programming Interface) 是屬於客戶端與伺服端的溝通橋樑，它提供一個端口能夠進行資料交換。簡單來說是一個前端與後端的一個溝通介面。</p>
-<p><img alt="" src="image/img29-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-2.png"><img alt="" src="image/img29-2.png"/></a></p>
 <p>另外大家可能聽過一個名詞叫做 RESTful API。所謂的 REST 為 Representational State Transfer 的縮寫是一種網路架構風格，近幾年來 REST 的概念已經被實作在大型網路系統中，而在 Web 服務中使用 REST 概念被實作出來的 API 就簡稱為 RESTful API 他是使用 HTTP 的協定完整定義 Web 服務在 HTTP Request 的各種流程。</p>
-<p><img alt="" src="image/img29-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-3.png"><img alt="" src="image/img29-3.png"/></a></p>
 <h2 id="http-request">HTTP Request 方法</h2>
 <p>透過網路協定 HTTP Request 不同的方法，可以實現不同的資料交換請求方式。HTTP 本身就是 REST 的實作，所謂的 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods">HTTP Request</a> 定義了八種請求方法分別為：</p>
 <ul>
@@ -579,16 +579,16 @@ xgboost
 <p>在本機或開發環境中測試執行 API 的方式很簡單。只要開啟終端機並輸入以下指令即可：</p>
 <div class="codehilite"><pre><span></span>python<span class="w"> </span>run.py
 </pre></div>
-<p><img alt="" src="image/img29-4.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-4.png"><img alt="" src="image/img29-4.png"/></a></p>
 <blockquote>
 <p>程式真正上線時建議使用 gunicorn 或 Waitress 來產生 WSGI 服務，並於背景運行</p>
 </blockquote>
 <p>還記得我們有寫一個 GET 方法的測試路由嗎？這時候大家可以開啟電腦中的瀏覽器並在網址列輸入 <code>http://localhost:3000</code> 即可立即看到 API 在指定的路徑下所回應的內容。如果出現以下畫面即代表 API 已經正常的被運行囉。</p>
-<p><img alt="" src="image/img29-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-5.png"><img alt="" src="image/img29-5.png"/></a></p>
 <p>那你可能會問我該怎麼測試另一個 POST 方法呢？由於 GET 方法比較好處理，我們直接在瀏覽器輸入路徑就能立即觀看結果。那當我們要測試 POST、PUT、DELETE 等方法時就必須依靠第三方軟體 Postman 來協助模擬 HTTP Request 完成 API 測試。</p>
 <h2 id="api-postman">測試 API 的好工具 Postman</h2>
 <p>當你寫好一支 API 時要馬上測試看看你寫的程式邏輯是否正確，就可以使用 Postman 這個軟體來做 API 測試。Postman 他是一個能夠模擬 HTTP Request 的工具能夠讓你簡單快速的測試你的 API，並且內建包含許多 HTTP 的請求方式，例如常見的 GET(取得)、POST(新增)、PUT(修改)、DELETE(刪除)。首先大家可以到<a href="https://www.postman.com/">官網</a>下載與安裝。</p>
-<p><img alt="" src="image/img29-6.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-6.png"><img alt="" src="image/img29-6.png"/></a></p>
 <p>安裝好之後可以打開程式並點選 POST 並貼上 API 網址。由於我們現在要測試另一個預測的路徑 <code>predict</code>，因此在網址列貼上 <code>http://localhost:3000/predict</code>。點選 Body-&gt; raw -&gt; JSON 並將花朵的四個參數以 JSON 格式進行描述。</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">"sepalLengthCm"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.9</span><span class="p">,</span>
@@ -598,7 +598,7 @@ xgboost
 <span class="p">}</span>
 </pre></div>
 <p>點選 <code>send</code> 後即可將模擬的四個數值透過 JSON 格式使用 POST 方法傳送到後端 API 中的 <code>predict</code> 路徑。該 API 透過 POST 接收到前端使用者所發送的訊息後，解析這四個數值並依序放在陣列中並進行模型預測。最終預測結果會將花的種類以 JSON 格式回傳到前端使用者。此時前端的網頁設計師就可以將拿到的預測結果進行前端的畫面渲染與更新。</p>
-<p><img alt="" src="image/img29-7.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-7.png"><img alt="" src="image/img29-7.png"/></a></p>
 <blockquote>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </blockquote>
@@ -662,5 +662,5 @@ xgboost
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>

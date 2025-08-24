@@ -30,7 +30,7 @@
 <link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
 <link href="../stylesheets/extra.css" rel="stylesheet"/>
 <link href="../stylesheets/dify.css" rel="stylesheet"/>
-</head>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
 <svg class="md-svg">
 <defs>
@@ -502,10 +502,10 @@
 </ul>
 </li>
 </ul>
-<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/22.Plotly-Express/22.Plotly-Express.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<p>範例程式：<a href="https://colab.research.google.com/github/andy6804tw/2021-13th-ironman/blob/main/docs/22.Plotly-Express/22.Plotly-Express.ipynb"><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://colab.research.google.com/assets/colab-badge.svg"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></a></p>
 <h2 id="_2">前言</h2>
 <p>Plotly Express 是一個高精緻的資料視覺化套件。初學機器學習的你一定碰過像是 matplotlib 和 seaborn 這類型的圖表化套件，不過使用過 Plotly Express 會讓你對於資料視覺化有更不一樣的體驗。它的功能使用起來非常直觀，並且可以很好地與 Pandas DataFrame 配合使用。<a href="https://plotly.com/python/plotly-express/">Plotly Express</a> 於 2019 年由加拿大 Plotly 這間公司釋出了第一版高階的 Python 資料視覺化套件。</p>
-<p><img alt="" src="image/img22-1.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-1.png"><img alt="" src="image/img22-1.png"/></a></p>
 <h2 id="plotly">安裝 plotly</h2>
 <p>若尚未安裝此套件的讀者，可以開啟終端機輸入以下指令進行安裝：</p>
 <div class="codehilite"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">plotly</span>
@@ -519,78 +519,78 @@
 <span class="n">df_data</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iris</span><span class="p">()</span>
 <span class="n">df_data</span>
 </pre></div>
-<p><img alt="" src="image/img22-2.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-2.png"><img alt="" src="image/img22-2.png"/></a></p>
 <h2 id="_3">直方圖</h2>
 <p>為了更清楚了解特徵的分布狀況，我們可以採用直方圖 histogram 做更近一步的分析。從直方圖我們可以更清楚知道特徵的每個值的頻率分佈。由於目前版本在 Notebook 無法直接使用 <code>fig.show()</code> 顯示互動圖，必須安裝一些小插件模組與設定。因此範例中採用最簡單方法，先轉換成 HTML code 並透過 <code>IPython.display</code> 中的 HTML 方法顯示出來。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="image/img22-3.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-3.png"><img alt="" src="image/img22-3.png"/></a></p>
 <p>除此之外我們也能觀察每一個獨立特徵對於花的品種的每個分布狀況。每個不同的顏色代表不同的花朵品種，我們可以藉由參數設定每個直方圖是否重疊，以及重疊的透明程度。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">barmode</span><span class="o">=</span><span class="s1">'overlay'</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="https://i.imgur.com/b0n0qOF.gif"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/b0n0qOF.gif"><img alt="" src="https://i.imgur.com/b0n0qOF.gif"/></a></p>
 <p>接下來一樣透過直方圖方式來觀察每個花朵品種的數量。從視覺化可以很清楚得知該資料集是否是一個平穩的資料集。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'species'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'sepal_width'</span><span class="p">,</span> <span class="n">histfunc</span><span class="o">=</span><span class="s1">'count'</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
                     <span class="n">title</span><span class="o">=</span><span class="s1">'Histogram Chart'</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="image/img22-5.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-5.png"><img alt="" src="image/img22-5.png"/></a></p>
 <h2 id="_4">特徵關聯度分析</h2>
 <p>我們可以採用 <code>scatter_matrix</code> 為每一個特徵彼此間做一個關聯度分析。透過這種視覺化方式我們可以很清楚的知道兩個特徵間是否正相關與負相關。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">[</span><span class="s2">"sepal_width"</span><span class="p">,</span> <span class="s2">"sepal_length"</span><span class="p">,</span> <span class="s2">"petal_width"</span><span class="p">,</span> <span class="s2">"petal_length"</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="https://i.imgur.com/OVYrqlo.gif"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/OVYrqlo.gif"><img alt="" src="https://i.imgur.com/OVYrqlo.gif"/></a></p>
 <h2 id="_5">散佈圖</h2>
 <p>我們使用散佈圖將花萼的長度與寬度顯示在二維坐標平面上。使用 Plotly Express 套件中的 scatter 方法，我們可以輕鬆構建圖形，並放入 DataFrame 格式的資料並指定必要參數 x 軸中的變數和 y 軸中的變數。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"sepal_length"</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="image/img22-7.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-7.png"><img alt="" src="image/img22-7.png"/></a></p>
 <p>如果想要更清楚表達每個資料點所對應的類別，可以再加上 <code>color</code> 並指定種類的欄位即會將所有資料自動分成三類。此外我們也能夠設定滑鼠移到資料點上所顯示的資訊，透過 <code>hover_data</code> 並給予指定欄位即可看到輸出。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"sepal_length"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span>
                      <span class="p">,</span> <span class="n">hover_data</span><span class="o">=</span><span class="p">[</span><span class="s1">'petal_length'</span><span class="p">,</span><span class="s1">'petal_width'</span><span class="p">])</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="https://i.imgur.com/ZpSvShY.gif"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/ZpSvShY.gif"><img alt="" src="https://i.imgur.com/ZpSvShY.gif"/></a></p>
 <p>Plotly Express 也提供三維的視覺化，此外使用者也能夠過控制變版自由的放大與縮小甚至旋轉。下圖範例中我們將 x 軸設定花萼寬度，y 軸設定花萼長度，z 軸設定花瓣寬度。此外 <code>size</code> 可以控制每一個資料點的大小，這裡採用花瓣的長度做為每個資料點大小的依據。因此從這個立體空間可以發現從花瓣長度對於花的種類有很強的關聯性。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_3d</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"sepal_length"</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="s2">"petal_width"</span><span class="p">,</span> 
                     <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="s1">'petal_length'</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="https://i.imgur.com/qBlYsR7.gif"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="https://i.imgur.com/qBlYsR7.gif"><img alt="" src="https://i.imgur.com/qBlYsR7.gif"/></a></p>
 <h2 id="_6">箱形圖</h2>
 <p>我們可以透過箱形圖進行特徵的分布狀況分析。從視覺化圖中可以清楚地知道花萼的寬度範圍介於 2~4.5 之間，以及四分位數和離群值的訊息。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="image/img22-10.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-10.png"><img alt="" src="image/img22-10.png"/></a></p>
 <p>除此之外我們能夠更近一步的分析花萼寬度對於每個品種的分布狀況。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="image/img22-11.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-11.png"><img alt="" src="image/img22-11.png"/></a></p>
 <h2 id="_7">複合型視覺化技巧</h2>
 <p>複合型視覺化方式可以同時預覽兩個變數間的散佈圖與箱型圖關係。主要是透過 <code>marginal_y</code> 與 <code>marginal_x</code> 設置橫軸與縱軸的視覺化方式，因此在一個圖表中可以結合兩種視覺化。此外 <code>trendline</code> 可以為散佈圖繪製趨勢線，設置 <code>ols</code> 會採用最小平方法位數據建立一個線性迴歸。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"sepal_length"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">marginal_y</span><span class="o">=</span><span class="s2">"box"</span><span class="p">,</span>
            <span class="n">marginal_x</span><span class="o">=</span><span class="s2">"box"</span><span class="p">,</span> <span class="n">trendline</span><span class="o">=</span><span class="s2">"ols"</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">"simple_white"</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="image/img22-12.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-12.png"><img alt="" src="image/img22-12.png"/></a></p>
 <p>也可以試著將橫軸與縱軸改成直方圖。</p>
 <div class="codehilite"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sepal_width"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"sepal_length"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">marginal_y</span><span class="o">=</span><span class="s2">"histogram"</span><span class="p">,</span>
            <span class="n">marginal_x</span><span class="o">=</span><span class="s2">"histogram"</span><span class="p">,</span> <span class="n">trendline</span><span class="o">=</span><span class="s2">"ols"</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">"simple_white"</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
-<p><img alt="" src="image/img22-13.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-13.png"><img alt="" src="image/img22-13.png"/></a></p>
 <h2 id="_8">匯出圖片</h2>
 <h3 id="_9">方法一</h3>
 <p>直接點選控制面板的相機圖示 (Download plot as a png) 可以立即下載圖片。</p>
-<p><img alt="" src="image/img22-14.png"/></p>
+<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img22-14.png"><img alt="" src="image/img22-14.png"/></a></p>
 <h3 id="_10">方法二</h3>
 <p>首先要安裝 kaleido 才能匯出 Plotly Express 的靜態圖片。</p>
 <div class="codehilite"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>kaleido
@@ -673,5 +673,5 @@
 <script src="../javascripts/extra.js"></script>
 <script src="../javascripts/analytics.js"></script>
 <script src="../javascripts/dify.js"></script>
-</body>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
 </html>
