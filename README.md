@@ -7,13 +7,13 @@
   <img align="left" width=140 alt="blog" src="design/ebook-dark.png" />
 </a>
 <a href="https://github.com/andy6804tw/crazyai-ml/releases/download/v2.0/crazyai-ml_v2.1.pdf">
-  <img align="left" width=150 alt="blog" src="design/pdf-dark.png" />
+  <img align="left" width=150 alt="PDF" src="design/pdf-dark.png" />
 </a>
 <a href="https://www.youtube.com/watch?v=C9mvGMtrPXo&list=PLXSkku8eiD-iFRBr11rV83579hing3gMU">
-  <img align="left" alt="blog" src="design/youtube-dark.svg" />
+  <img align="left" alt="YouTube" src="design/youtube-dark.svg" />
 </a>
 <a href="https://podcasters.spotify.com/pod/show/10413/episodes/Ep-1-Your-Journey-Begins-Here-e2obnbm/a-abhb0dn">
-  <img align="left" alt="blog" src="https://github.com/nathangathright/podcast-badges/raw/main/badges/spotify-dark.svg" />
+  <img align="left" alt="Spotify" src="design/spotify-dark.svg" />
 </a>
 <br><br>
 
