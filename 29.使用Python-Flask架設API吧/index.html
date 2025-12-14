@@ -1,474 +1,898 @@
 
-<!DOCTYPE html>
 
-<html class="no-js" lang="zh-Hant">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="ie=edge" http-equiv="x-ua-compatible"/>
-<link href="https://andy6804tw.github.io/crazyai-ml/29.使用Python-Flask架設API吧/" rel="canonical"/>
-<meta content="10程式中" name="author"/>
-<meta content="複製" name="lang:clipboard.copy"/>
-<meta content="已複製" name="lang:clipboard.copied"/>
-<meta content="ja" name="lang:search.language"/>
-<meta content="True" name="lang:search.pipeline.stopwords"/>
-<meta content="True" name="lang:search.pipeline.trimmer"/>
-<meta content="沒有符合的項目" name="lang:search.result.none"/>
-<meta content="找到 1 個符合的項目" name="lang:search.result.one"/>
-<meta content="找到 # 個符合的項目" name="lang:search.result.other"/>
-<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.0.4, mkdocs-material-4.4.0" name="generator"/>
-<title>[Day 29] 使用 Python Flask 架設 API 吧！ - 全民瘋AI系列 [經典機器學習]</title>
-<link href="../assets/stylesheets/application.0284f74d.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/application-palette.01803549.css" rel="stylesheet"/>
-<meta content="#795548" name="theme-color"/>
-<script src="../assets/javascripts/modernizr.74668098.js"></script>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
-<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
-<link href="../stylesheets/extra.css" rel="stylesheet"/>
-<link href="../stylesheets/dify.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="deep-orange" data-md-color-primary="brown" dir="ltr">
-<svg class="md-svg">
-<defs>
-<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
-</defs>
-</svg>
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-<a class="md-skip" href="#day-29-python-flask-api" tabindex="1">
+
+
+<!doctype html>
+<html lang="zh-Hant" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://andy6804tw.github.io/crazyai-ml/29.使用Python-Flask架設API吧/">
+      
+      
+        <meta name="author" content="10程式中">
+      
+      
+        <meta name="lang:clipboard.copy" content="複製">
+      
+        <meta name="lang:clipboard.copied" content="已複製">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="沒有符合的項目">
+      
+        <meta name="lang:search.result.one" content="找到 1 個符合的項目">
+      
+        <meta name="lang:search.result.other" content="找到 # 個符合的項目">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>[Day 29] 使用 Python Flask 架設 API 吧！ - 全民瘋AI系列 [經典機器學習]</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#795548">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/dify.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#day-29-python-flask-api" tabindex="1" class="md-skip">
         跳轉到
       </a>
-<header class="md-header" data-md-component="header">
-<nav class="md-header-nav md-grid">
-<div class="md-flex">
-<div class="md-flex__cell md-flex__cell--shrink">
-<a class="md-header-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
-<i class="md-icon"></i>
-</a>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch">
-<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-<span class="md-header-nav__topic">
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
               全民瘋AI系列 [經典機器學習]
             </span>
-<span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
               
                 [Day 29] 使用 Python Flask 架設 API 吧！
               
             </span>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="搜尋" spellcheck="false" type="text"/>
-<label class="md-icon md-search__icon" for="__search"></label>
-<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
-        
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
       </button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="result">
-<div class="md-search-result__meta">
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
             打字進行搜尋
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<div class="md-header-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-</div>
-</div>
-</nav>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
 </header>
-<div class="md-container">
-<main class="md-main">
-<div class="md-main__inner md-grid" data-md-component="container">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title md-nav__title--site" for="__drawer">
-<a class="md-nav__button md-logo" href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]">
-<i class="md-icon"></i>
-</a>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://andy6804tw.github.io/crazyai-ml/" title="全民瘋AI系列 [經典機器學習]" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
     全民瘋AI系列 [經典機器學習]
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/andy6804tw/crazyai-ml" title="前往倉庫" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" id="nav-1" type="checkbox"/>
-<label class="md-nav__link" for="nav-1">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
       第一部分 AI基礎概念
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-1">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
         第一部分 AI基礎概念
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../1.全民瘋AI系列2.0目標介紹/" title="[Day 1] 目標介紹">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.全民瘋AI系列2.0目標介紹/" title="[Day 1] 目標介紹" class="md-nav__link">
       [Day 1] 目標介紹
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2.快來探索AI的世界/" title="[Day 2] 快來探索AI的世界">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.快來探索AI的世界/" title="[Day 2] 快來探索AI的世界" class="md-nav__link">
       [Day 2] 快來探索AI的世界
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../3.你真了解資料嗎試試看視覺化分析吧/" title="[Day 3] 你真了解資料嗎?試試看視覺化分析吧!">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.你真了解資料嗎試試看視覺化分析吧/" title="[Day 3] 你真了解資料嗎?試試看視覺化分析吧!" class="md-nav__link">
       [Day 3] 你真了解資料嗎?試試看視覺化分析吧!
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../4.咱們一起做資料清理和前處理/" title="[Day 4] 咱們一起做資料清理和前處理">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.咱們一起做資料清理和前處理/" title="[Day 4] 咱們一起做資料清理和前處理" class="md-nav__link">
       [Day 4] 咱們一起做資料清理和前處理
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../5.機器學習大補帖/" title="[Day 5] 機器學習大補帖">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.機器學習大補帖/" title="[Day 5] 機器學習大補帖" class="md-nav__link">
       [Day 5] 機器學習大補帖
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
       第二部分 機器學習入門
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
         第二部分 機器學習入門
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../6.非監督式學習k-means分群/" title="[Day 6] 非監督式學習 K-means 分群">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.非監督式學習k-means分群/" title="[Day 6] 非監督式學習 K-means 分群" class="md-nav__link">
       [Day 6] 非監督式學習 K-means 分群
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../7.非監督式學習-降維/" title="[Day 7] 非監督式學習-降維">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../7.非監督式學習-降維/" title="[Day 7] 非監督式學習-降維" class="md-nav__link">
       [Day 7] 非監督式學習-降維
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../8.線性迴歸/" title="[Day 8] 線性迴歸 (Linear Regression)">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../8.線性迴歸/" title="[Day 8] 線性迴歸 (Linear Regression)" class="md-nav__link">
       [Day 8] 線性迴歸 (Linear Regression)
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../9.邏輯迴歸/" title="[Day 9] 邏輯迴歸 (Logistic Regression)">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../9.邏輯迴歸/" title="[Day 9] 邏輯迴歸 (Logistic Regression)" class="md-nav__link">
       [Day 9] 邏輯迴歸 (Logistic Regression)
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../10.KNN/" title="[Day 10] 近朱者赤，近墨者黑 - KNN">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../10.KNN/" title="[Day 10] 近朱者赤，近墨者黑 - KNN" class="md-nav__link">
       [Day 10] 近朱者赤，近墨者黑 - KNN
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../11.SVM/" title="[Day 11] 核模型 - 支持向量機 (SVM)">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../11.SVM/" title="[Day 11] 核模型 - 支持向量機 (SVM)" class="md-nav__link">
       [Day 11] 核模型 - 支持向量機 (SVM)
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../12.決策樹/" title="[Day 12] 決策樹 (Decision tree)">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../12.決策樹/" title="[Day 12] 決策樹 (Decision tree)" class="md-nav__link">
       [Day 12] 決策樹 (Decision tree)
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../13.整體學習/" title="[Day 13] 整體學習 (Ensemble Learning)">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../13.整體學習/" title="[Day 13] 整體學習 (Ensemble Learning)" class="md-nav__link">
       [Day 13] 整體學習 (Ensemble Learning)
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../14.隨機森林/" title="[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../14.隨機森林/" title="[Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)" class="md-nav__link">
       [Day 14] 多棵決策樹更厲害：隨機森林 (Random forest)
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../15.XGBoost/" title="[Day 15] 機器學習常勝軍 - XGBoost">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../15.XGBoost/" title="[Day 15] 機器學習常勝軍 - XGBoost" class="md-nav__link">
       [Day 15] 機器學習常勝軍 - XGBoost
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../16.Stacking/" title="[Day 16] 每個模型我全都要 - 堆疊法 (Stacking)">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../16.Stacking/" title="[Day 16] 每個模型我全都要 - 堆疊法 (Stacking)" class="md-nav__link">
       [Day 16] 每個模型我全都要 - 堆疊法 (Stacking)
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../17.LightGBM/" title="[Day 17] 輕量化的梯度提升機 - LightGBM">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../17.LightGBM/" title="[Day 17] 輕量化的梯度提升機 - LightGBM" class="md-nav__link">
       [Day 17] 輕量化的梯度提升機 - LightGBM
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../18.CatBoost/" title="[Day 18] 機器學習 boosting 神器 - CatBoost">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../18.CatBoost/" title="[Day 18] 機器學習 boosting 神器 - CatBoost" class="md-nav__link">
       [Day 18] 機器學習 boosting 神器 - CatBoost
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
-<label class="md-nav__link" for="nav-3">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
       第三部分 進階概念與應用
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-3">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
         第三部分 進階概念與應用
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../19.AutoML/" title="[Day 19] 自動化機器學習 - AutoML">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../19.AutoML/" title="[Day 19] 自動化機器學習 - AutoML" class="md-nav__link">
       [Day 19] 自動化機器學習 - AutoML
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../20.Auto-Sklearn/" title="[Day 20] 機器學習金手指 - Auto-sklearn">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../20.Auto-Sklearn/" title="[Day 20] 機器學習金手指 - Auto-sklearn" class="md-nav__link">
       [Day 20] 機器學習金手指 - Auto-sklearn
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../21.Optuna/" title="[Day 21] 調整模型超參數利器 - Optuna">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../21.Optuna/" title="[Day 21] 調整模型超參數利器 - Optuna" class="md-nav__link">
       [Day 21] 調整模型超參數利器 - Optuna
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../22.Plotly-Express/" title="[Day 22] Python 視覺化解釋數據 - Plotly Express">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../22.Plotly-Express/" title="[Day 22] Python 視覺化解釋數據 - Plotly Express" class="md-nav__link">
       [Day 22] Python 視覺化解釋數據 - Plotly Express
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../23.資料分布與離群值處理/" title="[Day 23] 資料分布與離群值處理">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../23.資料分布與離群值處理/" title="[Day 23] 資料分布與離群值處理" class="md-nav__link">
       [Day 23] 資料分布與離群值處理
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../24.不能忽視的過擬合與欠擬合/" title="[Day 24] 機器學習 - 不能忽視的過擬合與欠擬合">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../24.不能忽視的過擬合與欠擬合/" title="[Day 24] 機器學習 - 不能忽視的過擬合與欠擬合" class="md-nav__link">
       [Day 24] 機器學習 - 不能忽視的過擬合與欠擬合
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../25.交叉驗證 Cross-Validation 簡介/" title="[Day 25] 交叉驗證 Cross-Validation 簡介">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../25.交叉驗證 Cross-Validation 簡介/" title="[Day 25] 交叉驗證 Cross-Validation 簡介" class="md-nav__link">
       [Day 25] 交叉驗證 Cross-Validation 簡介
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../26.交叉驗證 K-Fold Cross-Validation/" title="[Day 26] 交叉驗證 K-Fold Cross-Validation">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../26.交叉驗證 K-Fold Cross-Validation/" title="[Day 26] 交叉驗證 K-Fold Cross-Validation" class="md-nav__link">
       [Day 26] 交叉驗證 K-Fold Cross-Validation
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../27.機器學習常犯錯的十件事/" title="[Day 27] 機器學習常犯錯的十件事">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../27.機器學習常犯錯的十件事/" title="[Day 27] 機器學習常犯錯的十件事" class="md-nav__link">
       [Day 27] 機器學習常犯錯的十件事
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../28.儲存訓練好的模型/" title="[Day 28] 儲存訓練好的模型">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../28.儲存訓練好的模型/" title="[Day 28] 儲存訓練好的模型" class="md-nav__link">
       [Day 28] 儲存訓練好的模型
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         [Day 29] 使用 Python Flask 架設 API 吧！
       </label>
-<a class="md-nav__link md-nav__link--active" href="./" title="[Day 29] 使用 Python Flask 架設 API 吧！">
+    
+    <a href="./" title="[Day 29] 使用 Python Flask 架設 API 吧！" class="md-nav__link md-nav__link--active">
       [Day 29] 使用 Python Flask 架設 API 吧！
     </a>
+    
+      
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">本頁目錄</label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1" title="今日學習目標">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">本頁目錄</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="今日學習目標" class="md-nav__link">
     今日學習目標
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2" title="前言">
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="前言" class="md-nav__link">
     前言
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api" title="什麼是 API？">
+      
+        <li class="md-nav__item">
+  <a href="#api" title="什麼是 API？" class="md-nav__link">
     什麼是 API？
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#http-request" title="HTTP Request 方法">
+      
+        <li class="md-nav__item">
+  <a href="#http-request" title="HTTP Request 方法" class="md-nav__link">
     HTTP Request 方法
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api_1" title="[程式實作] 鳶尾花朵分類器 API">
+      
+        <li class="md-nav__item">
+  <a href="#api_1" title="[程式實作] 鳶尾花朵分類器 API" class="md-nav__link">
     [程式實作] 鳶尾花朵分類器 API
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#python-flask-api" title="建立 Python Flask API">
+      
+        <li class="md-nav__item">
+  <a href="#python-flask-api" title="建立 Python Flask API" class="md-nav__link">
     建立 Python Flask API
   </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#modelpy" title="封裝預測模型 (model.py)">
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelpy" title="封裝預測模型 (model.py)" class="md-nav__link">
     封裝預測模型 (model.py)
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#flask-api-runpy" title="建立 Flask API (run.py)">
+        
+          <li class="md-nav__item">
+  <a href="#flask-api-runpy" title="建立 Flask API (run.py)" class="md-nav__link">
     建立 Flask API (run.py)
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#requirementstxt" title="管理套件版本 (requirements.txt)">
+        
+          <li class="md-nav__item">
+  <a href="#requirementstxt" title="管理套件版本 (requirements.txt)" class="md-nav__link">
     管理套件版本 (requirements.txt)
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api_2" title="執行 API">
+      
+        <li class="md-nav__item">
+  <a href="#api_2" title="執行 API" class="md-nav__link">
     執行 API
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api-postman" title="測試 API 的好工具 Postman">
+      
+        <li class="md-nav__item">
+  <a href="#api-postman" title="測試 API 的好工具 Postman" class="md-nav__link">
     測試 API 的好工具 Postman
   </a>
+  
 </li>
-</ul>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../30.使用 Heroku 部署機器學習 API/" title="[Day 30] 使用 Heroku 部署機器學習 API">
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../30.使用 Heroku 部署機器學習 API/" title="[Day 30] 使用 Heroku 部署機器學習 API" class="md-nav__link">
       [Day 30] 使用 Heroku 部署機器學習 API
     </a>
-</li>
-</ul>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
 <nav class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">本頁目錄</label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1" title="今日學習目標">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">本頁目錄</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="今日學習目標" class="md-nav__link">
     今日學習目標
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2" title="前言">
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="前言" class="md-nav__link">
     前言
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api" title="什麼是 API？">
+      
+        <li class="md-nav__item">
+  <a href="#api" title="什麼是 API？" class="md-nav__link">
     什麼是 API？
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#http-request" title="HTTP Request 方法">
+      
+        <li class="md-nav__item">
+  <a href="#http-request" title="HTTP Request 方法" class="md-nav__link">
     HTTP Request 方法
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api_1" title="[程式實作] 鳶尾花朵分類器 API">
+      
+        <li class="md-nav__item">
+  <a href="#api_1" title="[程式實作] 鳶尾花朵分類器 API" class="md-nav__link">
     [程式實作] 鳶尾花朵分類器 API
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#python-flask-api" title="建立 Python Flask API">
+      
+        <li class="md-nav__item">
+  <a href="#python-flask-api" title="建立 Python Flask API" class="md-nav__link">
     建立 Python Flask API
   </a>
-<nav class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#modelpy" title="封裝預測模型 (model.py)">
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelpy" title="封裝預測模型 (model.py)" class="md-nav__link">
     封裝預測模型 (model.py)
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#flask-api-runpy" title="建立 Flask API (run.py)">
+        
+          <li class="md-nav__item">
+  <a href="#flask-api-runpy" title="建立 Flask API (run.py)" class="md-nav__link">
     建立 Flask API (run.py)
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#requirementstxt" title="管理套件版本 (requirements.txt)">
+        
+          <li class="md-nav__item">
+  <a href="#requirementstxt" title="管理套件版本 (requirements.txt)" class="md-nav__link">
     管理套件版本 (requirements.txt)
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api_2" title="執行 API">
+      
+        <li class="md-nav__item">
+  <a href="#api_2" title="執行 API" class="md-nav__link">
     執行 API
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#api-postman" title="測試 API 的好工具 Postman">
+      
+        <li class="md-nav__item">
+  <a href="#api-postman" title="測試 API 的好工具 Postman" class="md-nav__link">
     測試 API 的好工具 Postman
   </a>
+  
 </li>
-</ul>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="../pdf/全民瘋AI系列_經典機器學習_v2.1.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
-<h1 id="day-29-python-flask-api">[Day 29] 使用 Python Flask 架設 API 吧！</h1>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="day-29-python-flask-api">[Day 29] 使用 Python Flask 架設 API 吧！</h1>
 <h2 id="_1">今日學習目標</h2>
 <ul>
 <li>API 觀念講解<ul>
@@ -482,16 +906,17 @@
 </ul>
 </li>
 </ul>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/FUj88Q_L62k" width="560"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FUj88Q_L62k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <p>範例程式：<a href="https://github.com/andy6804tw/2021-13th-ironman/tree/main/29.使用Python-Flask架設API吧/Flask-API-example-with-ML-model">Code</a></p>
 <h2 id="_2">前言</h2>
 <p>當模型訓練完以後下一個步驟就是應用與落地。我們可以設計一個嵌入式系統與使用者互動，例如樹莓派、Jetson Nano、NeuroPilot...等硬體來協助 AI 模型的邊緣運算。或是設計一個手機 APP 以及網頁應用。很多人可能會有疑問模型訓練好然後下一個步驟該怎做？最常見的做法就是將訓練好的模型儲存起來並建立一個 API 部署在後端伺服器中，接著任何的終端設備都可以透過這一個 API 進行資料的存取與模型預測。下圖是一個簡單的模型落地的應用情境，我們可以在後端伺服器部署模型並建立一個 API 的接口與前端使用者互動。前端網頁的使用者透過 HTTP 的協定與後端伺服器進行通訊與資料交換，最終模型的預測結果會回傳到前端使用者並將結果選染在網頁上。我們延續昨天的內容 <a href="https://ithelp.ithome.com.tw/articles/10280076">[Day 28] 儲存訓練好的模型</a>，目前已經成功的輸出模型。今天就來教各位如何透過 Python Flask 架設一個鳶尾花朵分類器的 API 吧！</p>
-<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-1.png"><img alt="" src="image/img29-1.png"/></a></p>
+<p><img alt="" src="image/img29-1.png" /></p>
 <h2 id="api">什麼是 API？</h2>
 <p>所謂的 API 中文全名為應用程式介面 (Application Programming Interface) 是屬於客戶端與伺服端的溝通橋樑，它提供一個端口能夠進行資料交換。簡單來說是一個前端與後端的一個溝通介面。</p>
-<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-2.png"><img alt="" src="image/img29-2.png"/></a></p>
+<p><img alt="" src="image/img29-2.png" /></p>
 <p>另外大家可能聽過一個名詞叫做 RESTful API。所謂的 REST 為 Representational State Transfer 的縮寫是一種網路架構風格，近幾年來 REST 的概念已經被實作在大型網路系統中，而在 Web 服務中使用 REST 概念被實作出來的 API 就簡稱為 RESTful API 他是使用 HTTP 的協定完整定義 Web 服務在 HTTP Request 的各種流程。</p>
-<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-3.png"><img alt="" src="image/img29-3.png"/></a></p>
+<p><img alt="" src="image/img29-3.png" /></p>
 <h2 id="http-request">HTTP Request 方法</h2>
 <p>透過網路協定 HTTP Request 不同的方法，可以實現不同的資料交換請求方式。HTTP 本身就是 REST 的實作，所謂的 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods">HTTP Request</a> 定義了八種請求方法分別為：</p>
 <ul>
@@ -514,6 +939,8 @@
 ├── requirements.txt
 └── run.py
 </pre></div>
+
+
 <h3 id="modelpy">封裝預測模型 (model.py)</h3>
 <p>首先建立一個 <code>model.py</code> 檔案，在這個檔案中我們要載入事先訓練好的模型並將它封裝成一個 function 或是 class。在本範例程式中我們是建立一個 <code>predict()</code> 的函式並且允許接收一個 Numpy 的陣列，其中裡面允許夾帶四個花朵特徵的數值。最後將模型預測結果存放在 <code>pred</code> 變數中，並將預測的類別回傳。</p>
 <div class="codehilite"><pre><span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
@@ -521,7 +948,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span>
 
 <span class="c1"># 載入模型</span>
-<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'./model/xgboost-iris.pgz'</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./model/xgboost-iris.pgz&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">xgboostModel</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># 將模型預測寫成一個 function </span>
@@ -529,6 +956,8 @@
     <span class="n">pred</span><span class="o">=</span><span class="n">xgboostModel</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">pred</span>
 </pre></div>
+
+
 <h3 id="flask-api-runpy">建立 Flask API (run.py)</h3>
 <p>接著我們要透過 Flask 建立一個 API，首先要設定開放跨網域 CORS 權限。所謂的跨來源資源共享 (Cross-Origin Resource Sharing, CORS) 是一種使用額外 HTTP 標頭來讓目前瀏覽網站的使用者能訪問不同來源網域的伺服器。當使用者請求一個來自於不同網域、通訊協定或通訊埠的資源時，會建立一個跨來源 HTTP 請求。所以在撰寫程式的時候必須透過 <code>flask_cors</code> 裡面所提供的 CORS 添加跨來源資源共享。這樣前端使用者在不同網域利用 ajax 或 fetch 存取 API 時就會有讀取權限。</p>
 <div class="codehilite"><pre><span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
@@ -541,29 +970,35 @@
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">CORS</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </pre></div>
-<p>接著我們先示範建立一個 GET 的路由 <code>@app.route('/')</code>，單引號內的內容即代表使用者在呼叫 API 的路徑位置 <code>/</code> 代表是 root 的意思。在這一個測試的路由中我們直接回傳一個 <code>hello!!</code> 的字串。稍後將會教各位如何透過 Postman 這個軟體來測試 API。另外第二個路由是負責接收花朵四個數值，並將這四個數值放到 Numpy 陣列中送到稍早以封裝好的 <code>mpdel.py</code> 中的 <code>predict()</code> 方法。並將預測的結果透過 JSON 格式回應給前端使用者。值得注意的是這一個路由我們是設定他的路徑為 <code>/predict</code> 以及 HTTP Requesst 的方法指定 <code>methods=['POST']</code>。</p>
-<div class="codehilite"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s1">'hello!!'</span>
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/predict'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">'POST'</span><span class="p">])</span>
+
+<p>接著我們先示範建立一個 GET 的路由 <code>@app.route('/')</code>，單引號內的內容即代表使用者在呼叫 API 的路徑位置 <code>/</code> 代表是 root 的意思。在這一個測試的路由中我們直接回傳一個 <code>hello!!</code> 的字串。稍後將會教各位如何透過 Postman 這個軟體來測試 API。另外第二個路由是負責接收花朵四個數值，並將這四個數值放到 Numpy 陣列中送到稍早以封裝好的 <code>mpdel.py</code> 中的 <code>predict()</code> 方法。並將預測的結果透過 JSON 格式回應給前端使用者。值得注意的是這一個路由我們是設定他的路徑為 <code>/predict</code> 以及 HTTP Requesst 的方法指定 <code>methods=['POST']</code>。</p>
+<div class="codehilite"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;hello!!&#39;</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/predict&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">postInput</span><span class="p">():</span>
     <span class="c1"># 取得前端傳過來的數值</span>
     <span class="n">insertValues</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
-    <span class="n">x1</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">'sepalLengthCm'</span><span class="p">]</span>
-    <span class="n">x2</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">'sepalWidthCm'</span><span class="p">]</span>
-    <span class="n">x3</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">'petalLengthCm'</span><span class="p">]</span>
-    <span class="n">x4</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">'petalWidthCm'</span><span class="p">]</span>
+    <span class="n">x1</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">&#39;sepalLengthCm&#39;</span><span class="p">]</span>
+    <span class="n">x2</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">&#39;sepalWidthCm&#39;</span><span class="p">]</span>
+    <span class="n">x3</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">&#39;petalLengthCm&#39;</span><span class="p">]</span>
+    <span class="n">x4</span><span class="o">=</span><span class="n">insertValues</span><span class="p">[</span><span class="s1">&#39;petalWidthCm&#39;</span><span class="p">]</span>
     <span class="nb">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span><span class="p">]])</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">'return'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)})</span>
 </pre></div>
+
+
 <p>最後我們透過 <code>app.run()</code> 將此 API 部署在伺服器的 3000 PORT 當中。<code>host='0.0.0.0'</code> 表示預設路由將會自動幫你取得目前伺服器的固定 IP 位置。由於我們目前在本機開發等等測試時可以直接使用 <code>http://localhost:3000</code> 進行測試。另外參數 <code>debug</code> 設定為 True 即表示 API 被啟動時會自動監聽程式是否有變動，如果有更新內容即會立刻重新啟動 API。此設定適合在開發時候使用，而真正上線時再調成 False。</p>
-<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">'0.0.0.0'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
+
+
 <h3 id="requirementstxt">管理套件版本 (requirements.txt)</h3>
 <p><code>requirements.txt</code> 這一支檔案是負記錄了當前專案資料夾下程式所有依賴的套件及相對應的版本。下列五個是在本實作中將會使用到的套件，若套件後面沒有特別指定版本號，安裝時將會自動安裝最新的版本。</p>
 <div class="codehilite"><pre><span></span>Flask
@@ -572,75 +1007,101 @@ numpy
 scikit-learn
 xgboost
 </pre></div>
+
+
 <p>假設程式在另一台電腦上執行時，要一個一個安裝套件很麻煩。因此可以直接透過 <code>requirements.txt</code> 紀錄專案中依賴的套件。並且輸入以下指令即可一次安裝所有指定的套件。</p>
 <div class="codehilite"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </pre></div>
+
+
 <h2 id="api_2">執行 API</h2>
 <p>在本機或開發環境中測試執行 API 的方式很簡單。只要開啟終端機並輸入以下指令即可：</p>
 <div class="codehilite"><pre><span></span>python<span class="w"> </span>run.py
 </pre></div>
-<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-4.png"><img alt="" src="image/img29-4.png"/></a></p>
+
+
+<p><img alt="" src="image/img29-4.png" /></p>
 <blockquote>
 <p>程式真正上線時建議使用 gunicorn 或 Waitress 來產生 WSGI 服務，並於背景運行</p>
 </blockquote>
 <p>還記得我們有寫一個 GET 方法的測試路由嗎？這時候大家可以開啟電腦中的瀏覽器並在網址列輸入 <code>http://localhost:3000</code> 即可立即看到 API 在指定的路徑下所回應的內容。如果出現以下畫面即代表 API 已經正常的被運行囉。</p>
-<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-5.png"><img alt="" src="image/img29-5.png"/></a></p>
+<p><img alt="" src="image/img29-5.png" /></p>
 <p>那你可能會問我該怎麼測試另一個 POST 方法呢？由於 GET 方法比較好處理，我們直接在瀏覽器輸入路徑就能立即觀看結果。那當我們要測試 POST、PUT、DELETE 等方法時就必須依靠第三方軟體 Postman 來協助模擬 HTTP Request 完成 API 測試。</p>
 <h2 id="api-postman">測試 API 的好工具 Postman</h2>
 <p>當你寫好一支 API 時要馬上測試看看你寫的程式邏輯是否正確，就可以使用 Postman 這個軟體來做 API 測試。Postman 他是一個能夠模擬 HTTP Request 的工具能夠讓你簡單快速的測試你的 API，並且內建包含許多 HTTP 的請求方式，例如常見的 GET(取得)、POST(新增)、PUT(修改)、DELETE(刪除)。首先大家可以到<a href="https://www.postman.com/">官網</a>下載與安裝。</p>
-<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-6.png"><img alt="" src="image/img29-6.png"/></a></p>
+<p><img alt="" src="image/img29-6.png" /></p>
 <p>安裝好之後可以打開程式並點選 POST 並貼上 API 網址。由於我們現在要測試另一個預測的路徑 <code>predict</code>，因此在網址列貼上 <code>http://localhost:3000/predict</code>。點選 Body-&gt; raw -&gt; JSON 並將花朵的四個參數以 JSON 格式進行描述。</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">"sepalLengthCm"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.9</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"sepalWidthCm"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"petalLengthCm"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"petalWidthCm"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.8</span>
+<span class="w">    </span><span class="nt">&quot;sepalLengthCm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.9</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sepalWidthCm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;petalLengthCm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;petalWidthCm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.8</span>
 <span class="p">}</span>
 </pre></div>
+
+
 <p>點選 <code>send</code> 後即可將模擬的四個數值透過 JSON 格式使用 POST 方法傳送到後端 API 中的 <code>predict</code> 路徑。該 API 透過 POST 接收到前端使用者所發送的訊息後，解析這四個數值並依序放在陣列中並進行模型預測。最終預測結果會將花的種類以 JSON 格式回傳到前端使用者。此時前端的網頁設計師就可以將拿到的預測結果進行前端的畫面渲染與更新。</p>
-<p><a class="glightbox" data-draggable="True" data-effect="zoom" data-height="auto" data-width="100%" data-zoomable="True" href="image/img29-7.png"><img alt="" src="image/img29-7.png"/></a></p>
+<p><img alt="" src="image/img29-7.png" /></p>
 <blockquote>
 <p>本系列教學內容及範例程式都可以從我的 <a href="https://github.com/andy6804tw/2021-13th-ironman">GitHub</a> 取得！</p>
 </blockquote>
-</article>
-</div>
-</div>
-</main>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
 <footer class="md-footer">
-<div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../28.儲存訓練好的模型/" rel="prev" title="[Day 28] 儲存訓練好的模型">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../28.儲存訓練好的模型/" title="[Day 28] 儲存訓練好的模型" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
                   上一頁
                 </span>
                 [Day 28] 儲存訓練好的模型
               </span>
-</div>
-</a>
-<a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../30.使用 Heroku 部署機器學習 API/" rel="next" title="[Day 30] 使用 Heroku 部署機器學習 API">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
+            </div>
+          </a>
+        
+        
+          <a href="../30.使用 Heroku 部署機器學習 API/" title="[Day 30] 使用 Heroku 部署機器學習 API" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
                   下一頁
                 </span>
                 [Day 30] 使用 Heroku 部署機器學習 API
               </span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a>
-</nav>
-</div>
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-footer-copyright">
-<div class="md-footer-copyright__highlight">
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
             Copyright © 2021 - 2025 10程式中
           </div>
         
@@ -649,18 +1110,41 @@ xgboost
         and
         <a href="https://squidfunk.github.io/mkdocs-material/">
           Material for MkDocs</a>
-</div>
-</div>
-</div>
+      </div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/application.245445c6.js"></script>
-<script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
-<script src="../assets/javascripts/lunr/tinyseg.js"></script>
-<script src="../assets/javascripts/lunr/lunr.ja.js"></script>
-<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
-<script src="../javascripts/extra.js"></script>
-<script src="../javascripts/analytics.js"></script>
-<script src="../javascripts/dify.js"></script>
-<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": false, "loop": false});})</script></body>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="../javascripts/extra.js"></script>
+      
+        <script src="../javascripts/analytics.js"></script>
+      
+        <script src="../javascripts/dify.js"></script>
+      
+    
+  </body>
 </html>
