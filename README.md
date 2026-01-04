@@ -19,7 +19,6 @@
 
 > 第13屆iT邦幫忙鐵人賽
 
-### 2025 新書預購中！
 
 <table>
     <tr>
@@ -38,7 +37,23 @@
     </tr>
 </table>
 
+## 《全民瘋 AI 系列 ‐ 經典機器學習》書籍勘誤與內容更新
+感謝您購買《全民瘋 AI 系列 - 經典機器學習》。雖然在出版過程中，書稿已經過多次校對與覆閱，但仍難免會有疏漏或錯誤。另外，由於 scikit-learn 等資料科學套件更新速度相當快，我也會在本網站適時提供相關內容的補充與修正資訊。
+
+👉 **完整勘誤與更新內容請參考：**
+🔗 [《全民瘋 AI 系列 ‐ 經典機器學習》書籍勘誤與內容更新（Wiki）](https://github.com/andy6804tw/crazyai-ml/wiki/%E3%80%8A%E5%85%A8%E6%B0%91%E7%98%8B-AI-%E7%B3%BB%E5%88%97-%E2%80%90-%E7%B6%93%E5%85%B8%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E3%80%8B%E6%9B%B8%E7%B1%8D%E5%8B%98%E8%AA%A4%E8%88%87%E5%85%A7%E5%AE%B9%E6%9B%B4%E6%96%B0)
+
+若您在閱讀過程中發現任何問題或錯誤，誠摯邀請您透過「[issue回報](https://github.com/andy6804tw/crazyai-ml/issues)」告訴我。非常感謝您的寶貴意見，我將會根據回報內容盡快更新「勘誤表」。
+
 ## 公告
+<details>
+  <summary>📢 [2026/01] 🎬 即將推出《經典機器學習》入門導讀影片，敬請期待</summary>
+</details>
+
+<details>
+  <summary>📢 [2025/12] 📘 新增《經典機器學習》書籍<a href="https://github.com/andy6804tw/crazyai-ml/wiki/%E3%80%8A%E5%85%A8%E6%B0%91%E7%98%8B-AI-%E7%B3%BB%E5%88%97-%E2%80%90-%E7%B6%93%E5%85%B8%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E3%80%8B%E6%9B%B8%E7%B1%8D%E5%8B%98%E8%AA%A4%E8%88%87%E5%85%A7%E5%AE%B9%E6%9B%B4%E6%96%B0">勘誤總表</a></summary>
+</details>
+
 <details>
   <summary>📢 [2025/02] ✨此系列出版實體書籍囉！</summary>
 
@@ -55,7 +70,7 @@
 
 </details>
 <details>
-  <summary>📢 [2024/09] 此系列新增英文版Podcast！ </summary>
+  <summary>📢 [2024/09] 此系列新增<a href="podcasters.spotify.com/pod/show/10413/episodes/Ep-1-Your-Journey-Begins-Here-e2obnbm/a-abhb0dn">英文版Podcast</a>！ </summary>
 
   無論是上學或上班途中，讓我們陪伴你一起展開新的學習旅程！
   我們很高興宣布，此系列節目已新增英文版Podcast，適合想加強英文聽力或喜歡用英文學習的朋友們！
@@ -71,7 +86,7 @@
 
   提供方便的學習平台，匯集影片與文章形式。
 ##### 傳送門 ⬇
-- [電子書](https://andy6804tw.github.io/2021-13th-ironman/)
+- [電子書(免費版)](https://andy6804tw.github.io/crazyai-ml/1.%E5%85%A8%E6%B0%91%E7%98%8BAI%E7%B3%BB%E5%88%972.0%E7%9B%AE%E6%A8%99%E4%BB%8B%E7%B4%B9/)
 
 </details>
 
@@ -88,7 +103,7 @@
 
 電子書： https://andy6804tw.github.io/2021-13th-ironman/
 
-## 全民瘋AI系列電子書
+## 全民瘋AI系列電子書 (免費開源版)
 全民瘋AI系列 是一個專為 AI 學習資源打造的開源平台，由一群熱愛資料科學的工程師所創立。這個平台的宗旨是提供一個開放、協作的環境，讓更多人能夠方便地學習 AI 和機器學習相關技術，無論是初學者還是進階使用者，都可以在這裡找到適合的學習資源和工具。透過社群的力量，平台上的內容持續更新，涵蓋從基礎理論到實務應用，滿足不同層次的學習需求。
 
 | 書名                            | 簡介                              | 完成進度  | 討論區連結 |
