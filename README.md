@@ -17,6 +17,9 @@
 </a>
 <br><br>
 
+📢 **[新影片](https://youtu.be/9nbd4tsF1Hc?si=1kVuarOGWXBlDAVu) 機器學習教學 2026｜3 小時零基礎 AI 入門｜Python 應用｜新手友善**
+[![機器學習3 小時零基礎 AI 入門](https://github.com/user-attachments/assets/fba1972a-dd7d-4fc1-af17-2158fd51dfc1)](https://youtu.be/9nbd4tsF1Hc?si=1kVuarOGWXBlDAVu)
+
 > 第13屆iT邦幫忙鐵人賽
 
 
